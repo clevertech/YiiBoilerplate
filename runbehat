@@ -1,0 +1,7 @@
+#!/bin/sh
+
+echo '#----------------------------------------------------------#'
+echo '| Do you remember you should start your Sahi beforehand?.. |'
+echo '#----------------------------------------------------------#'
+
+php common/lib/Behat/behat.phar --config=tests/behat.yml

@@ -1,0 +1,23 @@
+This Zend library has been modified to efficiently load Zend Framework classes without the need call require_once()
+or Yii::import().
+
+
+If you update the library, please strip all require_once from ZF.
+It is required for this extension and allows to load ZF classes faster.
+
+a) You can do search-replace from your IDE: search require_once replace to //require_once.
+
+b) Altenatively you can use console:
+
+GNU:
+
+% cd path/to/ZendFramework/library
+% find . -name '*.php' -not -wholename '*/Loader/Autoloader.php' \
+  -not -wholename '*/Application.php' -print0 | \
+  xargs -0 sed --regexp-extended --in-place 's/(require_once)/\/\/ \1/g'
+MacOSX:
+
+% cd path/to/ZendFramework/library
+% find . -name '*.php' | grep -v './Loader/Autoloader.php' | \
+xargs sed -E -i~ 's/(require_once)/\/\/ \1/g'
+% find . -name '*.php~' | xargs rm -f
