@@ -3,7 +3,7 @@
 <h1>Welcome to <i><?php echo CHtml::encode(Yii::app()->name); ?></i></h1>
 
 <?php Yii::app()->user->setFlash('success', '<strong>Well done!</strong> You have successfully created your Yii application.');?>
-<?php $this->widget('bootstrap.widgets.BootAlert'); ?>
+<?php $this->widget('bootstrap.widgets.TbAlert'); ?>
 
 <p>You may change the content of this page by modifying the following two files:</p>
 <ul>
@@ -25,7 +25,7 @@ $gridDataProvider = new CArrayDataProvider(array(
 ));
 
 ?>
-<?php $this->widget('bootstrap.widgets.BootGridView', array(
+<?php $this->widget('bootstrap.widgets.TbGridView', array(
 	'type'=>'striped bordered condensed',
 	'dataProvider'=>$gridDataProvider,
 	'template'=>"{items}",
@@ -35,7 +35,7 @@ $gridDataProvider = new CArrayDataProvider(array(
 		array('name'=>'lastName', 'header'=>'Last name'),
 		array('name'=>'language', 'header'=>'Language'),
 		array(
-			'class'=>'bootstrap.widgets.BootButtonColumn',
+			'class'=>'bootstrap.widgets.TbButtonColumn',
 			'viewButtonUrl'=>'Yii::app()->controller->createUrl("view",array("id"=>$data["id"]))',
 			'updateButtonUrl'=>'Yii::app()->controller->createUrl("update",array("id"=>$data["id"]))',
 			'deleteButtonUrl'=>'Yii::app()->controller->createUrl("delete",array("id"=>$data["id"]))',

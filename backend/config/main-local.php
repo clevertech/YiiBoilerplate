@@ -13,14 +13,14 @@
 
 return array(
 	'components' => array(
-		'db'=> array(
-			'connectionString' => $params['db.connectionString'],
-			'username' => $params['db.username'],
-			'password' => $params['db.password'],
-			'schemaCachingDuration' => YII_DEBUG ? 0 : 86400000, // 1000 days
-			'enableParamLogging' => Yii_DEBUG,
-			'charset' => 'utf8'
-		),
+//		'db'=> array(
+//			'connectionString' => $params['db.connectionString'],
+//			'username' => $params['db.username'],
+//			'password' => $params['db.password'],
+//			'schemaCachingDuration' => YII_DEBUG ? 0 : 86400000, // 1000 days
+//			'enableParamLogging' => Yii_DEBUG,
+//			'charset' => 'utf8'
+//		),
 		'urlManager' => array(
 			'urlFormat' => $params['url.format'],
 			'showScriptName' => $params['url.showScriptName'],

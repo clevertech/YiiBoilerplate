@@ -42,7 +42,7 @@ return CMap::mergeArray(
 		// @see http://www.yiiframework.com/doc/api/1.1/CApplication#language-detail
 		'language' => 'en',
 		// using bootstrap theme
-		'theme' => 'bootstrap',
+//		'theme' => 'bootstrap',
 		// setup import paths aliases
 		// @see http://www.yiiframework.com/doc/api/1.1/YiiBase#import-detail
 		'import' => array(
@@ -76,20 +76,20 @@ return CMap::mergeArray(
 			/* load bootstrap components */
 			'bootstrap' => array(
 				'class' => 'common.extensions.bootstrap.components.Bootstrap',
-				'coreCss' => false
+				'responsiveCss' => true,
 			),
 			'errorHandler' => array(
 				// @see http://www.yiiframework.com/doc/api/1.1/CErrorHandler#errorAction-detail
 				'errorAction'=>'site/error'
 			),
-			'db'=> array(
-				'connectionString' => $params['db.connectionString'],
-				'username' => $params['db.username'],
-				'password' => $params['db.password'],
-				'schemaCachingDuration' => YII_DEBUG ? 0 : 86400000, // 1000 days
-				'enableParamLogging' => YII_DEBUG,
-				'charset' => 'utf8'
-			),
+//			'db'=> array(
+//				'connectionString' => $params['db.connectionString'],
+//				'username' => $params['db.username'],
+//				'password' => $params['db.password'],
+//				'schemaCachingDuration' => YII_DEBUG ? 0 : 86400000, // 1000 days
+//				'enableParamLogging' => YII_DEBUG,
+//				'charset' => 'utf8'
+//			),
 			'urlManager' => array(
 				'urlFormat' => 'path',
 				'showScriptName' => false,
