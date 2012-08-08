@@ -3,11 +3,11 @@ We use this folder structure setup on [Clevertech](http://www.clevertech.biz) fo
 
 ### Overview
 
-**YiiBoilerplate**, aims to provide *Yii developers* an application folder structure with sufficient flexibility to satisfy from simple to enterprise application's development needs.
+**YiiBoilerplate**, aims to provide *Yii developers* an application folder structure with sufficient flexibility to satisfy development needs from simple to enterprise applications.
 
-It may look a little bit too complex at first sight but, at Clevertech, we understand that needs may vary along the development life cycle of a product in order to fulfill customer's requirements and that commonly forces developers to modify the initial folder structure, thus making very hard for a new developer to jump in and 'understand' where is all located.
+It may look a little bit too complex at first sight but, at Clevertech, we understand that needs may vary along the development life cycle of a product in order to fulfill customer's requirements and that commonly forces developers to modify the initial folder structure, thus making very hard for a new developer to jump in and 'understand' where everything is located.
 
-In order to avoid such time consuming tasks, **easy the life of our beloved developers** and increase productivity, we make use of this folder structure template for our projects.
+In order to avoid such time consuming tasks, **ease the life of our beloved developers** and increase productivity, we make use of this folder structure template for our projects.
 
 ### Overall Structure
 Below the directory structure we are using:
