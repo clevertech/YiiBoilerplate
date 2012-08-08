@@ -41,7 +41,7 @@ return CMap::mergeArray(
 		'preload' => array('bootstrap', 'log'),
 		// @see http://www.yiiframework.com/doc/api/1.1/CApplication#language-detail
 		'language' => 'en',
-		// using bootstrap theme
+		// using bootstrap theme ? not needed with extension
 //		'theme' => 'bootstrap',
 		// setup import paths aliases
 		// @see http://www.yiiframework.com/doc/api/1.1/YiiBase#import-detail
