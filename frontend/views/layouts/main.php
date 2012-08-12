@@ -20,12 +20,11 @@
 	<!-- Use the .htaccess and remove these lines to avoid edge case issues. More info: h5bp.com/b/378 -->
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-	<title><?php echo h($this->pageTitle); ?></title>
+	<title><?php echo h($this->pageTitle); /* using shortcut for CHtml::encode */ ?></title>
 	<meta name="description" content="">
 	<meta name="keywords" content="">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
-
-	<title><?php echo CHtml::encode($this->pageTitle)?></title>
+	
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/styles.css"/>
 	<!--using less instead? file not included-->
 	<!--<link rel="stylesheet/less" type="text/css" href="/less/styles.less">-->
