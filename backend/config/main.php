@@ -67,7 +67,7 @@ return CMap::mergeArray(
 			'gii' => array(
 				'class' => 'system.gii.GiiModule',
 				'password' => 'clevertech',
-				'generatorsPaths' => array(
+				'generatorPaths' => array(
 					'bootstrap.gii'
 				)
 			)
