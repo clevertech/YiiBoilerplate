@@ -96,6 +96,13 @@ return CMap::mergeArray(
 				'urlSuffix' => '/',
 				'rules' => $params['url.rules']
 			),
+			/* uncomment and configure to suit your needs */
+			/*
+			 'request' => array(
+				'hostInfo' => 'http://localhost',
+				'baseUrl' => '/bp'
+			),
+			*/
 			/* uncomment and configure upon your project requirements */
 			/*
 			'authManager' => array(
