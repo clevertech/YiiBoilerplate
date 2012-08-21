@@ -8,11 +8,11 @@
  * Date: 7/22/12
  * Time: 12:15 PM
  */
-$currentDir = dirname(__FILE__);
+$consoleConfigDir = dirname(__FILE__);
 
-$root = $currentDir . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..';
+$root = $consoleConfigDir . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..';
 
-$params = require_once($currentDir . DIRECTORY_SEPARATOR . 'params.php');
+$params = require_once($consoleConfigDir . DIRECTORY_SEPARATOR . 'params.php');
 
 // Setup some default path aliases. These alias may vary from projects.
 Yii::setPathOfAlias('root', $root);
@@ -22,10 +22,10 @@ Yii::setPathOfAlias('common', $root . DIRECTORY_SEPARATOR . 'common');
 //Yii::setPathOfAlias('frontend', $root . DIRECTORY_SEPARATOR . 'frontend');
 //Yii::setPathOfAlias('backend', $root . DIRECTORY_SEPARATOR . 'backend');
 
-$mainLocalFile = $currentDir . DIRECTORY_SEPARATOR . 'main-local.php';
+$mainLocalFile = $consoleConfigDir . DIRECTORY_SEPARATOR . 'main-local.php';
 $mainLocalConfiguration = file_exists($mainLocalFile) ? require($mainLocalFile) : array();
 
-$mainEnvFile = $currentDir . DIRECTORY_SEPARATOR . 'main-env.php';
+$mainEnvFile = $consoleConfigDir . DIRECTORY_SEPARATOR . 'main-env.php';
 $mainEnvConfiguration = file_exists($mainEnvFile) ? require($mainEnvFile) : array();
 
 return CMap::mergeArray(
@@ -72,14 +72,14 @@ return CMap::mergeArray(
 					)
 				)
 			),
-			'db' => array(
-				'connectionString' => $params['db.connectionString'],
-				'username' => $params['db.username'],
-				'password' => $params['db.password'],
-				'schemaCachingDuration' => YII_DEBUG ? 0 : 86400000, // 1000 days
-				'enableParamLogging' => YII_DEBUG,
-				'charset' => 'utf8'
-			),
+//			'db' => array(
+//				'connectionString' => $params['db.connectionString'],
+//				'username' => $params['db.username'],
+//				'password' => $params['db.password'],
+//				'schemaCachingDuration' => YII_DEBUG ? 0 : 86400000, // 1000 days
+//				'enableParamLogging' => YII_DEBUG,
+//				'charset' => 'utf8'
+//			),
 			/* uncomment if we require to run commands against test database */
 			/*
 			 'testdb' => array(

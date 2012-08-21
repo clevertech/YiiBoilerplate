@@ -10,14 +10,14 @@
  * Parameters shared by all applications.
  * Please put environment-sensitive parameters in env/params-{environmentcode}.php
  */
-$currentDir = dirname(__FILE__);
+$commonConfigDir = dirname(__FILE__);
 
 // get local parameters in
-$commonParamsLocalFile = $currentDir . DIRECTORY_SEPARATOR . 'params-local.php';
+$commonParamsLocalFile = $commonConfigDir . DIRECTORY_SEPARATOR . 'params-local.php';
 $commonParamsLocal = file_exists($commonParamsLocalFile) ? require ($commonParamsLocalFile) : array();
 
 // if exists, include it, otherwise set as an empty array
-$commonEnvParamsFile = $currentDir . DIRECTORY_SEPARATOR . 'params-env.php';
+$commonEnvParamsFile = $commonConfigDir . DIRECTORY_SEPARATOR . 'params-env.php';
 $commonEnvParams = file_exists($commonEnvParamsFile) ? require($commonEnvParamsFile) : array();
 
 return CMap::mergeArray(array(

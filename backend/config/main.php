@@ -8,11 +8,11 @@
  *
  * This file holds the configuration settings of your backend application.
  **/
-$currentDir = dirname(__FILE__);
+$backendConfigDir = dirname(__FILE__);
 
-$root = $currentDir . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..';
+$root = $backendConfigDir . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..';
 
-$params = require_once($currentDir . DIRECTORY_SEPARATOR . 'params.php');
+$params = require_once($backendConfigDir . DIRECTORY_SEPARATOR . 'params.php');
 
 // Setup some default path aliases. These alias may vary from projects.
 Yii::setPathOfAlias('root', $root);
@@ -23,10 +23,10 @@ Yii::setPathOfAlias('www', $root. DIRECTORY_SEPARATOR . 'backend' . DIRECTORY_SE
 /* Yii::setPathOfAlias('frontend', $root . DIRECTORY_SEPARATOR . 'frontend'); */
 
 
-$mainLocalFile = $currentDir . DIRECTORY_SEPARATOR . 'main-local.php';
+$mainLocalFile = $backendConfigDir . DIRECTORY_SEPARATOR . 'main-local.php';
 $mainLocalConfiguration = file_exists($mainLocalFile)? require($mainLocalFile): array();
 
-$mainEnvFile = $currentDir . DIRECTORY_SEPARATOR . 'main-env.php';
+$mainEnvFile = $backendConfigDir . DIRECTORY_SEPARATOR . 'main-env.php';
 $mainEnvConfiguration = file_exists($mainEnvFile) ? require($mainEnvFile) : array();
 
 return CMap::mergeArray(

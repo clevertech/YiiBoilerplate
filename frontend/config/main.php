@@ -8,11 +8,11 @@
  * Date: 7/22/12
  * Time: 5:48 PM
  */
-$currentDir = dirname(__FILE__);
+$frontendConfigDir = dirname(__FILE__);
 
-$root = $currentDir . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..';
+$root = $frontendConfigDir . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..';
 
-$params = require_once($currentDir . DIRECTORY_SEPARATOR . 'params.php');
+$params = require_once($frontendConfigDir . DIRECTORY_SEPARATOR . 'params.php');
 
 // Setup some default path aliases. These alias may vary from projects.
 Yii::setPathOfAlias('root', $root);
@@ -20,10 +20,10 @@ Yii::setPathOfAlias('common', $root . DIRECTORY_SEPARATOR . 'common');
 Yii::setPathOfAlias('frontend', $root . DIRECTORY_SEPARATOR . 'frontend');
 Yii::setPathOfAlias('www', $root. DIRECTORY_SEPARATOR . 'frontend' . DIRECTORY_SEPARATOR . 'www');
 
-$mainLocalFile = $currentDir . DIRECTORY_SEPARATOR . 'main-local.php';
+$mainLocalFile = $frontendConfigDir . DIRECTORY_SEPARATOR . 'main-local.php';
 $mainLocalConfiguration = file_exists($mainLocalFile)? require($mainLocalFile): array();
 
-$mainEnvFile = $currentDir . DIRECTORY_SEPARATOR . 'main-env.php';
+$mainEnvFile = $frontendConfigDir . DIRECTORY_SEPARATOR . 'main-env.php';
 $mainEnvConfiguration = file_exists($mainEnvFile) ? require($mainEnvFile) : array();
 
 return CMap::mergeArray(
