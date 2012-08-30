@@ -167,12 +167,13 @@ We have created **extensions** and **widgets** folders, that could had been obvi
 
 The directory structure for **console** application differs from the others as it doesn't require **controllers**, **views**, **widgets**, and **www**. It has a **commands** directory to store all console command class files.
 
+When developing a large project with a long development cycle, we constantly need to adjust the database structure. For this reason, we also use the DB migration feature to keep track of database changes. We store all DB migrations under the **migrations** directory in **console**.
+
 ###The Common Directory
 The common directory contains the files that are shared among applications. For example, every application may need to access the database using ActiveRecord. Therefore, we can store the AR model classes under the common directory. Similarly, if some helper or widget classes are used in more than one application, we should also put them under common to avoid duplication of code.
 
 To facilitate the maintenance of code, we organize the common directory in a structure similar to that of an application. For example, we have components, models, lib, etc.
 
-When developing a large project with a long development cycle, we constantly need to adjust the database structure. For this reason, we also use the DB migration feature to keep track of database changes. We store all DB migrations under the **migrations** directory in common.
 
 <span style="float:right;">***- source: [Yii Framework Site](http://www.yiiframework.com/wiki/155/the-directory-structure-of-the-yii-project-site#hh3)***</span>
 <div style="clear:both">&nbsp;</div>
