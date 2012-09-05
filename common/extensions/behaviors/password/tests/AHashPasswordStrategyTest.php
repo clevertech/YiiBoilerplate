@@ -55,7 +55,7 @@ class MockUserModel extends AUser
 {
 	public $password;
 	public $salt;
-	public $passwordStrategy;
+	public $password_strategy;
 
 	public function tableName()
 	{

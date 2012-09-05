@@ -19,8 +19,8 @@
  * @property integer $login_attempts
  * @property integer $login_time
  * @property string $validation_key
- * @property string $passwordStrategy
- * @property boolean $requiresNewPassword
+ * @property string $password_strategy
+ * @property boolean $requires_new_password
  * @property integer $create_id
  * @property integer $create_time
  * @property integer $update_id
@@ -99,12 +99,12 @@ class User extends CActiveRecord
 			array('email', 'email'),
 			array('username, email', 'unique'),
 			array('passwordConfirm', 'compare', 'compareAttribute' => 'newPassword', 'message' => Yii::t('validation', "Passwords don't match")),
-			array('newPassword, passwordStrategy ', 'length', 'max' => 50, 'min' => 8),
+			array('newPassword, password_strategy ', 'length', 'max' => 50, 'min' => 8),
 			array('email, password, salt', 'length', 'max' => 255),
-			array('requiresNewPassword, login_attempts', 'numerical', 'integerOnly' => true),
+			array('requires_new_password, login_attempts', 'numerical', 'integerOnly' => true),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, password, salt, passwordStrategy , requiresNewPassword , email', 'safe', 'on' => 'search'),
+			array('id, password, salt, password_strategy , requires_new_password , email', 'safe', 'on' => 'search'),
 		);
 	}
 
