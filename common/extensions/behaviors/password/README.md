@@ -57,8 +57,8 @@ By default, APasswordBehavior assumes that your model contains the following fie
 <ul>
 	<li><strong>salt</strong> - holds the per user salt used for hashing passwords</li>
 	<li><strong>password</strong> - holds the hashed password</li>
-	<li><strong>passwordStrategy</strong> - holds the name of the current password strategy for this user
-	<li><strong>requiresNewPassword</strong> - a boolean field that determines whether the user should change their password or not
+	<li><strong>password_strategy</strong> - holds the name of the current password strategy for this user
+	<li><strong>requires_new_password</strong> - a boolean field that determines whether the user should change their password or not
 </ul>
 
 You can configure the field names on the behavior.

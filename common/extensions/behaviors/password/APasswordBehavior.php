@@ -51,13 +51,13 @@ class APasswordBehavior extends CActiveRecordBehavior {
 	 * The name of the attribute that contains the password strategy name
 	 * @var string
 	 */
-	public $strategyAttribute ="passwordStrategy";
+	public $strategyAttribute ="password_strategy";
 
 	/**
 	 * The name of the attribute that determines whether a user requires a new password or not
 	 * @var string
 	 */
-	public $requireNewPasswordAttribute = "requiresNewPassword";
+	public $requireNewPasswordAttribute = "requires_new_password";
 
 	/**
 	 * The name of the default password strategy
