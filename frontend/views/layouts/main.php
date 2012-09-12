@@ -33,7 +33,7 @@
 	<!--<link rel="stylesheet/less" type="text/css" href="/less/styles.less">-->
 
 	<!-- create your own: http://modernizr.com/download/-->
-	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/modernizr-2.6.1.js"></script>
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>/app/js/libs/utils/modernizr-2.6.2.js"></script>
 
 	<!--<script src="/less/less-1.3.0.min.js"></script>-->
 	<link rel="shortcut icon" href="<?php echo Yii::app()->request->baseUrl; ?>/images/favicon.ico">
@@ -44,22 +44,12 @@
 	<?php echo $content?>
 </div>
 
+<!-- Google Analytics -->
 <script>
-	window._gaq = [['_setAccount','<?php echo param('google.analytics.account'); // check global.php shortcut file at "common/lib/" ?>'],['_trackPageview'],['_trackPageLoadTime']];
-	Modernizr.load({
-		load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
-	});
-</script>
-<script type="text/javascript">
-	function trackClick(link, action, category) {
-		action=action || link.href;
-		category=category || 'Outbound Links';
-		try {
-			_gaq.push(['site._trackEvent', category, action]);
-			setTimeout('document.location = "' + link.href + '"', 250);
-		}catch(err){}
-		return false;
-	}
+	var _gaq=[['_setAccount','<?php echo param('google.analytics.account'); // check global.php shortcut file at "common/lib/" ?>'],['_trackPageview']];
+	(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+		g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+		s.parentNode.insertBefore(g,s)}(document,'script'));
 </script>
 </body>
 </html>
