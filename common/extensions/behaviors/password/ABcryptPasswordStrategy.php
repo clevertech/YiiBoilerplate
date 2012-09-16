@@ -54,7 +54,11 @@ class ABcryptPasswordStrategy extends APasswordStrategy
 			while(strlen($bytes) < $count) {
 				$value = $bytes;
 				for($i = 0; $i < 12; $i++) {
-					$value = hash_hmac("salsa20",microtime().$value,$key,true);
+                    if (version_compare(PHP_VERSION, '5.4.0') >= 0) {
+                        $value = hash_hmac('sha1',microtime().$value,$key,true);
+                    } else {
+                        $value = hash_hmac('salsa20',microtime().$value,$key,true);
+                    }
 					usleep(10); // make sure microtime() returns a new value
 				}
 				$bytes = substr($value,0,$count);
