@@ -20,7 +20,7 @@ class TbInputHorizontal extends TbInput
 	 */
 	public function run()
 	{
-		echo CHtml::openTag('div', array('class'=>'control-group '.$this->getContainerCssClass()));
+		echo CHtml::openTag('div', array('class' => 'control-group ' . $this->getContainerCssClass()));
 		parent::run();
 		echo '</div>';
 	}
@@ -47,10 +47,10 @@ class TbInputHorizontal extends TbInput
 	{
 		$attribute = $this->attribute;
 		echo '<div class="controls">';
-		echo '<label class="checkbox" for="'.$this->getAttributeId($attribute).'">';
-		echo $this->form->checkBox($this->model, $attribute, $this->htmlOptions).PHP_EOL;
+		echo '<label class="checkbox" for="' . $this->getAttributeId($attribute) . '">';
+		echo $this->form->checkBox($this->model, $attribute, $this->htmlOptions) . PHP_EOL;
 		echo $this->model->getAttributeLabel($attribute);
-		echo $this->getError().$this->getHint();
+		echo $this->getError() . $this->getHint();
 		echo '</label></div>';
 	}
 
@@ -63,7 +63,7 @@ class TbInputHorizontal extends TbInput
 		echo $this->getLabel();
 		echo '<div class="controls">';
 		echo $this->form->checkBoxList($this->model, $this->attribute, $this->data, $this->htmlOptions);
-		echo $this->getError().$this->getHint();
+		echo $this->getError() . $this->getHint();
 		echo '</div>';
 	}
 
@@ -86,7 +86,7 @@ class TbInputHorizontal extends TbInput
 		echo $this->getLabel();
 		echo '<div class="controls">';
 		echo $this->form->dropDownList($this->model, $this->attribute, $this->data, $this->htmlOptions);
-		echo $this->getError().$this->getHint();
+		echo $this->getError() . $this->getHint();
 		echo '</div>';
 	}
 
@@ -99,7 +99,7 @@ class TbInputHorizontal extends TbInput
 		echo $this->getLabel();
 		echo '<div class="controls">';
 		echo $this->form->fileField($this->model, $this->attribute, $this->htmlOptions);
-		echo $this->getError().$this->getHint();
+		echo $this->getError() . $this->getHint();
 		echo '</div>';
 	}
 
@@ -114,7 +114,7 @@ class TbInputHorizontal extends TbInput
 		echo $this->getPrepend();
 		echo $this->form->passwordField($this->model, $this->attribute, $this->htmlOptions);
 		echo $this->getAppend();
-		echo $this->getError().$this->getHint();
+		echo $this->getError() . $this->getHint();
 		echo '</div>';
 	}
 
@@ -126,10 +126,10 @@ class TbInputHorizontal extends TbInput
 	{
 		$attribute = $this->attribute;
 		echo '<div class="controls">';
-		echo '<label class="radio" for="'.$this->getAttributeId($attribute).'">';
-		echo $this->form->radioButton($this->model, $attribute, $this->htmlOptions).PHP_EOL;
+		echo '<label class="radio" for="' . $this->getAttributeId($attribute) . '">';
+		echo $this->form->radioButton($this->model, $attribute, $this->htmlOptions) . PHP_EOL;
 		echo $this->model->getAttributeLabel($attribute);
-		echo $this->getError().$this->getHint();
+		echo $this->getError() . $this->getHint();
 		echo '</label></div>';
 	}
 
@@ -142,7 +142,7 @@ class TbInputHorizontal extends TbInput
 		echo $this->getLabel();
 		echo '<div class="controls">';
 		echo $this->form->radioButtonList($this->model, $this->attribute, $this->data, $this->htmlOptions);
-		echo $this->getError().$this->getHint();
+		echo $this->getError() . $this->getHint();
 		echo '</div>';
 	}
 
@@ -165,7 +165,7 @@ class TbInputHorizontal extends TbInput
 		echo $this->getLabel();
 		echo '<div class="controls">';
 		echo $this->form->textArea($this->model, $this->attribute, $this->htmlOptions);
-		echo $this->getError().$this->getHint();
+		echo $this->getError() . $this->getHint();
 		echo '</div>';
 	}
 
@@ -180,7 +180,7 @@ class TbInputHorizontal extends TbInput
 		echo $this->getPrepend();
 		echo $this->form->textField($this->model, $this->attribute, $this->htmlOptions);
 		echo $this->getAppend();
-		echo $this->getError().$this->getHint();
+		echo $this->getError() . $this->getHint();
 		echo '</div>';
 	}
 
@@ -192,9 +192,9 @@ class TbInputHorizontal extends TbInput
 	{
 		echo $this->getLabel();
 		echo '<div class="controls"><div class="captcha">';
-		echo '<div class="widget">'.$this->widget('CCaptcha', $this->captchaOptions, true).'</div>';
+		echo '<div class="widget">' . $this->widget('CCaptcha', $this->captchaOptions, true) . '</div>';
 		echo $this->form->textField($this->model, $this->attribute, $this->htmlOptions);
-		echo $this->getError().$this->getHint();
+		echo $this->getError() . $this->getHint();
 		echo '</div></div>';
 	}
 
@@ -207,7 +207,68 @@ class TbInputHorizontal extends TbInput
 		echo $this->getLabel();
 		echo '<div class="controls">';
 		echo CHtml::tag('span', $this->htmlOptions, $this->model->{$this->attribute});
-		echo $this->getError().$this->getHint();
+		echo $this->getError() . $this->getHint();
+		echo '</div>';
+	}
+
+	/**
+	 * Renders a datepicker field.
+	 * @return string the rendered content
+	 */
+	protected function datepickerField()
+	{
+		if (isset($this->htmlOptions['options']))
+		{
+			$options = $this->htmlOptions['options'];
+			unset($this->htmlOptions['options']);
+		}
+
+		if (isset($this->htmlOptions['events']))
+		{
+			$events = $this->htmlOptions['events'];
+			unset($this->htmlOptions['events']);
+		}
+
+		echo $this->getLabel();
+		echo '<div class="controls">';
+		$this->widget('bootstrap.widgets.TbDatePicker', array(
+			'model' => $this->model,
+			'attribute' => $this->attribute,
+			'options' => isset($options) ? $options : array(),
+			'events' => isset($events) ? $events : array(),
+			'htmlOptions' => $this->htmlOptions,
+		));
+		echo $this->getError() . $this->getHint();
+		echo '</div>';
+	}
+
+	/**
+	 * Renders a redactor.
+	 * @return string the rendered content
+	 */
+	protected function redactorJs()
+	{
+		if (isset($this->htmlOptions['options']))
+		{
+			$options = $this->htmlOptions['options'];
+			unset($this->htmlOptions['options']);
+		}
+		if (isset($this->htmlOptions['width']))
+		{
+			$width = $this->htmlOptions['width'];
+			unset($this->htmlOptions['width']);
+		}
+		echo $this->getLabel();
+		echo '<div class="controls">';
+		$this->widget('bootstrap.widgets.TbRedactorJs', array(
+			'model' => $this->model,
+			'attribute' => $this->attribute,
+			'editorOptions' => isset($options) ? $options : array(),
+			'width' => isset($width) ? $width : '100%',
+			'height' => isset($height) ? $height : '400px',
+			'htmlOptions' => $this->htmlOptions
+		));
+		echo $this->getError() . $this->getHint();
 		echo '</div>';
 	}
 }

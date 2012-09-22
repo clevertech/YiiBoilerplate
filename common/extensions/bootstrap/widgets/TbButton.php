@@ -25,6 +25,7 @@ class TbButton extends CWidget
 	const BUTTON_AJAXSUBMIT = 'ajaxSubmit';
 
 	// Button types.
+	const TYPE_LINK = 'link';
 	const TYPE_PRIMARY = 'primary';
 	const TYPE_INFO = 'info';
 	const TYPE_SUCCESS = 'success';
@@ -109,7 +110,7 @@ class TbButton extends CWidget
 	{
 		$classes = array('btn');
 
-		$validTypes = array(self::TYPE_PRIMARY, self::TYPE_INFO, self::TYPE_SUCCESS,
+		$validTypes = array(self::TYPE_LINK, self::TYPE_PRIMARY, self::TYPE_INFO, self::TYPE_SUCCESS,
 				self::TYPE_WARNING, self::TYPE_DANGER, self::TYPE_INVERSE);
 
 		if (isset($this->type) && in_array($this->type, $validTypes))
@@ -136,14 +137,14 @@ class TbButton extends CWidget
 			$this->htmlOptions['data-toggle'] = 'dropdown';
 		}
 
-        if (!empty($classes))
-        {
-            $classes = implode(' ', $classes);
-            if (isset($this->htmlOptions['class']))
-                $this->htmlOptions['class'] .= ' '.$classes;
-            else
-                $this->htmlOptions['class'] = $classes;
-        }
+		if (!empty($classes))
+		{
+			$classes = implode(' ', $classes);
+			if (isset($this->htmlOptions['class']))
+				$this->htmlOptions['class'] .= ' '.$classes;
+			else
+				$this->htmlOptions['class'] = $classes;
+		}
 
 		if (isset($this->icon))
 		{
@@ -153,14 +154,14 @@ class TbButton extends CWidget
 			$this->label = '<i class="'.$this->icon.'"></i> '.$this->label;
 		}
 
-        if (isset($this->toggle))
-            $this->htmlOptions['data-toggle'] = 'button';
+		if (isset($this->toggle))
+			$this->htmlOptions['data-toggle'] = 'button';
 
-        if (isset($this->loadingText))
-            $this->htmlOptions['data-loading-text'] = $this->loadingText;
+		if (isset($this->loadingText))
+			$this->htmlOptions['data-loading-text'] = $this->loadingText;
 
-        if (isset($this->completeText))
-            $this->htmlOptions['data-complete-text'] = $this->completeText;
+		if (isset($this->completeText))
+			$this->htmlOptions['data-complete-text'] = $this->completeText;
 	}
 
 	/**

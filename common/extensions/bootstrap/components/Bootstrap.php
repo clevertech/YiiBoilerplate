@@ -14,18 +14,20 @@ class Bootstrap extends CApplicationComponent
 {
 	// Bootstrap plugins.
 	const PLUGIN_ALERT = 'alert';
-    const PLUGIN_BUTTON = 'button';
-    const PLUGIN_CAROUSEL = 'carousel';
-    const PLUGIN_COLLAPSE = 'collapse';
-    const PLUGIN_DROPDOWN = 'dropdown';
-    const PLUGIN_MODAL = 'modal';
-    const PLUGIN_POPOVER = 'popover';
-    const PLUGIN_SCROLLSPY = 'scrollspy';
-    const PLUGIN_TAB = 'tab';
-    const PLUGIN_TOOLTIP = 'tooltip';
-    const PLUGIN_TRANSITION = 'transition';
-    const PLUGIN_TYPEAHEAD = 'typeahead';
-    // todo: add the affix plugin in version 2.1.0
+	const PLUGIN_BUTTON = 'button';
+	const PLUGIN_CAROUSEL = 'carousel';
+	const PLUGIN_COLLAPSE = 'collapse';
+	const PLUGIN_DROPDOWN = 'dropdown';
+	const PLUGIN_MODAL = 'modal';
+	const PLUGIN_POPOVER = 'popover';
+	const PLUGIN_SCROLLSPY = 'scrollspy';
+	const PLUGIN_TAB = 'tab';
+	const PLUGIN_TOOLTIP = 'tooltip';
+	const PLUGIN_TRANSITION = 'transition';
+	const PLUGIN_TYPEAHEAD = 'typeahead';
+	const PLUGIN_DATEPICKER = 'datepicker';
+	const PLUGIN_REDACTOR = 'redactor';
+	// todo: add the affix plugin in version 2.1.0
 
 	/**
 	 * @var boolean whether to register the Bootstrap core CSS (bootstrap.min.css).
@@ -74,7 +76,7 @@ class Bootstrap extends CApplicationComponent
 	{
 		// Register the bootstrap path alias.
 		if (Yii::getPathOfAlias('bootstrap') === false)
-			Yii::setPathOfAlias('bootstrap', realpath(dirname(__FILE__).'/..'));
+			Yii::setPathOfAlias('bootstrap', realpath(dirname(__FILE__) . '/..'));
 
 		// Prevents the extension from registering scripts and publishing assets when ran from the command line.
 		if (Yii::app() instanceof CConsoleApplication)
@@ -92,7 +94,7 @@ class Bootstrap extends CApplicationComponent
 		if ($this->enableJS !== false)
 			$this->registerCoreScripts();
 
-        parent::init();
+		parent::init();
 	}
 
 	/**
@@ -100,7 +102,7 @@ class Bootstrap extends CApplicationComponent
 	 */
 	public function registerCoreCss()
 	{
-		Yii::app()->clientScript->registerCssFile($this->getAssetsUrl().'/css/bootstrap.css');
+		Yii::app()->clientScript->registerCssFile($this->getAssetsUrl() . '/css/bootstrap.css');
 	}
 
 	/**
@@ -112,7 +114,7 @@ class Bootstrap extends CApplicationComponent
 		/** @var CClientScript $cs */
 		$cs = Yii::app()->getClientScript();
 		$cs->registerMetaTag('width=device-width, initial-scale=1.0', 'viewport');
-		$cs->registerCssFile($this->getAssetsUrl().'/css/bootstrap-responsive.css');
+		$cs->registerCssFile($this->getAssetsUrl() . '/css/bootstrap-responsive.css');
 	}
 
 	/**
@@ -121,7 +123,17 @@ class Bootstrap extends CApplicationComponent
 	 */
 	public function registerYiiCss()
 	{
-		Yii::app()->clientScript->registerCssFile($this->getAssetsUrl().'/css/bootstrap-yii.css');
+		Yii::app()->clientScript->registerCssFile($this->getAssetsUrl() . '/css/bootstrap-yii.css');
+	}
+
+	/**
+	 * Registers a specific css in the asset's css folder
+	 * @param string $cssFile the css file name to register
+	 * @param string $media the media that the CSS file should be applied to. If empty, it means all media types.
+	 */
+	public function registerAssetCss($cssFile, $media = '')
+	{
+		Yii::app()->getClientScript()->registerCssFile($this->getAssetsUrl() . "/css/{$cssFile}", $media);
 	}
 
 	/**
@@ -145,7 +157,19 @@ class Bootstrap extends CApplicationComponent
 		/** @var CClientScript $cs */
 		$cs = Yii::app()->getClientScript();
 		$cs->registerCoreScript('jquery');
-		$cs->registerScriptFile($this->getAssetsUrl().'/js/bootstrap.js', $position);
+		$cs->registerScriptFile($this->getAssetsUrl() . '/js/bootstrap.bootbox.min.js', $position);
+		$cs->registerScriptFile($this->getAssetsUrl() . '/js/bootstrap.js', $position);
+	}
+
+	/**
+	 * Register a specific js file in the asset's js folder
+	 * @param string $jsFile
+	 * @param int $position the position of the JavaScript code.
+	 * @see CClientScript::registerScriptFile
+	 */
+	public function registerAssetJs($jsFile, $position = CClientScript::POS_END)
+	{
+		Yii::app()->getClientScript()->registerScriptFile($this->getAssetsUrl() . "/js/{$jsFile}", $position);
 	}
 
 	/**
@@ -282,6 +306,28 @@ class Bootstrap extends CApplicationComponent
 	}
 
 	/**
+	 * Register the Bootstrap datepicker plugin.
+	 * IMPORTANT: if you register a selector via this method you wont be able to attach events to the plugin.
+	 * @param string $selector the CSS selector
+	 * @param array $options the plugin options
+	 * @see http://www.eyecon.ro/bootstrap-datepicker/
+	 *
+	 */
+	public function registerDatePicker($selector = null, $options = array())
+	{
+		$this->registerPlugin(self::PLUGIN_DATEPICKER, $selector, $options);
+	}
+
+	/**
+	 * Registers the RedactorJS plugin.
+	 * @param null $selector
+	 * @param $options
+	 */
+	public function registerRedactor($selector = null, $options)
+	{
+		$this->registerPlugin(self::PLUGIN_REDACTOR, $selector, $options);
+	}
+	/**
 	 * Registers a Bootstrap JavaScript plugin.
 	 * @param string $name the name of the plugin
 	 * @param string $selector the CSS selector
@@ -308,16 +354,16 @@ class Bootstrap extends CApplicationComponent
 
 		if (isset($selector))
 		{
-			$key = __CLASS__.'.'.md5($name.$selector.serialize($options).$defaultSelector);
+			$key = __CLASS__ . '.' . md5($name . $selector . serialize($options) . $defaultSelector);
 			$options = !empty($options) ? CJavaScript::encode($options) : '';
 			Yii::app()->clientScript->registerScript($key, "jQuery('{$selector}').{$name}({$options});");
 		}
 	}
 
 	/**
-	* Returns the URL to the published assets folder.
-	* @return string the URL
-	*/
+	 * Returns the URL to the published assets folder.
+	 * @return string the URL
+	 */
 	protected function getAssetsUrl()
 	{
 		if (isset($this->_assetsUrl))
@@ -330,12 +376,12 @@ class Bootstrap extends CApplicationComponent
 		}
 	}
 
-    /**
-     * Returns the extension version number.
-     * @return string the version
-     */
-    public function getVersion()
-    {
-        return '1.0.0';
-    }
+	/**
+	 * Returns the extension version number.
+	 * @return string the version
+	 */
+	public function getVersion()
+	{
+		return '1.0.0';
+	}
 }

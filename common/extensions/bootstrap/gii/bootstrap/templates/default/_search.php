@@ -4,7 +4,7 @@
  * - $this: the BootCrudCode object
  */
 ?>
-<?php echo "<?php \$form=\$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
+<?php echo "<?php \$form=\$this->beginWidget('bootstrap.widgets.BootActiveForm',array(
 	'action'=>Yii::app()->createUrl(\$this->route),
 	'method'=>'get',
 )); ?>\n"; ?>
@@ -19,8 +19,7 @@
 
 <?php endforeach; ?>
 	<div class="form-actions">
-		<?php echo "<?php \$this->widget('bootstrap.widgets.TbButton', array(
-		    'buttonType'=>'submit',
+		<?php echo "<?php \$this->widget('bootstrap.widgets.BootButton', array(
 			'type'=>'primary',
 			'label'=>'Search',
 		)); ?>\n"; ?>

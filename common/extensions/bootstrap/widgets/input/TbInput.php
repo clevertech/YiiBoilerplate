@@ -27,6 +27,8 @@ abstract class TbInput extends CInputWidget
 	const TYPE_TEXT = 'textfield';
 	const TYPE_CAPTCHA = 'captcha';
 	const TYPE_UNEDITABLE = 'uneditable';
+	const TYPE_DATEPICKER = 'datepicker';
+	const TYPE_REDACTOR = 'redactor';
 
 	/**
 	 * @var TbActiveForm the associated form widget.
@@ -46,42 +48,42 @@ abstract class TbInput extends CInputWidget
 	 * @var array the data for list inputs.
 	 */
 	public $data = array();
-    /**
-     * @var string text to prepend.
-     */
-    public $prependText;
-    /**
-     * @var string text to append.
-     */
-    public $appendText;
-    /**
-     * @var string the hint text.
-     */
-    public $hintText;
-    /**
-     * @var array label html attributes.
-     */
-    public $labelOptions = array();
-    /**
-     * @var array prepend html attributes.
-     */
-    public $prependOptions = array();
-    /**
-     * @var array append html attributes.
-     */
-    public $appendOptions = array();
-    /**
-     * @var array hint html attributes.
-     */
-    public $hintOptions = array();
-    /**
-     * @var array error html attributes.
-     */
-    public $errorOptions = array();
-    /**
-     * @var array captcha html attributes.
-     */
-    public $captchaOptions = array();
+	/**
+	 * @var string text to prepend.
+	 */
+	public $prependText;
+	/**
+	 * @var string text to append.
+	 */
+	public $appendText;
+	/**
+	 * @var string the hint text.
+	 */
+	public $hintText;
+	/**
+	 * @var array label html attributes.
+	 */
+	public $labelOptions = array();
+	/**
+	 * @var array prepend html attributes.
+	 */
+	public $prependOptions = array();
+	/**
+	 * @var array append html attributes.
+	 */
+	public $appendOptions = array();
+	/**
+	 * @var array hint html attributes.
+	 */
+	public $hintOptions = array();
+	/**
+	 * @var array error html attributes.
+	 */
+	public $errorOptions = array();
+	/**
+	 * @var array captcha html attributes.
+	 */
+	public $captchaOptions = array();
 
 	/**
 	 * Initializes the widget.
@@ -106,69 +108,69 @@ abstract class TbInput extends CInputWidget
 				$this->htmlOptions['class'] = 'uneditable-input';
 		}
 
-        $this->processHtmlOptions();
+		$this->processHtmlOptions();
 	}
 
-    /**
-     * Processes the html options.
-     */
-    protected function processHtmlOptions()
-    {
-        if (isset($this->htmlOptions['prepend']))
-        {
-            $this->prependText = $this->htmlOptions['prepend'];
-            unset($this->htmlOptions['prepend']);
-        }
+	/**
+	 * Processes the html options.
+	 */
+	protected function processHtmlOptions()
+	{
+		if (isset($this->htmlOptions['prepend']))
+		{
+			$this->prependText = $this->htmlOptions['prepend'];
+			unset($this->htmlOptions['prepend']);
+		}
 
-        if (isset($this->htmlOptions['append']))
-        {
-            $this->appendText = $this->htmlOptions['append'];
-            unset($this->htmlOptions['append']);
-        }
+		if (isset($this->htmlOptions['append']))
+		{
+			$this->appendText = $this->htmlOptions['append'];
+			unset($this->htmlOptions['append']);
+		}
 
-        if (isset($this->htmlOptions['hint']))
-        {
-            $this->hintText = $this->htmlOptions['hint'];
-            unset($this->htmlOptions['hint']);
-        }
+		if (isset($this->htmlOptions['hint']))
+		{
+			$this->hintText = $this->htmlOptions['hint'];
+			unset($this->htmlOptions['hint']);
+		}
 
-        if (isset($this->htmlOptions['labelOptions']))
-        {
-            $this->labelOptions = $this->htmlOptions['labelOptions'];
-            unset($this->htmlOptions['labelOptions']);
-        }
+		if (isset($this->htmlOptions['labelOptions']))
+		{
+			$this->labelOptions = $this->htmlOptions['labelOptions'];
+			unset($this->htmlOptions['labelOptions']);
+		}
 
-        if (isset($this->htmlOptions['prependOptions']))
-        {
-            $this->prependOptions = $this->htmlOptions['prependOptions'];
-            unset($this->htmlOptions['prependOptions']);
-        }
+		if (isset($this->htmlOptions['prependOptions']))
+		{
+			$this->prependOptions = $this->htmlOptions['prependOptions'];
+			unset($this->htmlOptions['prependOptions']);
+		}
 
-        if (isset($this->htmlOptions['appendOptions']))
-        {
-            $this->appendOptions = $this->htmlOptions['appendOptions'];
-            unset($this->htmlOptions['appendOptions']);
-        }
+		if (isset($this->htmlOptions['appendOptions']))
+		{
+			$this->appendOptions = $this->htmlOptions['appendOptions'];
+			unset($this->htmlOptions['appendOptions']);
+		}
 
-        if (isset($this->htmlOptions['hintOptions']))
-        {
-            $this->hintOptions = $this->htmlOptions['hintOptions'];
-            unset($this->htmlOptions['hintOptions']);
+		if (isset($this->htmlOptions['hintOptions']))
+		{
+			$this->hintOptions = $this->htmlOptions['hintOptions'];
+			unset($this->htmlOptions['hintOptions']);
 
-        }
+		}
 
-        if (isset($this->htmlOptions['errorOptions']))
-        {
-            $this->errorOptions = $this->htmlOptions['errorOptions'];
-            unset($this->htmlOptions['errorOptions']);
-        }
+		if (isset($this->htmlOptions['errorOptions']))
+		{
+			$this->errorOptions = $this->htmlOptions['errorOptions'];
+			unset($this->htmlOptions['errorOptions']);
+		}
 
-        if (isset($this->htmlOptions['captchaOptions']))
-        {
-            $this->captchaOptions = $this->htmlOptions['captchaOptions'];
-            unset($this->htmlOptions['captchaOptions']);
-        }
-    }
+		if (isset($this->htmlOptions['captchaOptions']))
+		{
+			$this->captchaOptions = $this->htmlOptions['captchaOptions'];
+			unset($this->htmlOptions['captchaOptions']);
+		}
+	}
 
 	/**
 	 * Runs the widget.
@@ -229,7 +231,12 @@ abstract class TbInput extends CInputWidget
 			case self::TYPE_UNEDITABLE:
 				$this->uneditableField();
 				break;
-
+			case self::TYPE_DATEPICKER:
+				$this->datepickerField();
+				break;
+			case self::TYPE_REDACTOR:
+				$this->redactorJs();
+				break;
 			default:
 				throw new CException(__CLASS__.': Failed to run widget! Type is invalid.');
 		}
@@ -257,7 +264,7 @@ abstract class TbInput extends CInputWidget
 	{
 		if ($this->hasAddOn())
 		{
-            $htmlOptions = $this->prependOptions;
+			$htmlOptions = $this->prependOptions;
 
 			if (isset($htmlOptions['class']))
 				$htmlOptions['class'] .= ' add-on';
@@ -283,7 +290,7 @@ abstract class TbInput extends CInputWidget
 	{
 		if ($this->hasAddOn())
 		{
-            $htmlOptions = $this->appendOptions;
+			$htmlOptions = $this->appendOptions;
 
 			if (isset($htmlOptions['class']))
 				$htmlOptions['class'] .= ' add-on';
@@ -467,4 +474,18 @@ abstract class TbInput extends CInputWidget
 	 * @abstract
 	 */
 	abstract protected function uneditableField();
+
+	/**
+	 * Renders a datepicker field.
+	 * @return string the rendered content
+	 * @abstract
+	 */
+	abstract protected function datepickerField();
+
+	/**
+	 * Renders a redactorJS wysiwyg field.
+	 * @abstract
+	 * @return mixed
+	 */
+	abstract protected function redactorJs();
 }
