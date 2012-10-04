@@ -226,7 +226,11 @@ From the application's root folder, to run the script simply do:
 * **environmentType** (required): can be "any" of the ones you configure on the **environments** folders (i.e. `./runpostdeploy private` to use ****-private.php*** configurations)
 * **migrations** (optional): could be "**migrate**"" or "**no-migrate**". 
 	* migrate: will run migrations
-	* no-migrate: will not run migrations (on private wont run them anyway) 
+	* no-migrate: will not run migrations (on private wont run them anyway)
+
+###YiiBooster library
+We have included [YiiBooster](http://yii-booster.clevertech.biz) widget library to the boilerplate. For more information regarding this library and its use
+please visit [YiiBooster Site](http://yii-booster.clevertech.biz).
 
 ====
 
