@@ -7,14 +7,14 @@ default:
     name: 'pretty'
   extensions:
     ../common/lib/Behat/extensions/mink_extension.phar:
-    mink_loader: '../common/lib/Behat/mink.phar'
+      mink_loader: '../common/lib/Behat/mink.phar'
 ## there will be your website base url for relative paths in step definitions.
-    base_url: 'http://example.com'
-    default_session: goutte
-    goutte: ~
+      base_url: 'http://example.com'
+      default_session: goutte
+      goutte: ~
 ## Scenarios tagged with @javascript will be processed with `sahi` driver
-    javascript_session: sahi
-    sahi: ~
+      javascript_session: sahi
+      sahi: ~
 ## You can import your local overrides as such:
 # imports:
 #  - 'behat-local.yml'
