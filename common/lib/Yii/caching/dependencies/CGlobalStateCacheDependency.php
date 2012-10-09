@@ -34,9 +34,9 @@ class CGlobalStateCacheDependency extends CCacheDependency
 	 * Constructor.
 	 * @param string $name the name of the global state
 	 */
-	public function __construct($name = null)
+	public function __construct($name=null)
 	{
-		$this->stateName = $name;
+		$this->stateName=$name;
 	}
 
 	/**
@@ -46,9 +46,9 @@ class CGlobalStateCacheDependency extends CCacheDependency
 	 */
 	protected function generateDependentData()
 	{
-		if ($this->stateName !== null)
+		if($this->stateName!==null)
 			return Yii::app()->getGlobalState($this->stateName);
 		else
-			throw new CException(Yii::t('yii', 'CGlobalStateCacheDependency.stateName cannot be empty.'));
+			throw new CException(Yii::t('yii','CGlobalStateCacheDependency.stateName cannot be empty.'));
 	}
 }

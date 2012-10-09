@@ -27,14 +27,14 @@ class CSqliteCommandBuilder extends CDbCommandBuilder
 	 * @param string $prefix column prefix (ended with dot)
 	 * @return string the expression for selection
 	 */
-	protected function createCompositeInCondition($table, $values, $prefix)
+	protected function createCompositeInCondition($table,$values,$prefix)
 	{
-		$keyNames = array();
-		foreach (array_keys($values[0]) as $name)
-			$keyNames[] = $prefix . $table->columns[$name]->rawName;
-		$vs = array();
-		foreach ($values as $value)
-			$vs[] = implode("||','||", $value);
-		return implode("||','||", $keyNames) . ' IN (' . implode(', ', $vs) . ')';
+		$keyNames=array();
+		foreach(array_keys($values[0]) as $name)
+			$keyNames[]=$prefix.$table->columns[$name]->rawName;
+		$vs=array();
+		foreach($values as $value)
+			$vs[]=implode("||','||",$value);
+		return implode("||','||",$keyNames).' IN ('.implode(', ',$vs).')';
 	}
 }

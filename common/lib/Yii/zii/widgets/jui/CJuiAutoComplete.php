@@ -52,10 +52,10 @@ class CJuiAutoComplete extends CJuiInputWidget
 	 * @var mixed the entries that the autocomplete should choose from. This can be
 	 * <ul>
 	 * <li>an Array with local data</li>
-	 * <li>a String, specifying a URL that returns JSON data as the entries.</li>
-	 * <li>a javascript callback. Please make sure you wrap the callback with
+	* <li>a String, specifying a URL that returns JSON data as the entries.</li>
+	* <li>a javascript callback. Please make sure you wrap the callback with
 	 * {@link CJavaScriptExpression} in this case.</li>
-	 * </ul>
+	* </ul>
 	 */
 	public $source = array();
 	/**
@@ -71,31 +71,31 @@ class CJuiAutoComplete extends CJuiInputWidget
 	 */
 	public function run()
 	{
-		list($name, $id) = $this->resolveNameID();
+		list($name,$id)=$this->resolveNameID();
 
-		if (isset($this->htmlOptions['id']))
-			$id = $this->htmlOptions['id'];
+		if(isset($this->htmlOptions['id']))
+			$id=$this->htmlOptions['id'];
 		else
-			$this->htmlOptions['id'] = $id;
+			$this->htmlOptions['id']=$id;
 
-		if (isset($this->htmlOptions['name']))
-			$name = $this->htmlOptions['name'];
+		if(isset($this->htmlOptions['name']))
+			$name=$this->htmlOptions['name'];
 
-		if ($this->hasModel())
-			echo CHtml::activeTextField($this->model, $this->attribute, $this->htmlOptions);
+		if($this->hasModel())
+			echo CHtml::activeTextField($this->model,$this->attribute,$this->htmlOptions);
 		else
-			echo CHtml::textField($name, $this->value, $this->htmlOptions);
+			echo CHtml::textField($name,$this->value,$this->htmlOptions);
 
-		if ($this->sourceUrl !== null)
-			$this->options['source'] = CHtml::normalizeUrl($this->sourceUrl);
+		if($this->sourceUrl!==null)
+			$this->options['source']=CHtml::normalizeUrl($this->sourceUrl);
 		else
-			$this->options['source'] = $this->source;
+			$this->options['source']=$this->source;
 
-		$options = CJavaScript::encode($this->options);
+		$options=CJavaScript::encode($this->options);
 
 		$js = "jQuery('#{$id}').autocomplete($options);";
 
 		$cs = Yii::app()->getClientScript();
-		$cs->registerScript(__CLASS__ . '#' . $id, $js);
+		$cs->registerScript(__CLASS__.'#'.$id, $js);
 	}
 }

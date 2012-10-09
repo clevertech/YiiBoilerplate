@@ -53,28 +53,28 @@ class CFormInputElement extends CFormElement
 	/**
 	 * @var array Core input types (alias=>CHtml method name)
 	 */
-	public static $coreTypes = array(
-		'text' => 'activeTextField',
-		'hidden' => 'activeHiddenField',
-		'password' => 'activePasswordField',
-		'textarea' => 'activeTextArea',
-		'file' => 'activeFileField',
-		'radio' => 'activeRadioButton',
-		'checkbox' => 'activeCheckBox',
-		'listbox' => 'activeListBox',
-		'dropdownlist' => 'activeDropDownList',
-		'checkboxlist' => 'activeCheckBoxList',
-		'radiolist' => 'activeRadioButtonList',
-		'url' => 'activeUrlField',
-		'email' => 'activeEmailField',
-		'number' => 'activeNumberField',
-		'range' => 'activeRangeField',
-		'date' => 'activeDateField'
+	public static $coreTypes=array(
+		'text'=>'activeTextField',
+		'hidden'=>'activeHiddenField',
+		'password'=>'activePasswordField',
+		'textarea'=>'activeTextArea',
+		'file'=>'activeFileField',
+		'radio'=>'activeRadioButton',
+		'checkbox'=>'activeCheckBox',
+		'listbox'=>'activeListBox',
+		'dropdownlist'=>'activeDropDownList',
+		'checkboxlist'=>'activeCheckBoxList',
+		'radiolist'=>'activeRadioButtonList',
+		'url'=>'activeUrlField',
+		'email'=>'activeEmailField',
+		'number'=>'activeNumberField',
+		'range'=>'activeRangeField',
+		'date'=>'activeDateField'
 	);
 
 	/**
 	 * @var string the type of this input. This can be a widget class name, a path alias of a widget class name,
-	 * or a input type alias (text, hidden, password, textarea, file, radio, checkbox, listbox, dropdownlist, checkboxlist, or radiolist).
+	 * or an input type alias (text, hidden, password, textarea, file, radio, checkbox, listbox, dropdownlist, checkboxlist, or radiolist).
 	 * If a widget class, it must extend from {@link CInputWidget} or (@link CJuiInputWidget).
 	 */
 	public $type;
@@ -90,14 +90,14 @@ class CFormInputElement extends CFormElement
 	 * @var array the options for this input when it is a list box, drop-down list, check box list, or radio button list.
 	 * Please see {@link CHtml::listData} for details of generating this property value.
 	 */
-	public $items = array();
+	public $items=array();
 	/**
 	 * @var array the options used when rendering the error part. This property will be passed
 	 * to the {@link CActiveForm::error} method call as its $htmlOptions parameter.
 	 * @see CActiveForm::error
 	 * @since 1.1.1
 	 */
-	public $errorOptions = array();
+	public $errorOptions=array();
 	/**
 	 * @var boolean whether to allow AJAX-based validation for this input. Note that in order to use
 	 * AJAX-based validation, {@link CForm::activeForm} must be configured with 'enableAjaxValidation'=>true.
@@ -105,7 +105,7 @@ class CFormInputElement extends CFormElement
 	 * Defaults to true.
 	 * @since 1.1.7
 	 */
-	public $enableAjaxValidation = true;
+	public $enableAjaxValidation=true;
 	/**
 	 * @var boolean whether to allow client-side validation for this input. Note that in order to use
 	 * client-side validation, {@link CForm::activeForm} must be configured with 'enableClientValidation'=>true.
@@ -113,12 +113,12 @@ class CFormInputElement extends CFormElement
 	 * Defaults to true.
 	 * @since 1.1.7
 	 */
-	public $enableClientValidation = true;
+	public $enableClientValidation=true;
 	/**
 	 * @var string the layout used to render label, input, hint and error. They correspond to the placeholders
 	 * "{label}", "{input}", "{hint}" and "{error}".
 	 */
-	public $layout = "{label}\n{input}\n{hint}\n{error}";
+	public $layout="{label}\n{input}\n{hint}\n{error}";
 
 	private $_label;
 	private $_required;
@@ -131,7 +131,7 @@ class CFormInputElement extends CFormElement
 	 */
 	public function getRequired()
 	{
-		if ($this->_required !== null)
+		if($this->_required!==null)
 			return $this->_required;
 		else
 			return $this->getParent()->getModel()->isAttributeRequired($this->name);
@@ -142,7 +142,7 @@ class CFormInputElement extends CFormElement
 	 */
 	public function setRequired($value)
 	{
-		$this->_required = $value;
+		$this->_required=$value;
 	}
 
 	/**
@@ -151,7 +151,7 @@ class CFormInputElement extends CFormElement
 	 */
 	public function getLabel()
 	{
-		if ($this->_label !== null)
+		if($this->_label!==null)
 			return $this->_label;
 		else
 			return $this->getParent()->getModel()->getAttributeLabel($this->name);
@@ -162,7 +162,7 @@ class CFormInputElement extends CFormElement
 	 */
 	public function setLabel($value)
 	{
-		$this->_label = $value;
+		$this->_label=$value;
 	}
 
 	/**
@@ -174,15 +174,15 @@ class CFormInputElement extends CFormElement
 	 */
 	public function render()
 	{
-		if ($this->type === 'hidden')
+		if($this->type==='hidden')
 			return $this->renderInput();
-		$output = array(
-			'{label}' => $this->renderLabel(),
-			'{input}' => $this->renderInput(),
-			'{hint}' => $this->renderHint(),
-			'{error}' => $this->getParent()->showErrorSummary ? '' : $this->renderError(),
+		$output=array(
+			'{label}'=>$this->renderLabel(),
+			'{input}'=>$this->renderInput(),
+			'{hint}'=>$this->renderHint(),
+			'{error}'=>$this->getParent()->showErrorSummary ? '' : $this->renderError(),
 		);
-		return strtr($this->layout, $output);
+		return strtr($this->layout,$output);
 	}
 
 	/**
@@ -193,14 +193,14 @@ class CFormInputElement extends CFormElement
 	public function renderLabel()
 	{
 		$options = array(
-			'label' => $this->getLabel(),
-			'required' => $this->getRequired()
+			'label'=>$this->getLabel(),
+			'required'=>$this->getRequired()
 		);
 
-		if (!empty($this->attributes['id']))
-		{
-			$options['for'] = $this->attributes['id'];
-		}
+		if(!empty($this->attributes['id']))
+        {
+            $options['for'] = $this->attributes['id'];
+        }
 
 		return CHtml::activeLabel($this->getParent()->getModel(), $this->name, $options);
 	}
@@ -212,18 +212,19 @@ class CFormInputElement extends CFormElement
 	 */
 	public function renderInput()
 	{
-		if (isset(self::$coreTypes[$this->type]))
+		if(isset(self::$coreTypes[$this->type]))
 		{
-			$method = self::$coreTypes[$this->type];
-			if (strpos($method, 'List') !== false)
+			$method=self::$coreTypes[$this->type];
+			if(strpos($method,'List')!==false)
 				return CHtml::$method($this->getParent()->getModel(), $this->name, $this->items, $this->attributes);
 			else
 				return CHtml::$method($this->getParent()->getModel(), $this->name, $this->attributes);
-		} else
+		}
+		else
 		{
-			$attributes = $this->attributes;
-			$attributes['model'] = $this->getParent()->getModel();
-			$attributes['attribute'] = $this->name;
+			$attributes=$this->attributes;
+			$attributes['model']=$this->getParent()->getModel();
+			$attributes['attribute']=$this->name;
 			ob_start();
 			$this->getParent()->getOwner()->widget($this->type, $attributes);
 			return ob_get_clean();
@@ -237,7 +238,7 @@ class CFormInputElement extends CFormElement
 	 */
 	public function renderError()
 	{
-		$parent = $this->getParent();
+		$parent=$this->getParent();
 		return $parent->getActiveFormWidget()->error($parent->getModel(), $this->name, $this->errorOptions, $this->enableAjaxValidation, $this->enableClientValidation);
 	}
 
@@ -248,7 +249,7 @@ class CFormInputElement extends CFormElement
 	 */
 	public function renderHint()
 	{
-		return $this->hint === null ? '' : '<div class="hint">' . $this->hint . '</div>';
+		return $this->hint===null ? '' : '<div class="hint">'.$this->hint.'</div>';
 	}
 
 	/**

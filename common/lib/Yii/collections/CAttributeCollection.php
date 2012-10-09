@@ -34,7 +34,7 @@ class CAttributeCollection extends CMap
 	/**
 	 * @var boolean whether the keys are case-sensitive. Defaults to false.
 	 */
-	public $caseSensitive = false;
+	public $caseSensitive=false;
 
 	/**
 	 * Returns a property value or an event handler list by property or event name.
@@ -46,7 +46,7 @@ class CAttributeCollection extends CMap
 	 */
 	public function __get($name)
 	{
-		if ($this->contains($name))
+		if($this->contains($name))
 			return $this->itemAt($name);
 		else
 			return parent::__get($name);
@@ -60,9 +60,9 @@ class CAttributeCollection extends CMap
 	 * @param mixed $value the property value or event handler
 	 * @throws CException If the property is not defined or read-only.
 	 */
-	public function __set($name, $value)
+	public function __set($name,$value)
 	{
-		$this->add($name, $value);
+		$this->add($name,$value);
 	}
 
 	/**
@@ -74,8 +74,8 @@ class CAttributeCollection extends CMap
 	 */
 	public function __isset($name)
 	{
-		if ($this->contains($name))
-			return $this->itemAt($name) !== null;
+		if($this->contains($name))
+			return $this->itemAt($name)!==null;
 		else
 			return parent::__isset($name);
 	}
@@ -99,7 +99,7 @@ class CAttributeCollection extends CMap
 	 */
 	public function itemAt($key)
 	{
-		if ($this->caseSensitive)
+		if($this->caseSensitive)
 			return parent::itemAt($key);
 		else
 			return parent::itemAt(strtolower($key));
@@ -111,12 +111,12 @@ class CAttributeCollection extends CMap
 	 * @param mixed $key key
 	 * @param mixed $value value
 	 */
-	public function add($key, $value)
+	public function add($key,$value)
 	{
-		if ($this->caseSensitive)
-			parent::add($key, $value);
+		if($this->caseSensitive)
+			parent::add($key,$value);
 		else
-			parent::add(strtolower($key), $value);
+			parent::add(strtolower($key),$value);
 	}
 
 	/**
@@ -127,7 +127,7 @@ class CAttributeCollection extends CMap
 	 */
 	public function remove($key)
 	{
-		if ($this->caseSensitive)
+		if($this->caseSensitive)
 			return parent::remove($key);
 		else
 			return parent::remove(strtolower($key));
@@ -141,7 +141,7 @@ class CAttributeCollection extends CMap
 	 */
 	public function contains($key)
 	{
-		if ($this->caseSensitive)
+		if($this->caseSensitive)
 			return parent::contains($key);
 		else
 			return parent::contains(strtolower($key));
@@ -200,15 +200,15 @@ class CAttributeCollection extends CMap
 	 *
 	 * @throws CException If data is neither an array nor an iterator.
 	 */
-	public function mergeWith($data, $recursive = true)
+	public function mergeWith($data,$recursive=true)
 	{
-		if (!$this->caseSensitive && (is_array($data) || $data instanceof Traversable))
+		if(!$this->caseSensitive && (is_array($data) || $data instanceof Traversable))
 		{
-			$d = array();
-			foreach ($data as $key => $value)
-				$d[strtolower($key)] = $value;
-			return parent::mergeWith($d, $recursive);
+            $d=array();
+            foreach($data as $key=>$value)
+                $d[strtolower($key)]=$value;
+            return parent::mergeWith($d,$recursive);
 		}
-		parent::mergeWith($data, $recursive);
+    parent::mergeWith($data,$recursive);
 	}
 }

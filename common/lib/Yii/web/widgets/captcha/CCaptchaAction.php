@@ -40,11 +40,11 @@ class CCaptchaAction extends CAction
 	/**
 	 * The name of the GET parameter indicating whether the CAPTCHA image should be regenerated.
 	 */
-	const REFRESH_GET_VAR = 'refresh';
+	const REFRESH_GET_VAR='refresh';
 	/**
 	 * Prefix to the session variable name used by the action.
 	 */
-	const SESSION_VAR_PREFIX = 'Yii.CCaptchaAction.';
+	const SESSION_VAR_PREFIX='Yii.CCaptchaAction.';
 	/**
 	 * @var integer how many times should the same CAPTCHA be displayed. Defaults to 3.
 	 * A value less than or equal to 0 means the test is unlimited (available since version 1.1.2).
@@ -109,17 +109,18 @@ class CCaptchaAction extends CAction
 	 */
 	public function run()
 	{
-		if (isset($_GET[self::REFRESH_GET_VAR])) // AJAX request for regenerating code
+		if(isset($_GET[self::REFRESH_GET_VAR]))  // AJAX request for regenerating code
 		{
-			$code = $this->getVerifyCode(true);
+			$code=$this->getVerifyCode(true);
 			echo CJSON::encode(array(
-				'hash1' => $this->generateValidationHash($code),
-				'hash2' => $this->generateValidationHash(strtolower($code)),
+				'hash1'=>$this->generateValidationHash($code),
+				'hash2'=>$this->generateValidationHash(strtolower($code)),
 				// we add a random 'v' parameter so that FireFox can refresh the image
 				// when src attribute of image tag is changed
-				'url' => $this->getController()->createUrl($this->getId(), array('v' => uniqid())),
+				'url'=>$this->getController()->createUrl($this->getId(),array('v' => uniqid())),
 			));
-		} else
+		}
+		else
 			$this->renderImage($this->getVerifyCode());
 		Yii::app()->end();
 	}
@@ -132,8 +133,8 @@ class CCaptchaAction extends CAction
 	 */
 	public function generateValidationHash($code)
 	{
-		for ($h = 0, $i = strlen($code) - 1; $i >= 0; --$i)
-			$h += ord($code[$i]);
+		for($h=0,$i=strlen($code)-1;$i>=0;--$i)
+			$h+=ord($code[$i]);
 		return $h;
 	}
 
@@ -142,15 +143,15 @@ class CCaptchaAction extends CAction
 	 * @param boolean $regenerate whether the verification code should be regenerated.
 	 * @return string the verification code.
 	 */
-	public function getVerifyCode($regenerate = false)
+	public function getVerifyCode($regenerate=false)
 	{
-		if ($this->fixedVerifyCode !== null)
+		if($this->fixedVerifyCode !== null)
 			return $this->fixedVerifyCode;
 
 		$session = Yii::app()->session;
 		$session->open();
 		$name = $this->getSessionKey();
-		if ($session[$name] === null || $regenerate)
+		if($session[$name] === null || $regenerate)
 		{
 			$session[$name] = $this->generateVerifyCode();
 			$session[$name . 'count'] = 1;
@@ -164,15 +165,15 @@ class CCaptchaAction extends CAction
 	 * @param boolean $caseSensitive whether the comparison should be case-sensitive
 	 * @return boolean whether the input is valid
 	 */
-	public function validate($input, $caseSensitive)
+	public function validate($input,$caseSensitive)
 	{
 		$code = $this->getVerifyCode();
-		$valid = $caseSensitive ? ($input === $code) : !strcasecmp($input, $code);
+		$valid = $caseSensitive ? ($input === $code) : !strcasecmp($input,$code);
 		$session = Yii::app()->session;
 		$session->open();
 		$name = $this->getSessionKey() . 'count';
 		$session[$name] = $session[$name] + 1;
-		if ($session[$name] > $this->testLimit && $this->testLimit > 0)
+		if($session[$name] > $this->testLimit && $this->testLimit > 0)
 			$this->getVerifyCode(true);
 		return $valid;
 	}
@@ -183,23 +184,23 @@ class CCaptchaAction extends CAction
 	 */
 	protected function generateVerifyCode()
 	{
-		if ($this->minLength < 3)
+		if($this->minLength < 3)
 			$this->minLength = 3;
-		if ($this->maxLength > 20)
+		if($this->maxLength > 20)
 			$this->maxLength = 20;
-		if ($this->minLength > $this->maxLength)
+		if($this->minLength > $this->maxLength)
 			$this->maxLength = $this->minLength;
-		$length = mt_rand($this->minLength, $this->maxLength);
+		$length = mt_rand($this->minLength,$this->maxLength);
 
 		$letters = 'bcdfghjklmnpqrstvwxyz';
 		$vowels = 'aeiou';
 		$code = '';
-		for ($i = 0; $i < $length; ++$i)
+		for($i = 0; $i < $length; ++$i)
 		{
-			if ($i % 2 && mt_rand(0, 10) > 2 || !($i % 2) && mt_rand(0, 10) > 9)
-				$code .= $vowels[mt_rand(0, 4)];
+			if($i % 2 && mt_rand(0,10) > 2 || !($i % 2) && mt_rand(0,10) > 9)
+				$code.=$vowels[mt_rand(0,4)];
 			else
-				$code .= $letters[mt_rand(0, 20)];
+				$code.=$letters[mt_rand(0,20)];
 		}
 
 		return $code;
@@ -221,43 +222,43 @@ class CCaptchaAction extends CAction
 	 */
 	protected function renderImage($code)
 	{
-		$image = imagecreatetruecolor($this->width, $this->height);
+		$image = imagecreatetruecolor($this->width,$this->height);
 
 		$backColor = imagecolorallocate($image,
-			(int)($this->backColor % 0x1000000 / 0x10000),
-			(int)($this->backColor % 0x10000 / 0x100),
-			$this->backColor % 0x100);
-		imagefilledrectangle($image, 0, 0, $this->width, $this->height, $backColor);
-		imagecolordeallocate($image, $backColor);
+				(int)($this->backColor % 0x1000000 / 0x10000),
+				(int)($this->backColor % 0x10000 / 0x100),
+				$this->backColor % 0x100);
+		imagefilledrectangle($image,0,0,$this->width,$this->height,$backColor);
+		imagecolordeallocate($image,$backColor);
 
-		if ($this->transparent)
-			imagecolortransparent($image, $backColor);
+		if($this->transparent)
+			imagecolortransparent($image,$backColor);
 
 		$foreColor = imagecolorallocate($image,
-			(int)($this->foreColor % 0x1000000 / 0x10000),
-			(int)($this->foreColor % 0x10000 / 0x100),
-			$this->foreColor % 0x100);
+				(int)($this->foreColor % 0x1000000 / 0x10000),
+				(int)($this->foreColor % 0x10000 / 0x100),
+				$this->foreColor % 0x100);
 
-		if ($this->fontFile === null)
+		if($this->fontFile === null)
 			$this->fontFile = dirname(__FILE__) . '/Duality.ttf';
 
 		$length = strlen($code);
-		$box = imagettfbbox(30, 0, $this->fontFile, $code);
+		$box = imagettfbbox(30,0,$this->fontFile,$code);
 		$w = $box[4] - $box[0] + $this->offset * ($length - 1);
 		$h = $box[1] - $box[5];
-		$scale = min(($this->width - $this->padding * 2) / $w, ($this->height - $this->padding * 2) / $h);
+		$scale = min(($this->width - $this->padding * 2) / $w,($this->height - $this->padding * 2) / $h);
 		$x = 10;
 		$y = round($this->height * 27 / 40);
-		for ($i = 0; $i < $length; ++$i)
+		for($i = 0; $i < $length; ++$i)
 		{
-			$fontSize = (int)(rand(26, 32) * $scale * 0.8);
-			$angle = rand(-10, 10);
+			$fontSize = (int)(rand(26,32) * $scale * 0.8);
+			$angle = rand(-10,10);
 			$letter = $code[$i];
-			$box = imagettftext($image, $fontSize, $angle, $x, $y, $foreColor, $this->fontFile, $letter);
+			$box = imagettftext($image,$fontSize,$angle,$x,$y,$foreColor,$this->fontFile,$letter);
 			$x = $box[2] + $this->offset;
 		}
 
-		imagecolordeallocate($image, $foreColor);
+		imagecolordeallocate($image,$foreColor);
 
 		header('Pragma: public');
 		header('Expires: 0');

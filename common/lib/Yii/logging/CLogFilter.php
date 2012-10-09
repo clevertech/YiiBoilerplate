@@ -28,21 +28,21 @@ class CLogFilter extends CComponent implements ILogFilter
 	 * @var boolean whether to prefix each log message with the current user session ID.
 	 * Defaults to false.
 	 */
-	public $prefixSession = false;
+	public $prefixSession=false;
 	/**
 	 * @var boolean whether to prefix each log message with the current user
 	 * {@link CWebUser::name name} and {@link CWebUser::id ID}. Defaults to false.
 	 */
-	public $prefixUser = false;
+	public $prefixUser=false;
 	/**
 	 * @var boolean whether to log the current user name and ID. Defaults to true.
 	 */
-	public $logUser = true;
+	public $logUser=true;
 	/**
 	 * @var array list of the PHP predefined variables that should be logged.
 	 * Note that a variable must be accessible via $GLOBALS. Otherwise it won't be logged.
 	 */
-	public $logVars = array('_GET', '_POST', '_FILES', '_COOKIE', '_SESSION', '_SERVER');
+	public $logVars=array('_GET','_POST','_FILES','_COOKIE','_SESSION','_SERVER');
 
 
 	/**
@@ -56,8 +56,8 @@ class CLogFilter extends CComponent implements ILogFilter
 	{
 		if (!empty($logs))
 		{
-			if (($message = $this->getContext()) !== '')
-				array_unshift($logs, array($message, CLogger::LEVEL_INFO, 'application', YII_BEGIN_TIME));
+			if(($message=$this->getContext())!=='')
+				array_unshift($logs,array($message,CLogger::LEVEL_INFO,'application',YII_BEGIN_TIME));
 			$this->format($logs);
 		}
 		return $logs;
@@ -72,15 +72,15 @@ class CLogFilter extends CComponent implements ILogFilter
 	 */
 	protected function format(&$logs)
 	{
-		$prefix = '';
-		if ($this->prefixSession && ($id = session_id()) !== '')
-			$prefix .= "[$id]";
-		if ($this->prefixUser && ($user = Yii::app()->getComponent('user', false)) !== null)
-			$prefix .= '[' . $user->getName() . '][' . $user->getId() . ']';
-		if ($prefix !== '')
+		$prefix='';
+		if($this->prefixSession && ($id=session_id())!=='')
+			$prefix.="[$id]";
+		if($this->prefixUser && ($user=Yii::app()->getComponent('user',false))!==null)
+			$prefix.='['.$user->getName().']['.$user->getId().']';
+		if($prefix!=='')
 		{
-			foreach ($logs as &$log)
-				$log[0] = $prefix . ' ' . $log[0];
+			foreach($logs as &$log)
+				$log[0]=$prefix.' '.$log[0];
 		}
 	}
 
@@ -91,16 +91,16 @@ class CLogFilter extends CComponent implements ILogFilter
 	 */
 	protected function getContext()
 	{
-		$context = array();
-		if ($this->logUser && ($user = Yii::app()->getComponent('user', false)) !== null)
-			$context[] = 'User: ' . $user->getName() . ' (ID: ' . $user->getId() . ')';
+		$context=array();
+		if($this->logUser && ($user=Yii::app()->getComponent('user',false))!==null)
+			$context[]='User: '.$user->getName().' (ID: '.$user->getId().')';
 
-		foreach ($this->logVars as $name)
+		foreach($this->logVars as $name)
 		{
-			if (!empty($GLOBALS[$name]))
-				$context[] = "\${$name}=" . var_export($GLOBALS[$name], true);
+			if(!empty($GLOBALS[$name]))
+				$context[]="\${$name}=".var_export($GLOBALS[$name],true);
 		}
 
-		return implode("\n\n", $context);
+		return implode("\n\n",$context);
 	}
 }

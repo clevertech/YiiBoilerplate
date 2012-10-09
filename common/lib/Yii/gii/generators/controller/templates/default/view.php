@@ -10,15 +10,16 @@
 /* @var $this <?php echo $this->getControllerClass(); ?> */
 
 <?php
-$label = ucwords(trim(strtolower(str_replace(array('-', '_', '.'), ' ', preg_replace('/(?<![A-Z])[A-Z]/', ' \0', basename($this->getControllerID()))))));
-if ($action === 'index')
+$label=ucwords(trim(strtolower(str_replace(array('-','_','.'),' ',preg_replace('/(?<![A-Z])[A-Z]/', ' \0', basename($this->getControllerID()))))));
+if($action==='index')
 {
 	echo "\$this->breadcrumbs=array(
 	'$label',
 );";
-} else
+}
+else
 {
-	$action = ucfirst($action);
+	$action=ucfirst($action);
 	echo "\$this->breadcrumbs=array(
 	'$label'=>array('/{$this->uniqueControllerID}'),
 	'$action',

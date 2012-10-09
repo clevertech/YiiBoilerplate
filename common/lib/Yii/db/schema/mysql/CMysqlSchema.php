@@ -22,7 +22,7 @@ class CMysqlSchema extends CDbSchema
 	 * @var array the abstract column types mapped to physical column types.
 	 * @since 1.1.6
 	 */
-	public $columnTypes = array(
+	public $columnTypes=array(
 		'pk' => 'int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY',
 		'string' => 'varchar(255)',
 		'text' => 'text',
@@ -47,7 +47,7 @@ class CMysqlSchema extends CDbSchema
 	 */
 	public function quoteSimpleTableName($name)
 	{
-		return '`' . $name . '`';
+		return '`'.$name.'`';
 	}
 
 	/**
@@ -59,7 +59,7 @@ class CMysqlSchema extends CDbSchema
 	 */
 	public function quoteSimpleColumnName($name)
 	{
-		return '`' . $name . '`';
+		return '`'.$name.'`';
 	}
 
 	/**
@@ -70,9 +70,9 @@ class CMysqlSchema extends CDbSchema
 	 * @param string $name2 table name 2
 	 * @return boolean whether the two table names refer to the same table.
 	 */
-	public function compareTableNames($name1, $name2)
+	public function compareTableNames($name1,$name2)
 	{
-		return parent::compareTableNames(strtolower($name1), strtolower($name2));
+		return parent::compareTableNames(strtolower($name1),strtolower($name2));
 	}
 
 	/**
@@ -84,14 +84,14 @@ class CMysqlSchema extends CDbSchema
 	 * the next new row's primary key will have a value 1.
 	 * @since 1.1
 	 */
-	public function resetSequence($table, $value = null)
+	public function resetSequence($table,$value=null)
 	{
-		if ($table->sequenceName !== null)
+		if($table->sequenceName!==null)
 		{
-			if ($value === null)
-				$value = $this->getDbConnection()->createCommand("SELECT MAX(`{$table->primaryKey}`) FROM {$table->rawName}")->queryScalar() + 1;
+			if($value===null)
+				$value=$this->getDbConnection()->createCommand("SELECT MAX(`{$table->primaryKey}`) FROM {$table->rawName}")->queryScalar()+1;
 			else
-				$value = (int)$value;
+				$value=(int)$value;
 			$this->getDbConnection()->createCommand("ALTER TABLE {$table->rawName} AUTO_INCREMENT=$value")->execute();
 		}
 	}
@@ -102,9 +102,9 @@ class CMysqlSchema extends CDbSchema
 	 * @param string $schema the schema of the tables. Defaults to empty string, meaning the current or default schema.
 	 * @since 1.1
 	 */
-	public function checkIntegrity($check = true, $schema = '')
+	public function checkIntegrity($check=true,$schema='')
 	{
-		$this->getDbConnection()->createCommand('SET FOREIGN_KEY_CHECKS=' . ($check ? 1 : 0))->execute();
+		$this->getDbConnection()->createCommand('SET FOREIGN_KEY_CHECKS='.($check?1:0))->execute();
 	}
 
 	/**
@@ -114,14 +114,15 @@ class CMysqlSchema extends CDbSchema
 	 */
 	protected function loadTable($name)
 	{
-		$table = new CMysqlTableSchema;
-		$this->resolveTableNames($table, $name);
+		$table=new CMysqlTableSchema;
+		$this->resolveTableNames($table,$name);
 
-		if ($this->findColumns($table))
+		if($this->findColumns($table))
 		{
 			$this->findConstraints($table);
 			return $table;
-		} else
+		}
+		else
 			return null;
 	}
 
@@ -130,18 +131,19 @@ class CMysqlSchema extends CDbSchema
 	 * @param CMysqlTableSchema $table the table instance
 	 * @param string $name the unquoted table name
 	 */
-	protected function resolveTableNames($table, $name)
+	protected function resolveTableNames($table,$name)
 	{
-		$parts = explode('.', str_replace('`', '', $name));
-		if (isset($parts[1]))
+		$parts=explode('.',str_replace('`','',$name));
+		if(isset($parts[1]))
 		{
-			$table->schemaName = $parts[0];
-			$table->name = $parts[1];
-			$table->rawName = $this->quoteTableName($table->schemaName) . '.' . $this->quoteTableName($table->name);
-		} else
+			$table->schemaName=$parts[0];
+			$table->name=$parts[1];
+			$table->rawName=$this->quoteTableName($table->schemaName).'.'.$this->quoteTableName($table->name);
+		}
+		else
 		{
-			$table->name = $parts[0];
-			$table->rawName = $this->quoteTableName($table->name);
+			$table->name=$parts[0];
+			$table->rawName=$this->quoteTableName($table->name);
 		}
 	}
 
@@ -152,28 +154,29 @@ class CMysqlSchema extends CDbSchema
 	 */
 	protected function findColumns($table)
 	{
-		$sql = 'SHOW COLUMNS FROM ' . $table->rawName;
+		$sql='SHOW COLUMNS FROM '.$table->rawName;
 		try
 		{
-			$columns = $this->getDbConnection()->createCommand($sql)->queryAll();
-		} catch (Exception $e)
+			$columns=$this->getDbConnection()->createCommand($sql)->queryAll();
+		}
+		catch(Exception $e)
 		{
 			return false;
 		}
-		foreach ($columns as $column)
+		foreach($columns as $column)
 		{
-			$c = $this->createColumn($column);
-			$table->columns[$c->name] = $c;
-			if ($c->isPrimaryKey)
+			$c=$this->createColumn($column);
+			$table->columns[$c->name]=$c;
+			if($c->isPrimaryKey)
 			{
-				if ($table->primaryKey === null)
-					$table->primaryKey = $c->name;
-				else if (is_string($table->primaryKey))
-					$table->primaryKey = array($table->primaryKey, $c->name);
+				if($table->primaryKey===null)
+					$table->primaryKey=$c->name;
+				else if(is_string($table->primaryKey))
+					$table->primaryKey=array($table->primaryKey,$c->name);
 				else
-					$table->primaryKey[] = $c->name;
-				if ($c->autoIncrement)
-					$table->sequenceName = '';
+					$table->primaryKey[]=$c->name;
+				if($c->autoIncrement)
+					$table->sequenceName='';
 			}
 		}
 		return true;
@@ -186,14 +189,14 @@ class CMysqlSchema extends CDbSchema
 	 */
 	protected function createColumn($column)
 	{
-		$c = new CMysqlColumnSchema;
-		$c->name = $column['Field'];
-		$c->rawName = $this->quoteColumnName($c->name);
-		$c->allowNull = $column['Null'] === 'YES';
-		$c->isPrimaryKey = strpos($column['Key'], 'PRI') !== false;
-		$c->isForeignKey = false;
-		$c->init($column['Type'], $column['Default']);
-		$c->autoIncrement = strpos(strtolower($column['Extra']), 'auto_increment') !== false;
+		$c=new CMysqlColumnSchema;
+		$c->name=$column['Field'];
+		$c->rawName=$this->quoteColumnName($c->name);
+		$c->allowNull=$column['Null']==='YES';
+		$c->isPrimaryKey=strpos($column['Key'],'PRI')!==false;
+		$c->isForeignKey=false;
+		$c->init($column['Type'],$column['Default']);
+		$c->autoIncrement=strpos(strtolower($column['Extra']),'auto_increment')!==false;
 
 		return $c;
 	}
@@ -203,10 +206,10 @@ class CMysqlSchema extends CDbSchema
 	 */
 	protected function getServerVersion()
 	{
-		$version = $this->getDbConnection()->getAttribute(PDO::ATTR_SERVER_VERSION);
-		$digits = array();
+		$version=$this->getDbConnection()->getAttribute(PDO::ATTR_SERVER_VERSION);
+		$digits=array();
 		preg_match('/(\d+)\.(\d+)\.(\d+)/', $version, $digits);
-		return floatval($digits[1] . '.' . $digits[2] . $digits[3]);
+		return floatval($digits[1].'.'.$digits[2].$digits[3]);
 	}
 
 	/**
@@ -215,23 +218,23 @@ class CMysqlSchema extends CDbSchema
 	 */
 	protected function findConstraints($table)
 	{
-		$row = $this->getDbConnection()->createCommand('SHOW CREATE TABLE ' . $table->rawName)->queryRow();
-		$matches = array();
-		$regexp = '/FOREIGN KEY\s+\(([^\)]+)\)\s+REFERENCES\s+([^\(^\s]+)\s*\(([^\)]+)\)/mi';
-		foreach ($row as $sql)
+		$row=$this->getDbConnection()->createCommand('SHOW CREATE TABLE '.$table->rawName)->queryRow();
+		$matches=array();
+		$regexp='/FOREIGN KEY\s+\(([^\)]+)\)\s+REFERENCES\s+([^\(^\s]+)\s*\(([^\)]+)\)/mi';
+		foreach($row as $sql)
 		{
-			if (preg_match_all($regexp, $sql, $matches, PREG_SET_ORDER))
+			if(preg_match_all($regexp,$sql,$matches,PREG_SET_ORDER))
 				break;
 		}
-		foreach ($matches as $match)
+		foreach($matches as $match)
 		{
-			$keys = array_map('trim', explode(',', str_replace('`', '', $match[1])));
-			$fks = array_map('trim', explode(',', str_replace('`', '', $match[3])));
-			foreach ($keys as $k => $name)
+			$keys=array_map('trim',explode(',',str_replace('`','',$match[1])));
+			$fks=array_map('trim',explode(',',str_replace('`','',$match[3])));
+			foreach($keys as $k=>$name)
 			{
-				$table->foreignKeys[$name] = array(str_replace('`', '', $match[2]), $fks[$k]);
-				if (isset($table->columns[$name]))
-					$table->columns[$name]->isForeignKey = true;
+				$table->foreignKeys[$name]=array(str_replace('`','',$match[2]),$fks[$k]);
+				if(isset($table->columns[$name]))
+					$table->columns[$name]->isForeignKey=true;
 			}
 		}
 	}
@@ -242,13 +245,13 @@ class CMysqlSchema extends CDbSchema
 	 * If not empty, the returned table names will be prefixed with the schema name.
 	 * @return array all table names in the database.
 	 */
-	protected function findTableNames($schema = '')
+	protected function findTableNames($schema='')
 	{
-		if ($schema === '')
+		if($schema==='')
 			return $this->getDbConnection()->createCommand('SHOW TABLES')->queryColumn();
-		$names = $this->getDbConnection()->createCommand('SHOW TABLES FROM ' . $this->quoteTableName($schema))->queryColumn();
-		foreach ($names as &$name)
-			$name = $schema . '.' . $name;
+		$names=$this->getDbConnection()->createCommand('SHOW TABLES FROM '.$this->quoteTableName($schema))->queryColumn();
+		foreach($names as &$name)
+			$name=$schema.'.'.$name;
 		return $names;
 	}
 
@@ -262,33 +265,33 @@ class CMysqlSchema extends CDbSchema
 	 */
 	public function renameColumn($table, $name, $newName)
 	{
-		$db = $this->getDbConnection();
-		$row = $db->createCommand('SHOW CREATE TABLE ' . $db->quoteTableName($table))->queryRow();
-		if ($row === false)
-			throw new CDbException(Yii::t('yii', 'Unable to find "{column}" in table "{table}".', array('{column}' => $name, '{table}' => $table)));
-		if (isset($row['Create Table']))
-			$sql = $row['Create Table'];
+		$db=$this->getDbConnection();
+		$row=$db->createCommand('SHOW CREATE TABLE '.$db->quoteTableName($table))->queryRow();
+		if($row===false)
+			throw new CDbException(Yii::t('yii','Unable to find "{column}" in table "{table}".',array('{column}'=>$name,'{table}'=>$table)));
+		if(isset($row['Create Table']))
+			$sql=$row['Create Table'];
 		else
 		{
-			$row = array_values($row);
-			$sql = $row[1];
+			$row=array_values($row);
+			$sql=$row[1];
 		}
-		if (preg_match_all('/^\s*`(.*?)`\s+(.*?),?$/m', $sql, $matches))
+		if(preg_match_all('/^\s*`(.*?)`\s+(.*?),?$/m',$sql,$matches))
 		{
-			foreach ($matches[1] as $i => $c)
+			foreach($matches[1] as $i=>$c)
 			{
-				if ($c === $name)
+				if($c===$name)
 				{
-					return "ALTER TABLE " . $db->quoteTableName($table)
-						. " CHANGE " . $db->quoteColumnName($name)
-						. ' ' . $db->quoteColumnName($newName) . ' ' . $matches[2][$i];
+					return "ALTER TABLE ".$db->quoteTableName($table)
+						. " CHANGE ".$db->quoteColumnName($name)
+						. ' '.$db->quoteColumnName($newName).' '.$matches[2][$i];
 				}
 			}
 		}
 
 		// try to give back a SQL anyway
-		return "ALTER TABLE " . $db->quoteTableName($table)
-			. " CHANGE " . $db->quoteColumnName($name) . ' ' . $newName;
+		return "ALTER TABLE ".$db->quoteTableName($table)
+			. " CHANGE ".$db->quoteColumnName($name).' '.$newName;
 	}
 
 	/**
@@ -300,7 +303,7 @@ class CMysqlSchema extends CDbSchema
 	 */
 	public function dropForeignKey($name, $table)
 	{
-		return 'ALTER TABLE ' . $this->quoteTableName($table)
-			. ' DROP FOREIGN KEY ' . $this->quoteColumnName($name);
+		return 'ALTER TABLE '.$this->quoteTableName($table)
+			.' DROP FOREIGN KEY '.$this->quoteColumnName($name);
 	}
 }

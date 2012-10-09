@@ -18,15 +18,15 @@
  *
  * @version $Id: $
  */
-return array(
-	'{n} B' => '{n} B',
-	'{n} Bytes' => '{n} bajtů',
-	'{n} GB' => '{n} GB',
-	'{n} GigaBytes' => '{n} gigabajtů',
-	'{n} KB' => '{n} KB',
-	'{n} KiloBytes' => '{n} kilobajtů',
-	'{n} MB' => '{n} MB',
-	'{n} MegaBytes' => '{n} megabajtů',
-	'{n} TB' => '{n} TB',
-	'{n} TeraBytes' => '{n} terabajtů',
+return array (
+  '{n} B' => '{n} B',
+  '{n} Bytes' => '{n} bajtů',
+  '{n} GB' => '{n} GB',
+  '{n} GigaBytes' => '{n} gigabajtů',
+  '{n} KB' => '{n} KB',
+  '{n} KiloBytes' => '{n} kilobajtů',
+  '{n} MB' => '{n} MB',
+  '{n} MegaBytes' => '{n} megabajtů',
+  '{n} TB' => '{n} TB',
+  '{n} TeraBytes' => '{n} terabajtů',
 );

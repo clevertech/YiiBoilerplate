@@ -40,13 +40,13 @@ class CAuthAssignment extends CComponent
 	 * @param string $bizRule the business rule associated with this assignment
 	 * @param mixed $data additional data for this assignment
 	 */
-	public function __construct($auth, $itemName, $userId, $bizRule = null, $data = null)
+	public function __construct($auth,$itemName,$userId,$bizRule=null,$data=null)
 	{
-		$this->_auth = $auth;
-		$this->_itemName = $itemName;
-		$this->_userId = $userId;
-		$this->_bizRule = $bizRule;
-		$this->_data = $data;
+		$this->_auth=$auth;
+		$this->_itemName=$itemName;
+		$this->_userId=$userId;
+		$this->_bizRule=$bizRule;
+		$this->_data=$data;
 	}
 
 	/**
@@ -78,9 +78,9 @@ class CAuthAssignment extends CComponent
 	 */
 	public function setBizRule($value)
 	{
-		if ($this->_bizRule !== $value)
+		if($this->_bizRule!==$value)
 		{
-			$this->_bizRule = $value;
+			$this->_bizRule=$value;
 			$this->_auth->saveAuthAssignment($this);
 		}
 	}
@@ -98,9 +98,9 @@ class CAuthAssignment extends CComponent
 	 */
 	public function setData($value)
 	{
-		if ($this->_data !== $value)
+		if($this->_data!==$value)
 		{
-			$this->_data = $value;
+			$this->_data=$value;
 			$this->_auth->saveAuthAssignment($this);
 		}
 	}

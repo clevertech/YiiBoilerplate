@@ -33,9 +33,9 @@ class CFileCacheDependency extends CCacheDependency
 	 * Constructor.
 	 * @param string $fileName name of the file whose change is to be checked.
 	 */
-	public function __construct($fileName = null)
+	public function __construct($fileName=null)
 	{
-		$this->fileName = $fileName;
+		$this->fileName=$fileName;
 	}
 
 	/**
@@ -45,9 +45,9 @@ class CFileCacheDependency extends CCacheDependency
 	 */
 	protected function generateDependentData()
 	{
-		if ($this->fileName !== null)
+		if($this->fileName!==null)
 			return @filemtime($this->fileName);
 		else
-			throw new CException(Yii::t('yii', 'CFileCacheDependency.fileName cannot be empty.'));
+			throw new CException(Yii::t('yii','CFileCacheDependency.fileName cannot be empty.'));
 	}
 }

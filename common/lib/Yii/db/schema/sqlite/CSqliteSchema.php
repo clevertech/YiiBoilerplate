@@ -22,21 +22,21 @@ class CSqliteSchema extends CDbSchema
 	 * @var array the abstract column types mapped to physical column types.
 	 * @since 1.1.6
 	 */
-	public $columnTypes = array(
-		'pk' => 'integer PRIMARY KEY AUTOINCREMENT NOT NULL',
-		'string' => 'varchar(255)',
-		'text' => 'text',
-		'integer' => 'integer',
-		'float' => 'float',
-		'decimal' => 'decimal',
-		'datetime' => 'datetime',
-		'timestamp' => 'timestamp',
-		'time' => 'time',
-		'date' => 'date',
-		'binary' => 'blob',
-		'boolean' => 'tinyint(1)',
+    public $columnTypes=array(
+        'pk' => 'integer PRIMARY KEY AUTOINCREMENT NOT NULL',
+        'string' => 'varchar(255)',
+        'text' => 'text',
+        'integer' => 'integer',
+        'float' => 'float',
+        'decimal' => 'decimal',
+        'datetime' => 'datetime',
+        'timestamp' => 'timestamp',
+        'time' => 'time',
+        'date' => 'date',
+        'binary' => 'blob',
+        'boolean' => 'tinyint(1)',
 		'money' => 'decimal(19,4)',
-	);
+    );
 
 	/**
 	 * Resets the sequence value of a table's primary key.
@@ -47,19 +47,20 @@ class CSqliteSchema extends CDbSchema
 	 * the next new row's primary key will have a value 1.
 	 * @since 1.1
 	 */
-	public function resetSequence($table, $value = null)
+	public function resetSequence($table,$value=null)
 	{
-		if ($table->sequenceName !== null)
+		if($table->sequenceName!==null)
 		{
-			if ($value === null)
-				$value = $this->getDbConnection()->createCommand("SELECT MAX(`{$table->primaryKey}`) FROM {$table->rawName}")->queryScalar();
+			if($value===null)
+				$value=$this->getDbConnection()->createCommand("SELECT MAX(`{$table->primaryKey}`) FROM {$table->rawName}")->queryScalar();
 			else
-				$value = (int)$value - 1;
+				$value=(int)$value-1;
 			try
 			{
 				// it's possible sqlite_sequence does not exist
 				$this->getDbConnection()->createCommand("UPDATE sqlite_sequence SET seq='$value' WHERE name='{$table->name}'")->execute();
-			} catch (Exception $e)
+			}
+			catch(Exception $e)
 			{
 			}
 		}
@@ -71,7 +72,7 @@ class CSqliteSchema extends CDbSchema
 	 * @param string $schema the schema of the tables. Defaults to empty string, meaning the current or default schema.
 	 * @since 1.1
 	 */
-	public function checkIntegrity($check = true, $schema = '')
+	public function checkIntegrity($check=true,$schema='')
 	{
 		// SQLite doesn't enforce integrity
 		return;
@@ -82,9 +83,9 @@ class CSqliteSchema extends CDbSchema
 	 * @param string $schema the schema of the tables. This is not used for sqlite database.
 	 * @return array all table names in the database.
 	 */
-	protected function findTableNames($schema = '')
+	protected function findTableNames($schema='')
 	{
-		$sql = "SELECT DISTINCT tbl_name FROM sqlite_master WHERE tbl_name<>'sqlite_sequence'";
+		$sql="SELECT DISTINCT tbl_name FROM sqlite_master WHERE tbl_name<>'sqlite_sequence'";
 		return $this->getDbConnection()->createCommand($sql)->queryColumn();
 	}
 
@@ -104,15 +105,16 @@ class CSqliteSchema extends CDbSchema
 	 */
 	protected function loadTable($name)
 	{
-		$table = new CDbTableSchema;
-		$table->name = $name;
-		$table->rawName = $this->quoteTableName($name);
+		$table=new CDbTableSchema;
+		$table->name=$name;
+		$table->rawName=$this->quoteTableName($name);
 
-		if ($this->findColumns($table))
+		if($this->findColumns($table))
 		{
 			$this->findConstraints($table);
 			return $table;
-		} else
+		}
+		else
 			return null;
 	}
 
@@ -123,29 +125,29 @@ class CSqliteSchema extends CDbSchema
 	 */
 	protected function findColumns($table)
 	{
-		$sql = "PRAGMA table_info({$table->rawName})";
-		$columns = $this->getDbConnection()->createCommand($sql)->queryAll();
-		if (empty($columns))
+		$sql="PRAGMA table_info({$table->rawName})";
+		$columns=$this->getDbConnection()->createCommand($sql)->queryAll();
+		if(empty($columns))
 			return false;
 
-		foreach ($columns as $column)
+		foreach($columns as $column)
 		{
-			$c = $this->createColumn($column);
-			$table->columns[$c->name] = $c;
-			if ($c->isPrimaryKey)
+			$c=$this->createColumn($column);
+			$table->columns[$c->name]=$c;
+			if($c->isPrimaryKey)
 			{
-				if ($table->primaryKey === null)
-					$table->primaryKey = $c->name;
-				else if (is_string($table->primaryKey))
-					$table->primaryKey = array($table->primaryKey, $c->name);
+				if($table->primaryKey===null)
+					$table->primaryKey=$c->name;
+				else if(is_string($table->primaryKey))
+					$table->primaryKey=array($table->primaryKey,$c->name);
 				else
-					$table->primaryKey[] = $c->name;
+					$table->primaryKey[]=$c->name;
 			}
 		}
-		if (is_string($table->primaryKey) && !strncasecmp($table->columns[$table->primaryKey]->dbType, 'int', 3))
+		if(is_string($table->primaryKey) && !strncasecmp($table->columns[$table->primaryKey]->dbType,'int',3))
 		{
-			$table->sequenceName = '';
-			$table->columns[$table->primaryKey]->autoIncrement = true;
+			$table->sequenceName='';
+			$table->columns[$table->primaryKey]->autoIncrement=true;
 		}
 
 		return true;
@@ -157,16 +159,16 @@ class CSqliteSchema extends CDbSchema
 	 */
 	protected function findConstraints($table)
 	{
-		$foreignKeys = array();
-		$sql = "PRAGMA foreign_key_list({$table->rawName})";
-		$keys = $this->getDbConnection()->createCommand($sql)->queryAll();
-		foreach ($keys as $key)
+		$foreignKeys=array();
+		$sql="PRAGMA foreign_key_list({$table->rawName})";
+		$keys=$this->getDbConnection()->createCommand($sql)->queryAll();
+		foreach($keys as $key)
 		{
-			$column = $table->columns[$key['from']];
-			$column->isForeignKey = true;
-			$foreignKeys[$key['from']] = array($key['table'], $key['to']);
+			$column=$table->columns[$key['from']];
+			$column->isForeignKey=true;
+			$foreignKeys[$key['from']]=array($key['table'],$key['to']);
 		}
-		$table->foreignKeys = $foreignKeys;
+		$table->foreignKeys=$foreignKeys;
 	}
 
 	/**
@@ -176,13 +178,13 @@ class CSqliteSchema extends CDbSchema
 	 */
 	protected function createColumn($column)
 	{
-		$c = new CSqliteColumnSchema;
-		$c->name = $column['name'];
-		$c->rawName = $this->quoteColumnName($c->name);
-		$c->allowNull = !$column['notnull'];
-		$c->isPrimaryKey = $column['pk'] != 0;
-		$c->isForeignKey = false;
-		$c->init(strtolower($column['type']), $column['dflt_value']);
+		$c=new CSqliteColumnSchema;
+		$c->name=$column['name'];
+		$c->rawName=$this->quoteColumnName($c->name);
+		$c->allowNull=!$column['notnull'];
+		$c->isPrimaryKey=$column['pk']!=0;
+		$c->isForeignKey=false;
+		$c->init(strtolower($column['type']),$column['dflt_value']);
 		return $c;
 	}
 
@@ -194,7 +196,7 @@ class CSqliteSchema extends CDbSchema
 	 */
 	public function truncateTable($table)
 	{
-		return "DELETE FROM " . $this->quoteTableName($table);
+		return "DELETE FROM ".$this->quoteTableName($table);
 	}
 
 	/**
@@ -237,7 +239,7 @@ class CSqliteSchema extends CDbSchema
 	 * @return string the SQL statement for adding a foreign key constraint to an existing table.
 	 * @since 1.1.6
 	 */
-	public function addForeignKey($name, $table, $columns, $refTable, $refColumns, $delete = null, $update = null)
+	public function addForeignKey($name, $table, $columns, $refTable, $refColumns, $delete=null, $update=null)
 	{
 		throw new CDbException(Yii::t('yii', 'Adding a foreign key constraint to an existing table is not supported by SQLite.'));
 	}
@@ -280,6 +282,6 @@ class CSqliteSchema extends CDbSchema
 	 */
 	public function dropIndex($name, $table)
 	{
-		return 'DROP INDEX ' . $this->quoteTableName($name);
+		return 'DROP INDEX '.$this->quoteTableName($name);
 	}
 }

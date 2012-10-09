@@ -25,9 +25,9 @@ Yii::import('zii.widgets.jui.CJuiWidget');
  *     ),
  * ));
  *     echo 'Your draggable content here';
- *
+ *     
  * $this->endWidget();
- *
+ * 
  * </pre>
  *
  * By configuring the {@link options} property, you may specify the options
@@ -45,36 +45,34 @@ class CJuiDraggable extends CJuiWidget
 	/**
 	 * @var string the name of the Draggable element. Defaults to 'div'.
 	 */
-	public $tagName = 'div';
+	public $tagName='div';
 
 	/**
 	 * Renders the open tag of the draggable element.
 	 * This method also registers the necessary javascript code.
 	 */
-	public function init()
-	{
+	public function init(){
 		parent::init();
-
-		$id = $this->getId();
+		
+		$id=$this->getId();
 		if (isset($this->htmlOptions['id']))
 			$id = $this->htmlOptions['id'];
 		else
-			$this->htmlOptions['id'] = $id;
+			$this->htmlOptions['id']=$id;
+		
+		$options=empty($this->options) ? '' : CJavaScript::encode($this->options);
+		Yii::app()->getClientScript()->registerScript(__CLASS__.'#'.$id,"jQuery('#{$id}').draggable($options);");
 
-		$options = empty($this->options) ? '' : CJavaScript::encode($this->options);
-		Yii::app()->getClientScript()->registerScript(__CLASS__ . '#' . $id, "jQuery('#{$id}').draggable($options);");
-
-		echo CHtml::openTag($this->tagName, $this->htmlOptions) . "\n";
+		echo CHtml::openTag($this->tagName,$this->htmlOptions)."\n";
 	}
 
 	/**
 	 * Renders the close tag of the draggable element.
 	 */
-	public function run()
-	{
+	public function run(){
 		echo CHtml::closeTag($this->tagName);
 	}
-
+	
 }
 
 

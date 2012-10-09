@@ -67,20 +67,21 @@ class CActiveDataProvider extends CDataProvider
 	 * (e.g. <code>Post::model()</code>, <code>Post::model()->published()</code>).
 	 * @param array $config configuration (name=>value) to be applied as the initial property values of this class.
 	 */
-	public function __construct($modelClass, $config = array())
+	public function __construct($modelClass,$config=array())
 	{
-		if (is_string($modelClass))
+		if(is_string($modelClass))
 		{
-			$this->modelClass = $modelClass;
-			$this->model = CActiveRecord::model($this->modelClass);
-		} else if ($modelClass instanceof CActiveRecord)
+			$this->modelClass=$modelClass;
+			$this->model=CActiveRecord::model($this->modelClass);
+		}
+		else if($modelClass instanceof CActiveRecord)
 		{
-			$this->modelClass = get_class($modelClass);
-			$this->model = $modelClass;
+			$this->modelClass=get_class($modelClass);
+			$this->model=$modelClass;
 		}
 		$this->setId($this->modelClass);
-		foreach ($config as $key => $value)
-			$this->$key = $value;
+		foreach($config as $key=>$value)
+			$this->$key=$value;
 	}
 
 	/**
@@ -89,8 +90,8 @@ class CActiveDataProvider extends CDataProvider
 	 */
 	public function getCriteria()
 	{
-		if ($this->_criteria === null)
-			$this->_criteria = new CDbCriteria;
+		if($this->_criteria===null)
+			$this->_criteria=new CDbCriteria;
 		return $this->_criteria;
 	}
 
@@ -101,7 +102,7 @@ class CActiveDataProvider extends CDataProvider
 	 */
 	public function setCriteria($value)
 	{
-		$this->_criteria = $value instanceof CDbCriteria ? $value : new CDbCriteria($value);
+		$this->_criteria=$value instanceof CDbCriteria ? $value : new CDbCriteria($value);
 	}
 
 	/**
@@ -110,8 +111,8 @@ class CActiveDataProvider extends CDataProvider
 	 */
 	public function getSort()
 	{
-		if (($sort = parent::getSort()) !== false)
-			$sort->modelClass = $this->modelClass;
+		if(($sort=parent::getSort())!==false)
+			$sort->modelClass=$this->modelClass;
 		return $sort;
 	}
 
@@ -121,32 +122,33 @@ class CActiveDataProvider extends CDataProvider
 	 */
 	protected function fetchData()
 	{
-		$criteria = clone $this->getCriteria();
+		$criteria=clone $this->getCriteria();
 
-		if (($pagination = $this->getPagination()) !== false)
+		if(($pagination=$this->getPagination())!==false)
 		{
 			$pagination->setItemCount($this->getTotalItemCount());
 			$pagination->applyLimit($criteria);
 		}
 
-		$baseCriteria = $this->model->getDbCriteria(false);
+		$baseCriteria=$this->model->getDbCriteria(false);
 
-		if (($sort = $this->getSort()) !== false)
+		if(($sort=$this->getSort())!==false)
 		{
 			// set model criteria so that CSort can use its table alias setting
-			if ($baseCriteria !== null)
+			if($baseCriteria!==null)
 			{
-				$c = clone $baseCriteria;
+				$c=clone $baseCriteria;
 				$c->mergeWith($criteria);
 				$this->model->setDbCriteria($c);
-			} else
+			}
+			else
 				$this->model->setDbCriteria($criteria);
 			$sort->applyOrder($criteria);
 		}
 
-		$this->model->setDbCriteria($baseCriteria !== null ? clone $baseCriteria : null);
-		$data = $this->model->findAll($criteria);
-		$this->model->setDbCriteria($baseCriteria); // restore original criteria
+		$this->model->setDbCriteria($baseCriteria!==null ? clone $baseCriteria : null);
+		$data=$this->model->findAll($criteria);
+		$this->model->setDbCriteria($baseCriteria);  // restore original criteria
 		return $data;
 	}
 
@@ -156,11 +158,11 @@ class CActiveDataProvider extends CDataProvider
 	 */
 	protected function fetchKeys()
 	{
-		$keys = array();
-		foreach ($this->getData() as $i => $data)
+		$keys=array();
+		foreach($this->getData() as $i=>$data)
 		{
-			$key = $this->keyAttribute === null ? $data->getPrimaryKey() : $data->{$this->keyAttribute};
-			$keys[$i] = is_array($key) ? implode(',', $key) : $key;
+			$key=$this->keyAttribute===null ? $data->getPrimaryKey() : $data->{$this->keyAttribute};
+			$keys[$i]=is_array($key) ? implode(',',$key) : $key;
 		}
 		return $keys;
 	}
@@ -171,10 +173,10 @@ class CActiveDataProvider extends CDataProvider
 	 */
 	protected function calculateTotalItemCount()
 	{
-		$baseCriteria = $this->model->getDbCriteria(false);
-		if ($baseCriteria !== null)
-			$baseCriteria = clone $baseCriteria;
-		$count = $this->model->count($this->getCriteria());
+		$baseCriteria=$this->model->getDbCriteria(false);
+		if($baseCriteria!==null)
+			$baseCriteria=clone $baseCriteria;
+		$count=$this->model->count($this->getCriteria());
 		$this->model->setDbCriteria($baseCriteria);
 		return $count;
 	}

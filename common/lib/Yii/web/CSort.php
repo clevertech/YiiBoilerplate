@@ -64,7 +64,7 @@ class CSort extends CComponent
 	 * @var boolean whether the sorting can be applied to multiple attributes simultaneously.
 	 * Defaults to false, which means each time the data can only be sorted by one attribute.
 	 */
-	public $multiSort = false;
+	public $multiSort=false;
 	/**
 	 * @var string the name of the model class whose attributes can be sorted.
 	 * The model class must be a child class of {@link CActiveRecord}.
@@ -143,17 +143,17 @@ class CSort extends CComponent
 	 * element is the first element in the array, the model attribute takes precedence; and if the star
 	 * element is the last one, the virtual attribute takes precedence.
 	 */
-	public $attributes = array();
+	public $attributes=array();
 	/**
 	 * @var string the name of the GET parameter that specifies which attributes to be sorted
 	 * in which direction. Defaults to 'sort'.
 	 */
-	public $sortVar = 'sort';
+	public $sortVar='sort';
 	/**
 	 * @var string the tag appeared in the GET parameter that indicates the attribute should be sorted
 	 * in descending order. Defaults to 'desc'.
 	 */
-	public $descTag = 'desc';
+	public $descTag='desc';
 	/**
 	 * @var mixed the default order that should be applied to the query criteria when
 	 * the current request does not specify any sort. For example, 'name, create_time DESC' or
@@ -180,14 +180,14 @@ class CSort extends CComponent
 	 * @var string the route (controller ID and action ID) for generating the sorted contents.
 	 * Defaults to empty string, meaning using the currently requested route.
 	 */
-	public $route = '';
+	public $route='';
 	/**
 	 * @var array separators used in the generated URL. This must be an array consisting of
 	 * two elements. The first element specifies the character separating different
 	 * attributes, while the second element specifies the character separating attribute name
 	 * and the corresponding sort direction. Defaults to array('-','.').
 	 */
-	public $separators = array('-', '.');
+	public $separators=array('-','.');
 	/**
 	 * @var array the additional GET parameters (name=>value) that should be used when generating sort URLs.
 	 * Defaults to null, meaning using the currently available GET parameters.
@@ -201,9 +201,9 @@ class CSort extends CComponent
 	 * @param string $modelClass the class name of data models that need to be sorted.
 	 * This should be a child class of {@link CActiveRecord}.
 	 */
-	public function __construct($modelClass = null)
+	public function __construct($modelClass=null)
 	{
-		$this->modelClass = $modelClass;
+		$this->modelClass=$modelClass;
 	}
 
 	/**
@@ -215,12 +215,12 @@ class CSort extends CComponent
 	 */
 	public function applyOrder($criteria)
 	{
-		$order = $this->getOrderBy($criteria);
-		if (!empty($order))
+		$order=$this->getOrderBy($criteria);
+		if(!empty($order))
 		{
-			if (!empty($criteria->order))
-				$criteria->order .= ', ';
-			$criteria->order .= $order;
+			if(!empty($criteria->order))
+				$criteria->order.=', ';
+			$criteria->order.=$order;
 		}
 	}
 
@@ -230,44 +230,40 @@ class CSort extends CComponent
 	 * This can be put in the ORDER BY clause of a SQL statement.
 	 * @since 1.1.0
 	 */
-	public function getOrderBy($criteria = null)
+	public function getOrderBy($criteria=null)
 	{
-		$directions = $this->getDirections();
-		if (empty($directions))
+		$directions=$this->getDirections();
+		if(empty($directions))
 			return is_string($this->defaultOrder) ? $this->defaultOrder : '';
 		else
 		{
-			if ($this->modelClass !== null)
+			if($this->modelClass!==null)
+				$schema=CActiveRecord::model($this->modelClass)->getDbConnection()->getSchema();
+			$orders=array();
+			foreach($directions as $attribute=>$descending)
 			{
-				$model = CActiveRecord::model($this->modelClass);
-				if ($criteria !== null)
-					$model->setDbCriteria($criteria);
-				$schema = $model->getDbConnection()->getSchema();
-			}
-			$orders = array();
-			foreach ($directions as $attribute => $descending)
-			{
-				$definition = $this->resolveAttribute($attribute);
-				if (is_array($definition))
+				$definition=$this->resolveAttribute($attribute);
+				if(is_array($definition))
 				{
-					if ($descending)
-						$orders[] = isset($definition['desc']) ? $definition['desc'] : $attribute . ' DESC';
+					if($descending)
+						$orders[]=isset($definition['desc']) ? $definition['desc'] : $attribute.' DESC';
 					else
-						$orders[] = isset($definition['asc']) ? $definition['asc'] : $attribute;
-				} else if ($definition !== false)
+						$orders[]=isset($definition['asc']) ? $definition['asc'] : $attribute;
+				}
+				else if($definition!==false)
 				{
-					$attribute = $definition;
-					if (isset($schema))
+					$attribute=$definition;
+					if(isset($schema))
 					{
-						if (($pos = strpos($attribute, '.')) !== false)
-							$attribute = $schema->quoteTableName(substr($attribute, 0, $pos)) . '.' . $schema->quoteColumnName(substr($attribute, $pos + 1));
+						if(($pos=strpos($attribute,'.'))!==false)
+							$attribute=$schema->quoteTableName(substr($attribute,0,$pos)).'.'.$schema->quoteColumnName(substr($attribute,$pos+1));
 						else
-							$attribute = CActiveRecord::model($this->modelClass)->getTableAlias(true) . '.' . $schema->quoteColumnName($attribute);
+							$attribute=($criteria===null || $criteria->alias===null ? CActiveRecord::model($this->modelClass)->getTableAlias(true) : $criteria->alias).'.'.$schema->quoteColumnName($attribute);
 					}
-					$orders[] = $descending ? $attribute . ' DESC' : $attribute;
+					$orders[]=$descending?$attribute.' DESC':$attribute;
 				}
 			}
-			return implode(', ', $orders);
+			return implode(', ',$orders);
 		}
 	}
 
@@ -281,35 +277,36 @@ class CSort extends CComponent
 	 * @param array $htmlOptions additional HTML attributes for the hyperlink tag
 	 * @return string the generated hyperlink
 	 */
-	public function link($attribute, $label = null, $htmlOptions = array())
+	public function link($attribute,$label=null,$htmlOptions=array())
 	{
-		if ($label === null)
-			$label = $this->resolveLabel($attribute);
-		if (($definition = $this->resolveAttribute($attribute)) === false)
+		if($label===null)
+			$label=$this->resolveLabel($attribute);
+		if(($definition=$this->resolveAttribute($attribute))===false)
 			return $label;
-		$directions = $this->getDirections();
-		if (isset($directions[$attribute]))
+		$directions=$this->getDirections();
+		if(isset($directions[$attribute]))
 		{
-			$class = $directions[$attribute] ? 'desc' : 'asc';
-			if (isset($htmlOptions['class']))
-				$htmlOptions['class'] .= ' ' . $class;
+			$class=$directions[$attribute] ? 'desc' : 'asc';
+			if(isset($htmlOptions['class']))
+				$htmlOptions['class'].=' '.$class;
 			else
-				$htmlOptions['class'] = $class;
-			$descending = !$directions[$attribute];
+				$htmlOptions['class']=$class;
+			$descending=!$directions[$attribute];
 			unset($directions[$attribute]);
-		} else if (is_array($definition) && isset($definition['default']))
-			$descending = $definition['default'] === 'desc';
+		}
+		else if(is_array($definition) && isset($definition['default']))
+			$descending=$definition['default']==='desc';
 		else
-			$descending = false;
+			$descending=false;
 
-		if ($this->multiSort)
-			$directions = array_merge(array($attribute => $descending), $directions);
+		if($this->multiSort)
+			$directions=array_merge(array($attribute=>$descending),$directions);
 		else
-			$directions = array($attribute => $descending);
+			$directions=array($attribute=>$descending);
 
-		$url = $this->createUrl(Yii::app()->getController(), $directions);
+		$url=$this->createUrl(Yii::app()->getController(),$directions);
 
-		return $this->createLink($attribute, $label, $url, $htmlOptions);
+		return $this->createLink($attribute,$label,$url,$htmlOptions);
 	}
 
 	/**
@@ -322,14 +319,15 @@ class CSort extends CComponent
 	 */
 	public function resolveLabel($attribute)
 	{
-		$definition = $this->resolveAttribute($attribute);
-		if (is_array($definition))
+		$definition=$this->resolveAttribute($attribute);
+		if(is_array($definition))
 		{
-			if (isset($definition['label']))
+			if(isset($definition['label']))
 				return $definition['label'];
-		} else if (is_string($definition))
-			$attribute = $definition;
-		if ($this->modelClass !== null)
+		}
+		else if(is_string($definition))
+			$attribute=$definition;
+		if($this->modelClass!==null)
 			return CActiveRecord::model($this->modelClass)->getAttributeLabel($attribute);
 		else
 			return $attribute;
@@ -343,32 +341,33 @@ class CSort extends CComponent
 	 */
 	public function getDirections()
 	{
-		if ($this->_directions === null)
+		if($this->_directions===null)
 		{
-			$this->_directions = array();
-			if (isset($_GET[$this->sortVar]) && is_string($_GET[$this->sortVar]))
+			$this->_directions=array();
+			if(isset($_GET[$this->sortVar]) && is_string($_GET[$this->sortVar]))
 			{
-				$attributes = explode($this->separators[0], $_GET[$this->sortVar]);
-				foreach ($attributes as $attribute)
+				$attributes=explode($this->separators[0],$_GET[$this->sortVar]);
+				foreach($attributes as $attribute)
 				{
-					if (($pos = strrpos($attribute, $this->separators[1])) !== false)
+					if(($pos=strrpos($attribute,$this->separators[1]))!==false)
 					{
-						$descending = substr($attribute, $pos + 1) === $this->descTag;
-						if ($descending)
-							$attribute = substr($attribute, 0, $pos);
-					} else
-						$descending = false;
+						$descending=substr($attribute,$pos+1)===$this->descTag;
+						if($descending)
+							$attribute=substr($attribute,0,$pos);
+					}
+					else
+						$descending=false;
 
-					if (($this->resolveAttribute($attribute)) !== false)
+					if(($this->resolveAttribute($attribute))!==false)
 					{
-						$this->_directions[$attribute] = $descending;
-						if (!$this->multiSort)
+						$this->_directions[$attribute]=$descending;
+						if(!$this->multiSort)
 							return $this->_directions;
 					}
 				}
 			}
-			if ($this->_directions === array() && is_array($this->defaultOrder))
-				$this->_directions = $this->defaultOrder;
+			if($this->_directions===array() && is_array($this->defaultOrder))
+				$this->_directions=$this->defaultOrder;
 		}
 		return $this->_directions;
 	}
@@ -394,14 +393,14 @@ class CSort extends CComponent
 	 * CSort::SORT_DESC for descending order.
 	 * @return string the URL for sorting
 	 */
-	public function createUrl($controller, $directions)
+	public function createUrl($controller,$directions)
 	{
-		$sorts = array();
-		foreach ($directions as $attribute => $descending)
-			$sorts[] = $descending ? $attribute . $this->separators[1] . $this->descTag : $attribute;
-		$params = $this->params === null ? $_GET : $this->params;
-		$params[$this->sortVar] = implode($this->separators[0], $sorts);
-		return $controller->createUrl($this->route, $params);
+		$sorts=array();
+		foreach($directions as $attribute=>$descending)
+			$sorts[]=$descending ? $attribute.$this->separators[1].$this->descTag : $attribute;
+		$params=$this->params===null ? $_GET : $this->params;
+		$params[$this->sortVar]=implode($this->separators[0],$sorts);
+		return $controller->createUrl($this->route,$params);
 	}
 
 	/**
@@ -421,23 +420,25 @@ class CSort extends CComponent
 	 */
 	public function resolveAttribute($attribute)
 	{
-		if ($this->attributes !== array())
-			$attributes = $this->attributes;
-		else if ($this->modelClass !== null)
-			$attributes = CActiveRecord::model($this->modelClass)->attributeNames();
+		if($this->attributes!==array())
+			$attributes=$this->attributes;
+		else if($this->modelClass!==null)
+			$attributes=CActiveRecord::model($this->modelClass)->attributeNames();
 		else
 			return false;
-		foreach ($attributes as $name => $definition)
+		foreach($attributes as $name=>$definition)
 		{
-			if (is_string($name))
+			if(is_string($name))
 			{
-				if ($name === $attribute)
+				if($name===$attribute)
 					return $definition;
-			} else if ($definition === '*')
+			}
+			else if($definition==='*')
 			{
-				if ($this->modelClass !== null && CActiveRecord::model($this->modelClass)->hasAttribute($attribute))
+				if($this->modelClass!==null && CActiveRecord::model($this->modelClass)->hasAttribute($attribute))
 					return $attribute;
-			} else if ($definition === $attribute)
+			}
+			else if($definition===$attribute)
 				return $attribute;
 		}
 		return false;
@@ -452,8 +453,8 @@ class CSort extends CComponent
 	 * @param array $htmlOptions additional HTML options
 	 * @return string the generated hyperlink
 	 */
-	protected function createLink($attribute, $label, $url, $htmlOptions)
+	protected function createLink($attribute,$label,$url,$htmlOptions)
 	{
-		return CHtml::link($label, $url, $htmlOptions);
+		return CHtml::link($label,$url,$htmlOptions);
 	}
 }

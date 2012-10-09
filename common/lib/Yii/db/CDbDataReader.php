@@ -38,9 +38,9 @@
 class CDbDataReader extends CComponent implements Iterator, Countable
 {
 	private $_statement;
-	private $_closed = false;
+	private $_closed=false;
 	private $_row;
-	private $_index = -1;
+	private $_index=-1;
 
 	/**
 	 * Constructor.
@@ -48,7 +48,7 @@ class CDbDataReader extends CComponent implements Iterator, Countable
 	 */
 	public function __construct(CDbCommand $command)
 	{
-		$this->_statement = $command->getPdoStatement();
+		$this->_statement=$command->getPdoStatement();
 		$this->_statement->setFetchMode(PDO::FETCH_ASSOC);
 	}
 
@@ -63,12 +63,12 @@ class CDbDataReader extends CComponent implements Iterator, Countable
 	 * @param integer $dataType Data type of the parameter
 	 * @see http://www.php.net/manual/en/function.PDOStatement-bindColumn.php
 	 */
-	public function bindColumn($column, &$value, $dataType = null)
+	public function bindColumn($column, &$value, $dataType=null)
 	{
-		if ($dataType === null)
-			$this->_statement->bindColumn($column, $value);
+		if($dataType===null)
+			$this->_statement->bindColumn($column,$value);
 		else
-			$this->_statement->bindColumn($column, $value, $dataType);
+			$this->_statement->bindColumn($column,$value,$dataType);
 	}
 
 	/**
@@ -78,8 +78,8 @@ class CDbDataReader extends CComponent implements Iterator, Countable
 	 */
 	public function setFetchMode($mode)
 	{
-		$params = func_get_args();
-		call_user_func_array(array($this->_statement, 'setFetchMode'), $params);
+		$params=func_get_args();
+		call_user_func_array(array($this->_statement,'setFetchMode'),$params);
 	}
 
 	/**
@@ -107,9 +107,9 @@ class CDbDataReader extends CComponent implements Iterator, Countable
 	 * @param array $fields Elements of this array are passed to the constructor
 	 * @return mixed|false the populated object, false if no more row of data available
 	 */
-	public function readObject($className, $fields)
+	public function readObject($className,$fields)
 	{
-		return $this->_statement->fetchObject($className, $fields);
+		return $this->_statement->fetchObject($className,$fields);
 	}
 
 	/**
@@ -130,8 +130,8 @@ class CDbDataReader extends CComponent implements Iterator, Countable
 	 */
 	public function nextResult()
 	{
-		if (($result = $this->_statement->nextRowset()) !== false)
-			$this->_index = -1;
+		if(($result=$this->_statement->nextRowset())!==false)
+			$this->_index=-1;
 		return $result;
 	}
 
@@ -143,7 +143,7 @@ class CDbDataReader extends CComponent implements Iterator, Countable
 	public function close()
 	{
 		$this->_statement->closeCursor();
-		$this->_closed = true;
+		$this->_closed=true;
 	}
 
 	/**
@@ -195,12 +195,13 @@ class CDbDataReader extends CComponent implements Iterator, Countable
 	 */
 	public function rewind()
 	{
-		if ($this->_index < 0)
+		if($this->_index<0)
 		{
-			$this->_row = $this->_statement->fetch();
-			$this->_index = 0;
-		} else
-			throw new CDbException(Yii::t('yii', 'CDbDataReader cannot rewind. It is a forward-only reader.'));
+			$this->_row=$this->_statement->fetch();
+			$this->_index=0;
+		}
+		else
+			throw new CDbException(Yii::t('yii','CDbDataReader cannot rewind. It is a forward-only reader.'));
 	}
 
 	/**
@@ -229,7 +230,7 @@ class CDbDataReader extends CComponent implements Iterator, Countable
 	 */
 	public function next()
 	{
-		$this->_row = $this->_statement->fetch();
+		$this->_row=$this->_statement->fetch();
 		$this->_index++;
 	}
 
@@ -240,6 +241,6 @@ class CDbDataReader extends CComponent implements Iterator, Countable
 	 */
 	public function valid()
 	{
-		return $this->_row !== false;
+		return $this->_row!==false;
 	}
 }

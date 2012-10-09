@@ -79,7 +79,7 @@ class CListView extends CBaseListView
 	 * @var array additional data to be passed to {@link itemView} when rendering each data item.
 	 * This array will be extracted into local PHP variables that can be accessed in the {@link itemView}.
 	 */
-	public $viewData = array();
+	public $viewData=array();
 	/**
 	 * @var array list of sortable attribute names. In order for an attribute to be sortable, it must also
 	 * appear as a sortable attribute in the {@link IDataProvider::sort} property of {@link dataProvider}.
@@ -91,17 +91,17 @@ class CListView extends CBaseListView
 	 * These tokens are recognized: {summary}, {sorter}, {items} and {pager}. They will be replaced with the
 	 * summary text, the sort links, the data item list, and the pager.
 	 */
-	public $template = "{summary}\n{sorter}\n{items}\n{pager}";
+	public $template="{summary}\n{sorter}\n{items}\n{pager}";
 	/**
 	 * @var string the CSS class name that will be assigned to the widget container element
 	 * when the widget is updating its content via AJAX. Defaults to 'list-view-loading'.
 	 * @since 1.1.1
 	 */
-	public $loadingCssClass = 'list-view-loading';
+	public $loadingCssClass='list-view-loading';
 	/**
 	 * @var string the CSS class name for the sorter container. Defaults to 'sorter'.
 	 */
-	public $sorterCssClass = 'sorter';
+	public $sorterCssClass='sorter';
 	/**
 	 * @var string the text shown before sort links. Defaults to 'Sort by: '.
 	 */
@@ -109,7 +109,7 @@ class CListView extends CBaseListView
 	/**
 	 * @var string the text shown after sort links. Defaults to empty.
 	 */
-	public $sorterFooter = '';
+	public $sorterFooter='';
 	/**
 	 * @var mixed the ID of the container whose content may be updated with an AJAX response.
 	 * Defaults to null, meaning the container for this list view instance.
@@ -128,7 +128,7 @@ class CListView extends CBaseListView
 	 * @var string the name of the GET variable that indicates the request is an AJAX request triggered
 	 * by this widget. Defaults to 'ajax'. This is effective only when {@link ajaxUpdate} is not false.
 	 */
-	public $ajaxVar = 'ajax';
+	public $ajaxVar='ajax';
 	/**
 	 * @var mixed the URL for the AJAX requests should be sent to. {@link CHtml::normalizeUrl()} will be
 	 * called on this property. If not set, the current page URL will be used for AJAX requests.
@@ -160,7 +160,7 @@ class CListView extends CBaseListView
 	 * @var string the HTML tag name for the container of all data item display. Defaults to 'div'.
 	 * @since 1.1.4
 	 */
-	public $itemsTagName = 'div';
+	public $itemsTagName='div';
 
 	/**
 	 * @var boolean whether to leverage the {@link https://developer.mozilla.org/en/DOM/window.history DOM history object}.  Set this property to true
@@ -168,8 +168,8 @@ class CListView extends CBaseListView
 	 * - this feature is only compatible with browsers that support HTML5.
 	 * - expect unexpected functionality (e.g. multiple ajax calls) if there is more than one grid/list on a single page with enableHistory turned on.
 	 * @since 1.1.11
-	 */
-	public $enableHistory = false;
+	*/
+	public $enableHistory=false;
 
 	/**
 	 * Initializes the list view.
@@ -177,20 +177,20 @@ class CListView extends CBaseListView
 	 */
 	public function init()
 	{
-		if ($this->itemView === null)
-			throw new CException(Yii::t('zii', 'The property "itemView" cannot be empty.'));
+		if($this->itemView===null)
+			throw new CException(Yii::t('zii','The property "itemView" cannot be empty.'));
 		parent::init();
 
-		if (!isset($this->htmlOptions['class']))
-			$this->htmlOptions['class'] = 'list-view';
+		if(!isset($this->htmlOptions['class']))
+			$this->htmlOptions['class']='list-view';
 
-		if ($this->baseScriptUrl === null)
-			$this->baseScriptUrl = Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('zii.widgets.assets')) . '/listview';
+		if($this->baseScriptUrl===null)
+			$this->baseScriptUrl=Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('zii.widgets.assets')).'/listview';
 
-		if ($this->cssFile !== false)
+		if($this->cssFile!==false)
 		{
-			if ($this->cssFile === null)
-				$this->cssFile = $this->baseScriptUrl . '/styles.css';
+			if($this->cssFile===null)
+				$this->cssFile=$this->baseScriptUrl.'/styles.css';
 			Yii::app()->getClientScript()->registerCssFile($this->cssFile);
 		}
 	}
@@ -200,54 +200,43 @@ class CListView extends CBaseListView
 	 */
 	public function registerClientScript()
 	{
-		$id = $this->getId();
+		$id=$this->getId();
 
-		if ($this->ajaxUpdate === false)
-			$ajaxUpdate = array();
+		if($this->ajaxUpdate===false)
+			$ajaxUpdate=array();
 		else
-			$ajaxUpdate = array_unique(preg_split('/\s*,\s*/', $this->ajaxUpdate . ',' . $id, -1, PREG_SPLIT_NO_EMPTY));
-		$options = array(
-			'ajaxUpdate' => $ajaxUpdate,
-			'ajaxVar' => $this->ajaxVar,
-			'pagerClass' => $this->pagerCssClass,
-			'loadingClass' => $this->loadingCssClass,
-			'sorterClass' => $this->sorterCssClass,
-			'enableHistory' => $this->enableHistory
+			$ajaxUpdate=array_unique(preg_split('/\s*,\s*/',$this->ajaxUpdate.','.$id,-1,PREG_SPLIT_NO_EMPTY));
+		$options=array(
+			'ajaxUpdate'=>$ajaxUpdate,
+			'ajaxVar'=>$this->ajaxVar,
+			'pagerClass'=>$this->pagerCssClass,
+			'loadingClass'=>$this->loadingCssClass,
+			'sorterClass'=>$this->sorterCssClass,
+			'enableHistory'=>$this->enableHistory
 		);
-		if ($this->ajaxUrl !== null)
-			$options['url'] = CHtml::normalizeUrl($this->ajaxUrl);
-		if ($this->updateSelector !== null)
-			$options['updateSelector'] = $this->updateSelector;
-		if ($this->beforeAjaxUpdate !== null)
+		if($this->ajaxUrl!==null)
+			$options['url']=CHtml::normalizeUrl($this->ajaxUrl);
+		if($this->updateSelector!==null)
+			$options['updateSelector']=$this->updateSelector;
+		foreach(array('beforeAjaxUpdate', 'afterAjaxUpdate') as $event)
 		{
-
-			if (!($this->beforeAjaxUpdate instanceof CJavaScriptExpression) && strpos($this->beforeAjaxUpdate, 'js:') !== 0)
+			if($this->$event!==null)
 			{
-				$options['beforeAjaxUpdate'] = new CJavaScriptExpression($this->beforeAjaxUpdate);
-			} else
-			{
-				$options['beforeAjaxUpdate'] = $this->beforeAjaxUpdate;
-			}
-		}
-		if ($this->afterAjaxUpdate !== null)
-		{
-			if (!($this->afterAjaxUpdate instanceof CJavaScriptExpression) && strpos($this->afterAjaxUpdate, 'js:') !== 0)
-			{
-				$options['beforeAjaxUpdate'] = new CJavaScriptExpression($this->afterAjaxUpdate);
-			} else
-			{
-				$options['beforeAjaxUpdate'] = $this->afterAjaxUpdate;
+				if($this->$event instanceof CJavaScriptExpression)
+					$options[$event]=$this->$event;
+				else
+					$options[$event]=new CJavaScriptExpression($this->$event);
 			}
 		}
 
-		$options = CJavaScript::encode($options);
-		$cs = Yii::app()->getClientScript();
+		$options=CJavaScript::encode($options);
+		$cs=Yii::app()->getClientScript();
 		$cs->registerCoreScript('jquery');
 		$cs->registerCoreScript('bbq');
-		if ($this->enableHistory)
+		if($this->enableHistory)
 			$cs->registerCoreScript('history');
-		$cs->registerScriptFile($this->baseScriptUrl . '/jquery.yiilistview.js', CClientScript::POS_END);
-		$cs->registerScript(__CLASS__ . '#' . $id, "jQuery('#$id').yiiListView($options);");
+		$cs->registerScriptFile($this->baseScriptUrl.'/jquery.yiilistview.js',CClientScript::POS_END);
+		$cs->registerScript(__CLASS__.'#'.$id,"jQuery('#$id').yiiListView($options);");
 	}
 
 	/**
@@ -255,24 +244,25 @@ class CListView extends CBaseListView
 	 */
 	public function renderItems()
 	{
-		echo CHtml::openTag($this->itemsTagName, array('class' => $this->itemsCssClass)) . "\n";
-		$data = $this->dataProvider->getData();
-		if (($n = count($data)) > 0)
+		echo CHtml::openTag($this->itemsTagName,array('class'=>$this->itemsCssClass))."\n";
+		$data=$this->dataProvider->getData();
+		if(($n=count($data))>0)
 		{
-			$owner = $this->getOwner();
-			$viewFile = $owner->getViewFile($this->itemView);
-			$j = 0;
-			foreach ($data as $i => $item)
+			$owner=$this->getOwner();
+			$viewFile=$owner->getViewFile($this->itemView);
+			$j=0;
+			foreach($data as $i=>$item)
 			{
-				$data = $this->viewData;
-				$data['index'] = $i;
-				$data['data'] = $item;
-				$data['widget'] = $this;
-				$owner->renderFile($viewFile, $data);
-				if ($j++ < $n - 1)
+				$data=$this->viewData;
+				$data['index']=$i;
+				$data['data']=$item;
+				$data['widget']=$this;
+				$owner->renderFile($viewFile,$data);
+				if($j++ < $n-1)
 					echo $this->separator;
 			}
-		} else
+		}
+		else
 			$this->renderEmptyText();
 		echo CHtml::closeTag($this->itemsTagName);
 	}
@@ -282,19 +272,19 @@ class CListView extends CBaseListView
 	 */
 	public function renderSorter()
 	{
-		if ($this->dataProvider->getItemCount() <= 0 || !$this->enableSorting || empty($this->sortableAttributes))
+		if($this->dataProvider->getItemCount()<=0 || !$this->enableSorting || empty($this->sortableAttributes))
 			return;
-		echo CHtml::openTag('div', array('class' => $this->sorterCssClass)) . "\n";
-		echo $this->sorterHeader === null ? Yii::t('zii', 'Sort by: ') : $this->sorterHeader;
+		echo CHtml::openTag('div',array('class'=>$this->sorterCssClass))."\n";
+		echo $this->sorterHeader===null ? Yii::t('zii','Sort by: ') : $this->sorterHeader;
 		echo "<ul>\n";
-		$sort = $this->dataProvider->getSort();
-		foreach ($this->sortableAttributes as $name => $label)
+		$sort=$this->dataProvider->getSort();
+		foreach($this->sortableAttributes as $name=>$label)
 		{
 			echo "<li>";
-			if (is_integer($name))
+			if(is_integer($name))
 				echo $sort->link($label);
 			else
-				echo $sort->link($name, $label);
+				echo $sort->link($name,$label);
 			echo "</li>\n";
 		}
 		echo "</ul>";

@@ -26,7 +26,6 @@ interface IApplicationComponent
 	 * This method is invoked after the application completes configuration.
 	 */
 	public function init();
-
 	/**
 	 * @return boolean whether the {@link init()} method has been invoked.
 	 */
@@ -51,7 +50,6 @@ interface ICache
 	 * @return mixed the value stored in cache, false if the value is not in the cache or expired.
 	 */
 	public function get($id);
-
 	/**
 	 * Retrieves multiple values from cache with the specified keys.
 	 * Some caches (such as memcache, apc) allow retrieving multiple cached values at one time,
@@ -63,7 +61,6 @@ interface ICache
 	 * If a value is not cached or expired, the corresponding array value will be false.
 	 */
 	public function mget($ids);
-
 	/**
 	 * Stores a value identified by a key into cache.
 	 * If the cache already contains such a key, the existing value and
@@ -75,8 +72,7 @@ interface ICache
 	 * @param ICacheDependency $dependency dependency of the cached item. If the dependency changes, the item is labelled invalid.
 	 * @return boolean true if the value is successfully stored into cache, false otherwise
 	 */
-	public function set($id, $value, $expire = 0, $dependency = null);
-
+	public function set($id,$value,$expire=0,$dependency=null);
 	/**
 	 * Stores a value identified by a key into cache if the cache does not contain this key.
 	 * Nothing will be done if the cache already contains the key.
@@ -86,15 +82,13 @@ interface ICache
 	 * @param ICacheDependency $dependency dependency of the cached item. If the dependency changes, the item is labelled invalid.
 	 * @return boolean true if the value is successfully stored into cache, false otherwise
 	 */
-	public function add($id, $value, $expire = 0, $dependency = null);
-
+	public function add($id,$value,$expire=0,$dependency=null);
 	/**
 	 * Deletes a value with the specified key from cache
 	 * @param string $id the key of the value to be deleted
 	 * @return boolean whether the deletion is successful
 	 */
 	public function delete($id);
-
 	/**
 	 * Deletes all values from cache.
 	 * Be careful of performing this operation if the cache is shared by multiple applications.
@@ -123,7 +117,6 @@ interface ICacheDependency
 	 * This method is invoked by cache before writing data into it.
 	 */
 	public function evaluateDependency();
-
 	/**
 	 * @return boolean whether the dependency has changed.
 	 */
@@ -148,7 +141,6 @@ interface IStatePersister
 	 * @return mixed the state
 	 */
 	public function load();
-
 	/**
 	 * Saves state data into a persistent storage.
 	 * @param mixed $state the state to be saved
@@ -190,7 +182,6 @@ interface IAction
 	 * @return string id of the action
 	 */
 	public function getId();
-
 	/**
 	 * @return CController the controller instance
 	 */
@@ -216,7 +207,6 @@ interface IWebServiceProvider
 	 * @return boolean whether the remote method should be executed.
 	 */
 	public function beforeWebMethod($service);
-
 	/**
 	 * This method is invoked after the requested remote method is invoked.
 	 * @param CWebService $service the currently requested Web service.
@@ -247,7 +237,7 @@ interface IViewRenderer
 	 * @param boolean $return whether the rendering result should be returned
 	 * @return mixed the rendering result, or null if the rendering result is not needed.
 	 */
-	public function renderFile($context, $file, $data, $return);
+	public function renderFile($context,$file,$data,$return);
 }
 
 
@@ -272,25 +262,21 @@ interface IUserIdentity
 	 * @return boolean whether authentication succeeds.
 	 */
 	public function authenticate();
-
 	/**
 	 * Returns a value indicating whether the identity is authenticated.
 	 * @return boolean whether the identity is valid.
 	 */
 	public function getIsAuthenticated();
-
 	/**
 	 * Returns a value that uniquely represents the identity.
 	 * @return mixed a value that uniquely represents the identity (e.g. primary key value).
 	 */
 	public function getId();
-
 	/**
 	 * Returns the display name for the identity (e.g. username).
 	 * @return string the display name for the identity.
 	 */
 	public function getName();
-
 	/**
 	 * Returns the additional identity information that needs to be persistent during the user session.
 	 * @return array additional identity information that needs to be persistent during the user session (excluding {@link id}).
@@ -317,19 +303,16 @@ interface IWebUser
 	 * @return mixed a value that uniquely represents the identity (e.g. primary key value).
 	 */
 	public function getId();
-
 	/**
 	 * Returns the display name for the identity (e.g. username).
 	 * @return string the display name for the identity.
 	 */
 	public function getName();
-
 	/**
 	 * Returns a value indicating whether the user is a guest (not authenticated).
 	 * @return boolean whether the user is a guest (not authenticated)
 	 */
 	public function getIsGuest();
-
 	/**
 	 * Performs access check for this user.
 	 * @param string $operation the name of the operation that need access check.
@@ -337,8 +320,7 @@ interface IWebUser
 	 * with the tasks and roles assigned to the user.
 	 * @return boolean whether the operations can be performed by this user.
 	 */
-	public function checkAccess($operation, $params = array());
-
+	public function checkAccess($operation,$params=array());
 	/**
 	 * Redirects the user browser to the login page.
 	 * Before the redirection, the current URL (if it's not an AJAX url) will be
@@ -373,7 +355,7 @@ interface IAuthManager
 	 * with the tasks and roles assigned to the user.
 	 * @return boolean whether the operations can be performed by the user.
 	 */
-	public function checkAccess($itemName, $userId, $params = array());
+	public function checkAccess($itemName,$userId,$params=array());
 
 	/**
 	 * Creates an authorization item.
@@ -390,15 +372,13 @@ interface IAuthManager
 	 * @return CAuthItem the authorization item
 	 * @throws CException if an item with the same name already exists
 	 */
-	public function createAuthItem($name, $type, $description = '', $bizRule = null, $data = null);
-
+	public function createAuthItem($name,$type,$description='',$bizRule=null,$data=null);
 	/**
 	 * Removes the specified authorization item.
 	 * @param string $name the name of the item to be removed
 	 * @return boolean whether the item exists in the storage and has been removed
 	 */
 	public function removeAuthItem($name);
-
 	/**
 	 * Returns the authorization items of the specific type and user.
 	 * @param integer $type the item type (0: operation, 1: task, 2: role). Defaults to null,
@@ -407,21 +387,19 @@ interface IAuthManager
 	 * they are not assigned to a user.
 	 * @return array the authorization items of the specific type.
 	 */
-	public function getAuthItems($type = null, $userId = null);
-
+	public function getAuthItems($type=null,$userId=null);
 	/**
 	 * Returns the authorization item with the specified name.
 	 * @param string $name the name of the item
 	 * @return CAuthItem the authorization item. Null if the item cannot be found.
 	 */
 	public function getAuthItem($name);
-
 	/**
 	 * Saves an authorization item to persistent storage.
 	 * @param CAuthItem $item the item to be saved.
 	 * @param string $oldName the old item name. If null, it means the item name is not changed.
 	 */
-	public function saveAuthItem($item, $oldName = null);
+	public function saveAuthItem($item,$oldName=null);
 
 	/**
 	 * Adds an item as a child of another item.
@@ -429,8 +407,7 @@ interface IAuthManager
 	 * @param string $childName the child item name
 	 * @throws CException if either parent or child doesn't exist or if a loop has been detected.
 	 */
-	public function addItemChild($itemName, $childName);
-
+	public function addItemChild($itemName,$childName);
 	/**
 	 * Removes a child from its parent.
 	 * Note, the child item is not deleted. Only the parent-child relationship is removed.
@@ -438,16 +415,14 @@ interface IAuthManager
 	 * @param string $childName the child item name
 	 * @return boolean whether the removal is successful
 	 */
-	public function removeItemChild($itemName, $childName);
-
+	public function removeItemChild($itemName,$childName);
 	/**
 	 * Returns a value indicating whether a child exists within a parent.
 	 * @param string $itemName the parent item name
 	 * @param string $childName the child item name
 	 * @return boolean whether the child exists
 	 */
-	public function hasItemChild($itemName, $childName);
-
+	public function hasItemChild($itemName,$childName);
 	/**
 	 * Returns the children of the specified item.
 	 * @param mixed $itemName the parent item name. This can be either a string or an array.
@@ -466,24 +441,21 @@ interface IAuthManager
 	 * @return CAuthAssignment the authorization assignment information.
 	 * @throws CException if the item does not exist or if the item has already been assigned to the user
 	 */
-	public function assign($itemName, $userId, $bizRule = null, $data = null);
-
+	public function assign($itemName,$userId,$bizRule=null,$data=null);
 	/**
 	 * Revokes an authorization assignment from a user.
 	 * @param string $itemName the item name
 	 * @param mixed $userId the user ID (see {@link IWebUser::getId})
 	 * @return boolean whether removal is successful
 	 */
-	public function revoke($itemName, $userId);
-
+	public function revoke($itemName,$userId);
 	/**
 	 * Returns a value indicating whether the item has been assigned to the user.
 	 * @param string $itemName the item name
 	 * @param mixed $userId the user ID (see {@link IWebUser::getId})
 	 * @return boolean whether the item has been assigned to the user.
 	 */
-	public function isAssigned($itemName, $userId);
-
+	public function isAssigned($itemName,$userId);
 	/**
 	 * Returns the item assignment information.
 	 * @param string $itemName the item name
@@ -491,8 +463,7 @@ interface IAuthManager
 	 * @return CAuthAssignment the item assignment information. Null is returned if
 	 * the item is not assigned to the user.
 	 */
-	public function getAuthAssignment($itemName, $userId);
-
+	public function getAuthAssignment($itemName,$userId);
 	/**
 	 * Returns the item assignments for the specified user.
 	 * @param mixed $userId the user ID (see {@link IWebUser::getId})
@@ -500,7 +471,6 @@ interface IAuthManager
 	 * returned if there is no item assigned to the user.
 	 */
 	public function getAuthAssignments($userId);
-
 	/**
 	 * Saves the changes to an authorization assignment.
 	 * @param CAuthAssignment $assignment the assignment that has been changed.
@@ -511,7 +481,6 @@ interface IAuthManager
 	 * Removes all authorization data.
 	 */
 	public function clearAll();
-
 	/**
 	 * Removes all authorization assignments.
 	 */
@@ -530,10 +499,10 @@ interface IAuthManager
 	 * @param string $bizRule the business rule to be executed.
 	 * @param array $params additional parameters to be passed to the business rule when being executed.
 	 * @param mixed $data additional data that is associated with the corresponding authorization item or assignment
-	 * @return whether the execution returns a true value.
+	 * @return boolean whether the execution returns a true value.
 	 * If the business rule is empty, it will also return true.
 	 */
-	public function executeBizRule($bizRule, $params, $data);
+	public function executeBizRule($bizRule,$params,$data);
 }
 
 
@@ -554,18 +523,15 @@ interface IBehavior
 	 * @param CComponent $component the component that this behavior is to be attached to.
 	 */
 	public function attach($component);
-
 	/**
 	 * Detaches the behavior object from the component.
 	 * @param CComponent $component the component that this behavior is to be detached from.
 	 */
 	public function detach($component);
-
 	/**
 	 * @return boolean whether this behavior is enabled
 	 */
 	public function getEnabled();
-
 	/**
 	 * @param boolean $value whether this behavior is enabled
 	 */
@@ -592,7 +558,7 @@ interface IWidgetFactory
 	 * @param array $properties the initial property values (name=>value) of the widget.
 	 * @return CWidget the newly created widget whose properties have been initialized with the given values.
 	 */
-	public function createWidget($owner, $className, $properties = array());
+	public function createWidget($owner,$className,$properties=array());
 }
 
 /**
@@ -612,7 +578,6 @@ interface IDataProvider
 	 * @return string the unique ID that identifies the data provider from other data providers.
 	 */
 	public function getId();
-
 	/**
 	 * Returns the number of data items in the current page.
 	 * This is equivalent to <code>count($provider->getData())</code>.
@@ -620,36 +585,31 @@ interface IDataProvider
 	 * @param boolean $refresh whether the number of data items should be re-calculated.
 	 * @return integer the number of data items in the current page.
 	 */
-	public function getItemCount($refresh = false);
-
+	public function getItemCount($refresh=false);
 	/**
 	 * Returns the total number of data items.
 	 * When {@link pagination} is set false, this returns the same value as {@link itemCount}.
 	 * @param boolean $refresh whether the total number of data items should be re-calculated.
 	 * @return integer total number of possible data items.
 	 */
-	public function getTotalItemCount($refresh = false);
-
+	public function getTotalItemCount($refresh=false);
 	/**
 	 * Returns the data items currently available.
 	 * @param boolean $refresh whether the data should be re-fetched from persistent storage.
 	 * @return array the list of data items currently available in this data provider.
 	 */
-	public function getData($refresh = false);
-
+	public function getData($refresh=false);
 	/**
 	 * Returns the key values associated with the data items.
 	 * @param boolean $refresh whether the keys should be re-calculated.
 	 * @return array the list of key values corresponding to {@link data}. Each data item in {@link data}
 	 * is uniquely identified by the corresponding key value in this array.
 	 */
-	public function getKeys($refresh = false);
-
+	public function getKeys($refresh=false);
 	/**
 	 * @return CSort the sorting object. If this is false, it means the sorting is disabled.
 	 */
 	public function getSort();
-
 	/**
 	 * @return CPagination the pagination object. If this is false, it means the pagination is disabled.
 	 */

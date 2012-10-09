@@ -47,14 +47,14 @@
  *   // This option is available since version 1.1.1.
  *   'message'=>'Access Denied.',
  *   // optional, the denied method callback name, that will be called once the
- *     // access is denied, instead of showing the customized error message. It can also be
+ *	 // access is denied, instead of showing the customized error message. It can also be
  *   // a valid PHP callback, including class method name (array(ClassName/Object, MethodName)),
- *     // or anonymous function (PHP 5.3.0+). The function/method signature should be as follows:
- *     // function foo($user, $rule) { ... }
- *     // where $user is the current application user object and $rule is this access rule.
+ *	 // or anonymous function (PHP 5.3.0+). The function/method signature should be as follows:
+ *	 // function foo($user, $rule) { ... }
+ *	 // where $user is the current application user object and $rule is this access rule.
  *   // This option is available since version 1.1.11.
  *   'deniedCallback'=>'redirectToDeniedMethod',
- * )
+  * )
  * </pre>
  *
  * @property array $rules List of access rules.
@@ -74,7 +74,7 @@ class CAccessControlFilter extends CFilter
 	 */
 	public $message;
 
-	private $_rules = array();
+	private $_rules=array();
 
 	/**
 	 * @return array list of access rules.
@@ -89,20 +89,20 @@ class CAccessControlFilter extends CFilter
 	 */
 	public function setRules($rules)
 	{
-		foreach ($rules as $rule)
+		foreach($rules as $rule)
 		{
-			if (is_array($rule) && isset($rule[0]))
+			if(is_array($rule) && isset($rule[0]))
 			{
-				$r = new CAccessRule;
-				$r->allow = $rule[0] === 'allow';
-				foreach (array_slice($rule, 1) as $name => $value)
+				$r=new CAccessRule;
+				$r->allow=$rule[0]==='allow';
+				foreach(array_slice($rule,1) as $name=>$value)
 				{
-					if ($name === 'expression' || $name === 'roles' || $name === 'message' || $name === 'deniedCallback')
-						$r->$name = $value;
+					if($name==='expression' || $name==='roles' || $name==='message' || $name==='deniedCallback')
+						$r->$name=$value;
 					else
-						$r->$name = array_map('strtolower', $value);
+						$r->$name=array_map('strtolower',$value);
 				}
-				$this->_rules[] = $r;
+				$this->_rules[]=$r;
 			}
 		}
 	}
@@ -115,22 +115,22 @@ class CAccessControlFilter extends CFilter
 	 */
 	protected function preFilter($filterChain)
 	{
-		$app = Yii::app();
-		$request = $app->getRequest();
-		$user = $app->getUser();
-		$verb = $request->getRequestType();
-		$ip = $request->getUserHostAddress();
+		$app=Yii::app();
+		$request=$app->getRequest();
+		$user=$app->getUser();
+		$verb=$request->getRequestType();
+		$ip=$request->getUserHostAddress();
 
-		foreach ($this->getRules() as $rule)
+		foreach($this->getRules() as $rule)
 		{
-			if (($allow = $rule->isUserAllowed($user, $filterChain->controller, $filterChain->action, $ip, $verb)) > 0) // allowed
+			if(($allow=$rule->isUserAllowed($user,$filterChain->controller,$filterChain->action,$ip,$verb))>0) // allowed
 				break;
-			else if ($allow < 0) // denied
+			else if($allow<0) // denied
 			{
-				if (isset($rule->deniedCallback))
+				if(isset($rule->deniedCallback))
 					call_user_func($rule->deniedCallback, $rule);
 				else
-					$this->accessDenied($user, $this->resolveErrorMessage($rule));
+					$this->accessDenied($user,$this->resolveErrorMessage($rule));
 				return false;
 			}
 		}
@@ -148,12 +148,12 @@ class CAccessControlFilter extends CFilter
 	 */
 	protected function resolveErrorMessage($rule)
 	{
-		if ($rule->message !== null)
+		if($rule->message!==null)
 			return $rule->message;
-		else if ($this->message !== null)
+		else if($this->message!==null)
 			return $this->message;
 		else
-			return Yii::t('yii', 'You are not authorized to perform this action.');
+			return Yii::t('yii','You are not authorized to perform this action.');
 	}
 
 	/**
@@ -162,12 +162,12 @@ class CAccessControlFilter extends CFilter
 	 * @param IWebUser $user the current user
 	 * @param string $message the error message to be displayed
 	 */
-	protected function accessDenied($user, $message)
+	protected function accessDenied($user,$message)
 	{
-		if ($user->getIsGuest())
+		if($user->getIsGuest())
 			$user->loginRequired();
 		else
-			throw new CHttpException(403, $message);
+			throw new CHttpException(403,$message);
 	}
 }
 
@@ -261,16 +261,15 @@ class CAccessRule extends CComponent
 	 * @param string $verb the request verb (GET, POST, etc.)
 	 * @return integer 1 if the user is allowed, -1 if the user is denied, 0 if the rule does not apply to the user
 	 */
-	public function isUserAllowed($user, $controller, $action, $ip, $verb)
+	public function isUserAllowed($user,$controller,$action,$ip,$verb)
 	{
-		if ($this->isActionMatched($action)
+		if($this->isActionMatched($action)
 			&& $this->isUserMatched($user)
 			&& $this->isRoleMatched($user)
 			&& $this->isIpMatched($ip)
 			&& $this->isVerbMatched($verb)
 			&& $this->isControllerMatched($controller)
-			&& $this->isExpressionMatched($user)
-		)
+			&& $this->isExpressionMatched($user))
 			return $this->allow ? 1 : -1;
 		else
 			return 0;
@@ -282,7 +281,7 @@ class CAccessRule extends CComponent
 	 */
 	protected function isActionMatched($action)
 	{
-		return empty($this->actions) || in_array(strtolower($action->getId()), $this->actions);
+		return empty($this->actions) || in_array(strtolower($action->getId()),$this->actions);
 	}
 
 	/**
@@ -291,7 +290,7 @@ class CAccessRule extends CComponent
 	 */
 	protected function isControllerMatched($controller)
 	{
-		return empty($this->controllers) || in_array(strtolower($controller->getId()), $this->controllers);
+		return empty($this->controllers) || in_array(strtolower($controller->getId()),$this->controllers);
 	}
 
 	/**
@@ -300,17 +299,17 @@ class CAccessRule extends CComponent
 	 */
 	protected function isUserMatched($user)
 	{
-		if (empty($this->users))
+		if(empty($this->users))
 			return true;
-		foreach ($this->users as $u)
+		foreach($this->users as $u)
 		{
-			if ($u === '*')
+			if($u==='*')
 				return true;
-			else if ($u === '?' && $user->getIsGuest())
+			else if($u==='?' && $user->getIsGuest())
 				return true;
-			else if ($u === '@' && !$user->getIsGuest())
+			else if($u==='@' && !$user->getIsGuest())
 				return true;
-			else if (!strcasecmp($u, $user->getName()))
+			else if(!strcasecmp($u,$user->getName()))
 				return true;
 		}
 		return false;
@@ -322,17 +321,18 @@ class CAccessRule extends CComponent
 	 */
 	protected function isRoleMatched($user)
 	{
-		if (empty($this->roles))
+		if(empty($this->roles))
 			return true;
-		foreach ($this->roles as $key => $role)
+		foreach($this->roles as $key=>$role)
 		{
-			if (is_numeric($key))
+			if(is_numeric($key))
 			{
-				if ($user->checkAccess($role))
+				if($user->checkAccess($role))
 					return true;
-			} else
+			}
+			else
 			{
-				if ($user->checkAccess($key, $role))
+				if($user->checkAccess($key,$role))
 					return true;
 			}
 		}
@@ -345,11 +345,11 @@ class CAccessRule extends CComponent
 	 */
 	protected function isIpMatched($ip)
 	{
-		if (empty($this->ips))
+		if(empty($this->ips))
 			return true;
-		foreach ($this->ips as $rule)
+		foreach($this->ips as $rule)
 		{
-			if ($rule === '*' || $rule === $ip || (($pos = strpos($rule, '*')) !== false && !strncmp($ip, $rule, $pos)))
+			if($rule==='*' || $rule===$ip || (($pos=strpos($rule,'*'))!==false && !strncmp($ip,$rule,$pos)))
 				return true;
 		}
 		return false;
@@ -361,7 +361,7 @@ class CAccessRule extends CComponent
 	 */
 	protected function isVerbMatched($verb)
 	{
-		return empty($this->verbs) || in_array(strtolower($verb), $this->verbs);
+		return empty($this->verbs) || in_array(strtolower($verb),$this->verbs);
 	}
 
 	/**
@@ -370,9 +370,9 @@ class CAccessRule extends CComponent
 	 */
 	protected function isExpressionMatched($user)
 	{
-		if ($this->expression === null)
+		if($this->expression===null)
 			return true;
 		else
-			return $this->evaluateExpression($this->expression, array('user' => $user));
+			return $this->evaluateExpression($this->expression, array('user'=>$user));
 	}
 }

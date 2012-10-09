@@ -25,7 +25,7 @@
  * @ignore
  */
 
-require_once dirname(__FILE__) . '/../Renderer.php';
+require_once dirname(__FILE__).'/../Renderer.php';
 
 /**
  * BB code renderer, based on Andrey Demenev's HTML renderer.
@@ -74,166 +74,156 @@ require_once dirname(__FILE__) . '/../Renderer.php';
 class Text_Highlighter_Renderer_BB extends Text_Highlighter_Renderer_Array
 {
 
-	/**#@+
-	 * @access private
-	 */
+    /**#@+
+     * @access private
+     */
 
-	/**
-	 * Line numbering - will use the specified BB tag for listings
-	 *
-	 * @var boolean
-	 */
-	var $_numbers = false;
+    /**
+     * Line numbering - will use the specified BB tag for listings
+     *
+     * @var boolean
+     */
+    var $_numbers = false;
 
-	/**
-	 * BB tags to be used
-	 *
-	 * @var array
-	 */
-	var $_bb_tags = array(
-		'color' => 'color',
-		'list' => 'list',
-		'list_item' => '*',
-		'code' => 'code',
-	);
+    /**
+     * BB tags to be used
+     *
+     * @var array
+     */
+    var $_bb_tags = array (
+        'color'     => 'color',
+        'list'      => 'list',
+        'list_item' => '*',
+        'code'      => 'code',
+    );
 
-	/**
-	 * BB brackets - [ and ]
-	 *
-	 * @var array
-	 */
-	var $_tag_brackets = array('start' => '[', 'end' => ']');
+    /**
+     * BB brackets - [ and ]
+     *
+     * @var array
+     */
+    var $_tag_brackets = array ('start' => '[', 'end' => ']');
 
-	/**
-	 * Colors map
-	 *
-	 * @var boolean
-	 */
-	var $_colors = array(
-		'default' => 'Black',
-		'code' => 'Gray',
-		'brackets' => 'Olive',
-		'comment' => 'Orange',
-		'mlcomment' => 'Orange',
-		'quotes' => 'Darkred',
-		'string' => 'Red',
-		'identifier' => 'Blue',
-		'builtin' => 'Teal',
-		'reserved' => 'Green',
-		'inlinedoc' => 'Blue',
-		'var' => 'Darkblue',
-		'url' => 'Blue',
-		'special' => 'Navy',
-		'number' => 'Maroon',
-		'inlinetags' => 'Blue',
-	);
+    /**
+     * Colors map
+     *
+     * @var boolean
+     */
+    var $_colors = array(
+        'default'    => 'Black',
+        'code'       => 'Gray',
+        'brackets'   => 'Olive',
+        'comment'    => 'Orange',
+        'mlcomment'  => 'Orange',
+        'quotes'     => 'Darkred',
+        'string'     => 'Red',
+        'identifier' => 'Blue',
+        'builtin'    => 'Teal',
+        'reserved'   => 'Green',
+        'inlinedoc'  => 'Blue',
+        'var'        => 'Darkblue',
+        'url'        => 'Blue',
+        'special'    => 'Navy',
+        'number'     => 'Maroon',
+        'inlinetags' => 'Blue',
+    );
 
-	/**#@-*/
+    /**#@-*/
 
-	/**
-	 * Resets renderer state
-	 *
-	 * @access protected
-	 *
-	 *
-	 * Descendents of Text_Highlighter call this method from the constructor,
-	 * passing $options they get as parameter.
-	 */
-	function reset()
-	{
-		parent::reset();
-		if (isset($this->_options['numbers']))
-		{
-			$this->_numbers = $this->_options['numbers'];
-		}
-		if (isset($this->_options['bb_tags']))
-		{
-			$this->_bb_tags = array_merge($this->_bb_tags, $this->_options['bb_tags']);
-		}
-		if (isset($this->_options['tag_brackets']))
-		{
-			$this->_tag_brackets = array_merge($this->_tag_brackets, $this->_options['tag_brackets']);
-		}
-		if (isset($this->_options['colors']))
-		{
-			$this->_colors = array_merge($this->_colors, $this->_options['colors']);
-		}
-	}
+    /**
+     * Resets renderer state
+     *
+     * @access protected
+     *
+     *
+     * Descendents of Text_Highlighter call this method from the constructor,
+     * passing $options they get as parameter.
+     */
+    function reset()
+    {
+        parent::reset();
+        if (isset($this->_options['numbers'])) {
+            $this->_numbers = $this->_options['numbers'];
+        }
+        if (isset($this->_options['bb_tags'])) {
+            $this->_bb_tags = array_merge($this->_bb_tags, $this->_options['bb_tags']);
+        }
+        if (isset($this->_options['tag_brackets'])) {
+            $this->_tag_brackets = array_merge($this->_tag_brackets, $this->_options['tag_brackets']);
+        }
+        if (isset($this->_options['colors'])) {
+            $this->_colors = array_merge($this->_colors, $this->_options['colors']);
+        }
+    }
 
 
-	/**
-	 * Signals that no more tokens are available
-	 *
-	 * @abstract
-	 * @access public
-	 *
-	 */
-	function finalize()
-	{
+    /**
+     * Signals that no more tokens are available
+     *
+     * @abstract
+     * @access public
+     *
+     */
+    function finalize()
+    {
 
-		// get parent's output
-		parent::finalize();
-		$output = parent::getOutput();
+        // get parent's output
+        parent::finalize();
+        $output = parent::getOutput();
 
-		$bb_output = '';
+        $bb_output = '';
 
-		$color_start = $this->_tag_brackets['start'] . $this->_bb_tags['color'] . '=%s' . $this->_tag_brackets['end'];
-		$color_end = $this->_tag_brackets['start'] . '/' . $this->_bb_tags['color'] . $this->_tag_brackets['end'];
+        $color_start = $this->_tag_brackets['start'] . $this->_bb_tags['color'] . '=%s'  . $this->_tag_brackets['end'];
+        $color_end   = $this->_tag_brackets['start'] . '/' . $this->_bb_tags['color'] . $this->_tag_brackets['end'];
 
-		// loop through each class=>content pair
-		foreach ($output AS $token)
-		{
+        // loop through each class=>content pair
+        foreach ($output AS $token) {
 
-			if ($this->_enumerated)
-			{
-				$class = $token[0];
-				$content = $token[1];
-			} else
-			{
-				$key = key($token);
-				$class = $key;
-				$content = $token[$key];
-			}
+            if ($this->_enumerated) {
+                $class = $token[0];
+                $content = $token[1];
+            } else {
+                $key = key($token);
+                $class = $key;
+                $content = $token[$key];
+            }
 
-			$iswhitespace = ctype_space($content);
-			if (!$iswhitespace && !empty($this->_colors[$class]))
-			{
-				$bb_output .= sprintf($color_start, $this->_colors[$class]);
-				$bb_output .= $content;
-				$bb_output .= $color_end;
-			} else
-			{
-				$bb_output .= $content;
-			}
-		}
+            $iswhitespace = ctype_space($content);
+            if (!$iswhitespace && !empty($this->_colors[$class])) {
+                $bb_output .= sprintf($color_start, $this->_colors[$class]);
+                $bb_output .= $content;
+                $bb_output .= $color_end;
+            } else {
+                $bb_output .= $content;
+            }
+        }
 
-		if ($this->_numbers)
-		{
+        if ($this->_numbers) {
 
-			$item_tag = $this->_tag_brackets['start'] .
-				$this->_bb_tags['list_item'] .
-				$this->_tag_brackets['end'];
-			$this->_output = $item_tag . str_replace("\n", "\n" . $item_tag . ' ', $bb_output);
-			$this->_output = $this->_tag_brackets['start'] .
-				$this->_bb_tags['list'] .
-				$this->_tag_brackets['end'] .
-				$this->_output .
-				$this->_tag_brackets['start'] .
-				'/' .
-				$this->_bb_tags['list'] .
-				$this->_tag_brackets['end'];
-		} else
-		{
-			$this->_output = $this->_tag_brackets['start'] .
-				$this->_bb_tags['code'] .
-				$this->_tag_brackets['end'] .
-				$bb_output .
-				$this->_tag_brackets['start'] .
-				'/' .
-				$this->_bb_tags['code'] .
-				$this->_tag_brackets['end'];
-		}
-	}
+            $item_tag = $this->_tag_brackets['start'] .
+                        $this->_bb_tags['list_item'] .
+                        $this->_tag_brackets['end'];
+            $this->_output = $item_tag . str_replace("\n", "\n". $item_tag .' ', $bb_output);
+            $this->_output = $this->_tag_brackets['start'] .
+                             $this->_bb_tags['list'] .
+                             $this->_tag_brackets['end'] .
+                             $this->_output .
+                             $this->_tag_brackets['start'] .
+                             '/'.
+                             $this->_bb_tags['list'] .
+                             $this->_tag_brackets['end']
+                             ;
+        } else {
+            $this->_output = $this->_tag_brackets['start'] .
+                             $this->_bb_tags['code'] .
+                             $this->_tag_brackets['end'] .
+                             $bb_output .
+                             $this->_tag_brackets['start'] .
+                             '/' .
+                             $this->_bb_tags['code'] .
+                             $this->_tag_brackets['end'];
+        }
+    }
 
 }
 

@@ -43,26 +43,26 @@
  */
 class CPhpMessageSource extends CMessageSource
 {
-	const CACHE_KEY_PREFIX = 'Yii.CPhpMessageSource.';
+	const CACHE_KEY_PREFIX='Yii.CPhpMessageSource.';
 
 	/**
 	 * @var integer the time in seconds that the messages can remain valid in cache.
 	 * Defaults to 0, meaning the caching is disabled.
 	 */
-	public $cachingDuration = 0;
+	public $cachingDuration=0;
 	/**
 	 * @var string the ID of the cache application component that is used to cache the messages.
 	 * Defaults to 'cache' which refers to the primary cache application component.
 	 * Set this property to false if you want to disable caching the messages.
 	 */
-	public $cacheID = 'cache';
+	public $cacheID='cache';
 	/**
 	 * @var string the base path for all translated messages. Defaults to null, meaning
 	 * the "messages" subdirectory of the application directory (e.g. "protected/messages").
 	 */
 	public $basePath;
 
-	private $_files = array();
+	private $_files=array();
 
 	/**
 	 * Initializes the application component.
@@ -72,8 +72,8 @@ class CPhpMessageSource extends CMessageSource
 	public function init()
 	{
 		parent::init();
-		if ($this->basePath === null)
-			$this->basePath = Yii::getPathOfAlias('application.messages');
+		if($this->basePath===null)
+			$this->basePath=Yii::getPathOfAlias('application.messages');
 	}
 
 	/**
@@ -86,18 +86,19 @@ class CPhpMessageSource extends CMessageSource
 	 * @param string $language language ID
 	 * @return string the message file path
 	 */
-	protected function getMessageFile($category, $language)
+	protected function getMessageFile($category,$language)
 	{
-		if (!isset($this->_files[$category][$language]))
+		if(!isset($this->_files[$category][$language]))
 		{
-			if (($pos = strpos($category, '.')) !== false)
+			if(($pos=strpos($category,'.'))!==false)
 			{
-				$moduleClass = substr($category, 0, $pos);
-				$moduleCategory = substr($category, $pos + 1);
-				$class = new ReflectionClass($moduleClass);
-				$this->_files[$category][$language] = dirname($class->getFileName()) . DIRECTORY_SEPARATOR . 'messages' . DIRECTORY_SEPARATOR . $language . DIRECTORY_SEPARATOR . $moduleCategory . '.php';
-			} else
-				$this->_files[$category][$language] = $this->basePath . DIRECTORY_SEPARATOR . $language . DIRECTORY_SEPARATOR . $category . '.php';
+				$moduleClass=substr($category,0,$pos);
+				$moduleCategory=substr($category,$pos+1);
+				$class=new ReflectionClass($moduleClass);
+				$this->_files[$category][$language]=dirname($class->getFileName()).DIRECTORY_SEPARATOR.'messages'.DIRECTORY_SEPARATOR.$language.DIRECTORY_SEPARATOR.$moduleCategory.'.php';
+			}
+			else
+				$this->_files[$category][$language]=$this->basePath.DIRECTORY_SEPARATOR.$language.DIRECTORY_SEPARATOR.$category.'.php';
 		}
 		return $this->_files[$category][$language];
 	}
@@ -108,29 +109,30 @@ class CPhpMessageSource extends CMessageSource
 	 * @param string $language the target language
 	 * @return array the loaded messages
 	 */
-	protected function loadMessages($category, $language)
+	protected function loadMessages($category,$language)
 	{
-		$messageFile = $this->getMessageFile($category, $language);
+		$messageFile=$this->getMessageFile($category,$language);
 
-		if ($this->cachingDuration > 0 && $this->cacheID !== false && ($cache = Yii::app()->getComponent($this->cacheID)) !== null)
+		if($this->cachingDuration>0 && $this->cacheID!==false && ($cache=Yii::app()->getComponent($this->cacheID))!==null)
 		{
-			$key = self::CACHE_KEY_PREFIX . $messageFile;
-			if (($data = $cache->get($key)) !== false)
+			$key=self::CACHE_KEY_PREFIX . $messageFile;
+			if(($data=$cache->get($key))!==false)
 				return unserialize($data);
 		}
 
-		if (is_file($messageFile))
+		if(is_file($messageFile))
 		{
-			$messages = include($messageFile);
-			if (!is_array($messages))
-				$messages = array();
-			if (isset($cache))
+			$messages=include($messageFile);
+			if(!is_array($messages))
+				$messages=array();
+			if(isset($cache))
 			{
-				$dependency = new CFileCacheDependency($messageFile);
-				$cache->set($key, serialize($messages), $this->cachingDuration, $dependency);
+				$dependency=new CFileCacheDependency($messageFile);
+				$cache->set($key,serialize($messages),$this->cachingDuration,$dependency);
 			}
 			return $messages;
-		} else
+		}
+		else
 			return array();
 	}
 }

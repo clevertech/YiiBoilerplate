@@ -20,20 +20,20 @@
 class CMssqlColumnSchema extends CDbColumnSchema
 {
 
-	/**
-	 * Initializes the column with its DB type and default value.
-	 * This sets up the column's PHP type, size, precision, scale as well as default value.
-	 * @param string $dbType the column's DB type
-	 * @param mixed $defaultValue the default value
-	 */
-	public function init($dbType, $defaultValue)
-	{
-		if ($defaultValue == '(NULL)')
-		{
-			$defaultValue = null;
-		}
-		parent::init($dbType, $defaultValue);
-	}
+     /**
+     * Initializes the column with its DB type and default value.
+     * This sets up the column's PHP type, size, precision, scale as well as default value.
+     * @param string $dbType the column's DB type
+     * @param mixed $defaultValue the default value
+     */
+     public function init($dbType, $defaultValue)
+     {
+        if ($defaultValue=='(NULL)')
+        {
+            $defaultValue=null;
+        }
+        parent::init($dbType, $defaultValue);
+     }
 
 
 	/**
@@ -42,14 +42,14 @@ class CMssqlColumnSchema extends CDbColumnSchema
 	 */
 	protected function extractType($dbType)
 	{
-		if (strpos($dbType, 'float') !== false || strpos($dbType, 'real') !== false)
-			$this->type = 'double';
-		else if (strpos($dbType, 'bigint') === false && (strpos($dbType, 'int') !== false || strpos($dbType, 'smallint') !== false || strpos($dbType, 'tinyint')))
-			$this->type = 'integer';
-		else if (strpos($dbType, 'bit') !== false)
-			$this->type = 'boolean';
+		if(strpos($dbType,'float')!==false || strpos($dbType,'real')!==false)
+			$this->type='double';
+		else if(strpos($dbType,'bigint')===false && (strpos($dbType,'int')!==false || strpos($dbType,'smallint')!==false || strpos($dbType,'tinyint')))
+			$this->type='integer';
+		else if(strpos($dbType,'bit')!==false)
+			$this->type='boolean';
 		else
-			$this->type = 'string';
+			$this->type='string';
 	}
 
 	/**
@@ -59,10 +59,10 @@ class CMssqlColumnSchema extends CDbColumnSchema
 	 */
 	protected function extractDefault($defaultValue)
 	{
-		if ($this->dbType === 'timestamp')
-			$this->defaultValue = null;
+		if($this->dbType==='timestamp' )
+			$this->defaultValue=null;
 		else
-			parent::extractDefault(str_replace(array('(', ')', "'"), '', $defaultValue));
+			parent::extractDefault(str_replace(array('(',')',"'"), '', $defaultValue));
 	}
 
 	/**
@@ -81,7 +81,7 @@ class CMssqlColumnSchema extends CDbColumnSchema
 	 */
 	public function typecast($value)
 	{
-		if ($this->type === 'boolean')
+		if($this->type==='boolean')
 			return $value ? 1 : 0;
 		else
 			return parent::typecast($value);

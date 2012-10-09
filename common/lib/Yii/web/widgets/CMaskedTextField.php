@@ -56,23 +56,23 @@ class CMaskedTextField extends CInputWidget
 	 */
 	public function run()
 	{
-		if ($this->mask == '')
-			throw new CException(Yii::t('yii', 'Property CMaskedTextField.mask cannot be empty.'));
+		if($this->mask=='')
+			throw new CException(Yii::t('yii','Property CMaskedTextField.mask cannot be empty.'));
 
-		list($name, $id) = $this->resolveNameID();
-		if (isset($this->htmlOptions['id']))
-			$id = $this->htmlOptions['id'];
+		list($name,$id)=$this->resolveNameID();
+		if(isset($this->htmlOptions['id']))
+			$id=$this->htmlOptions['id'];
 		else
-			$this->htmlOptions['id'] = $id;
-		if (isset($this->htmlOptions['name']))
-			$name = $this->htmlOptions['name'];
+			$this->htmlOptions['id']=$id;
+		if(isset($this->htmlOptions['name']))
+			$name=$this->htmlOptions['name'];
 
 		$this->registerClientScript();
 
-		if ($this->hasModel())
-			echo CHtml::activeTextField($this->model, $this->attribute, $this->htmlOptions);
+		if($this->hasModel())
+			echo CHtml::activeTextField($this->model,$this->attribute,$this->htmlOptions);
 		else
-			echo CHtml::textField($name, $this->value, $this->htmlOptions);
+			echo CHtml::textField($name,$this->value,$this->htmlOptions);
 	}
 
 	/**
@@ -80,17 +80,17 @@ class CMaskedTextField extends CInputWidget
 	 */
 	public function registerClientScript()
 	{
-		$id = $this->htmlOptions['id'];
-		$miOptions = $this->getClientOptions();
-		$options = $miOptions !== array() ? ',' . CJavaScript::encode($miOptions) : '';
-		$js = '';
-		if (is_array($this->charMap))
-			$js .= 'jQuery.mask.definitions=' . CJavaScript::encode($this->charMap) . ";\n";
-		$js .= "jQuery(\"#{$id}\").mask(\"{$this->mask}\"{$options});";
+		$id=$this->htmlOptions['id'];
+		$miOptions=$this->getClientOptions();
+		$options=$miOptions!==array() ? ','.CJavaScript::encode($miOptions) : '';
+		$js='';
+		if(is_array($this->charMap))
+			$js.='jQuery.mask.definitions='.CJavaScript::encode($this->charMap).";\n";
+		$js.="jQuery(\"#{$id}\").mask(\"{$this->mask}\"{$options});";
 
-		$cs = Yii::app()->getClientScript();
+		$cs=Yii::app()->getClientScript();
 		$cs->registerCoreScript('maskedinput');
-		$cs->registerScript('Yii.CMaskedTextField#' . $id, $js);
+		$cs->registerScript('Yii.CMaskedTextField#'.$id,$js);
 	}
 
 	/**
@@ -98,16 +98,18 @@ class CMaskedTextField extends CInputWidget
 	 */
 	protected function getClientOptions()
 	{
-		$options = array();
-		if ($this->placeholder !== null)
-			$options['placeholder'] = $this->placeholder;
-		if (is_string($this->completed))
+		$options=array();
+		if($this->placeholder!==null)
+			$options['placeholder']=$this->placeholder;
+
+		if($this->completed!==null)
 		{
-			if (!($this->completed instanceof CJavaScriptExpression) && strncmp($this->completed, 'js:', 3))
-				$options['completed'] = new CJavaScriptExpression($this->completed);
+			if($this->completed instanceof CJavaScriptExpression)
+				$options['completed']=$this->completed;
 			else
-				$options['completed'] = $this->completed;
+				$options['completed']=new CJavaScriptExpression($this->completed);
 		}
+
 		return $options;
 	}
 }

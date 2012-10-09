@@ -83,7 +83,7 @@ class CWidgetFactory extends CApplicationComponent implements IWidgetFactory
 	 * @see skinnableWidgets
 	 * @since 1.1.3
 	 */
-	public $enableSkin = false;
+	public $enableSkin=false;
 	/**
 	 * @var array widget initial property values. Each array key-value pair
 	 * represents the initial property values for a single widget class, with
@@ -106,7 +106,7 @@ class CWidgetFactory extends CApplicationComponent implements IWidgetFactory
 	 * They may also be overridden by widget skins, if {@link enableSkin} is true.
 	 * @since 1.1.3
 	 */
-	public $widgets = array();
+	public $widgets=array();
 	/**
 	 * @var array list of widget class names that can be skinned.
 	 * Because skinning widgets has performance impact, you may want to specify this property
@@ -121,7 +121,7 @@ class CWidgetFactory extends CApplicationComponent implements IWidgetFactory
 	 */
 	public $skinPath;
 
-	private $_skins = array(); // class name, skin name, property name => value
+	private $_skins=array();  // class name, skin name, property name => value
 
 	/**
 	 * Initializes the application component.
@@ -131,8 +131,8 @@ class CWidgetFactory extends CApplicationComponent implements IWidgetFactory
 	{
 		parent::init();
 
-		if ($this->enableSkin && $this->skinPath === null)
-			$this->skinPath = Yii::app()->getViewPath() . DIRECTORY_SEPARATOR . 'skins';
+		if($this->enableSkin && $this->skinPath===null)
+			$this->skinPath=Yii::app()->getViewPath().DIRECTORY_SEPARATOR.'skins';
 	}
 
 	/**
@@ -142,24 +142,24 @@ class CWidgetFactory extends CApplicationComponent implements IWidgetFactory
 	 * @param array $properties the initial property values (name=>value) of the widget.
 	 * @return CWidget the newly created widget whose properties have been initialized with the given values.
 	 */
-	public function createWidget($owner, $className, $properties = array())
+	public function createWidget($owner,$className,$properties=array())
 	{
-		$className = Yii::import($className, true);
-		$widget = new $className($owner);
+		$className=Yii::import($className,true);
+		$widget=new $className($owner);
 
-		if (isset($this->widgets[$className]))
-			$properties = $properties === array() ? $this->widgets[$className] : CMap::mergeArray($this->widgets[$className], $properties);
-		if ($this->enableSkin)
+		if(isset($this->widgets[$className]))
+			$properties=$properties===array() ? $this->widgets[$className] : CMap::mergeArray($this->widgets[$className],$properties);
+		if($this->enableSkin)
 		{
-			if ($this->skinnableWidgets === null || in_array($className, $this->skinnableWidgets))
+			if($this->skinnableWidgets===null || in_array($className,$this->skinnableWidgets))
 			{
-				$skinName = isset($properties['skin']) ? $properties['skin'] : 'default';
-				if ($skinName !== false && ($skin = $this->getSkin($className, $skinName)) !== array())
-					$properties = $properties === array() ? $skin : CMap::mergeArray($skin, $properties);
+				$skinName=isset($properties['skin']) ? $properties['skin'] : 'default';
+				if($skinName!==false && ($skin=$this->getSkin($className,$skinName))!==array())
+					$properties=$properties===array() ? $skin : CMap::mergeArray($skin,$properties);
 			}
 		}
-		foreach ($properties as $name => $value)
-			$widget->$name = $value;
+		foreach($properties as $name=>$value)
+			$widget->$name=$value;
 		return $widget;
 	}
 
@@ -169,29 +169,29 @@ class CWidgetFactory extends CApplicationComponent implements IWidgetFactory
 	 * @param string $skinName the widget skin name
 	 * @return array the skin (name=>value) for the widget
 	 */
-	protected function getSkin($className, $skinName)
+	protected function getSkin($className,$skinName)
 	{
-		if (!isset($this->_skins[$className][$skinName]))
+		if(!isset($this->_skins[$className][$skinName]))
 		{
-			$skinFile = $this->skinPath . DIRECTORY_SEPARATOR . $className . '.php';
-			if (is_file($skinFile))
-				$this->_skins[$className] = require($skinFile);
+			$skinFile=$this->skinPath.DIRECTORY_SEPARATOR.$className.'.php';
+			if(is_file($skinFile))
+				$this->_skins[$className]=require($skinFile);
 			else
-				$this->_skins[$className] = array();
+				$this->_skins[$className]=array();
 
-			if (($theme = Yii::app()->getTheme()) !== null)
+			if(($theme=Yii::app()->getTheme())!==null)
 			{
-				$skinFile = $theme->getSkinPath() . DIRECTORY_SEPARATOR . $className . '.php';
-				if (is_file($skinFile))
+				$skinFile=$theme->getSkinPath().DIRECTORY_SEPARATOR.$className.'.php';
+				if(is_file($skinFile))
 				{
-					$skins = require($skinFile);
-					foreach ($skins as $name => $skin)
-						$this->_skins[$className][$name] = $skin;
+					$skins=require($skinFile);
+					foreach($skins as $name=>$skin)
+						$this->_skins[$className][$name]=$skin;
 				}
 			}
 
-			if (!isset($this->_skins[$className][$skinName]))
-				$this->_skins[$className][$skinName] = array();
+			if(!isset($this->_skins[$className][$skinName]))
+				$this->_skins[$className][$skinName]=array();
 		}
 		return $this->_skins[$className][$skinName];
 	}

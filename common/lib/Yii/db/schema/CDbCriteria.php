@@ -26,60 +26,60 @@
  */
 class CDbCriteria extends CComponent
 {
-	const PARAM_PREFIX = ':ycp';
+	const PARAM_PREFIX=':ycp';
 	/**
 	 * @var integer the global counter for anonymous binding parameters.
 	 * This counter is used for generating the name for the anonymous parameters.
 	 */
-	public static $paramCount = 0;
+	public static $paramCount=0;
 	/**
 	 * @var mixed the columns being selected. This refers to the SELECT clause in an SQL
 	 * statement. The property can be either a string (column names separated by commas)
 	 * or an array of column names. Defaults to '*', meaning all columns.
 	 */
-	public $select = '*';
+	public $select='*';
 	/**
 	 * @var boolean whether to select distinct rows of data only. If this is set true,
 	 * the SELECT clause would be changed to SELECT DISTINCT.
 	 */
-	public $distinct = false;
+	public $distinct=false;
 	/**
 	 * @var string query condition. This refers to the WHERE clause in an SQL statement.
 	 * For example, <code>age>31 AND team=1</code>.
 	 */
-	public $condition = '';
+	public $condition='';
 	/**
 	 * @var array list of query parameter values indexed by parameter placeholders.
 	 * For example, <code>array(':name'=>'Dan', ':age'=>31)</code>.
 	 */
-	public $params = array();
+	public $params=array();
 	/**
 	 * @var integer maximum number of records to be returned. If less than 0, it means no limit.
 	 */
-	public $limit = -1;
+	public $limit=-1;
 	/**
 	 * @var integer zero-based offset from where the records are to be returned. If less than 0, it means starting from the beginning.
 	 */
-	public $offset = -1;
+	public $offset=-1;
 	/**
 	 * @var string how to sort the query results. This refers to the ORDER BY clause in an SQL statement.
 	 */
-	public $order = '';
+	public $order='';
 	/**
 	 * @var string how to group the query results. This refers to the GROUP BY clause in an SQL statement.
 	 * For example, <code>'projectID, teamID'</code>.
 	 */
-	public $group = '';
+	public $group='';
 	/**
 	 * @var string how to join with other tables. This refers to the JOIN clause in an SQL statement.
 	 * For example, <code>'LEFT JOIN users ON users.id=authorID'</code>.
 	 */
-	public $join = '';
+	public $join='';
 	/**
 	 * @var string the condition to be applied with GROUP-BY clause.
 	 * For example, <code>'SUM(revenue)<50000'</code>.
 	 */
-	public $having = '';
+	public $having='';
 	/**
 	 * @var mixed the relational query criteria. This is used for fetching related objects in eager loading fashion.
 	 * This property is effective only when the criteria is passed as a parameter to the following methods of CActiveRecord:
@@ -125,19 +125,19 @@ class CDbCriteria extends CComponent
 	 */
 	public $index;
 	/**
-	 * @var mixed scopes to apply
+     * @var mixed scopes to apply
 	 *
-	 * This property is effective only when passing criteria to
+     * This property is effective only when passing criteria to
 	 * the one of the following methods:
-	 * <ul>
-	 * <li>{@link CActiveRecord::find()}</li>
-	 * <li>{@link CActiveRecord::findAll()}</li>
-	 * <li>{@link CActiveRecord::findByPk()}</li>
-	 * <li>{@link CActiveRecord::findAllByPk()}</li>
-	 * <li>{@link CActiveRecord::findByAttributes()}</li>
-	 * <li>{@link CActiveRecord::findAllByAttributes()}</li>
-	 * <li>{@link CActiveRecord::count()}</li>
-	 * </ul>
+     * <ul>
+     * <li>{@link CActiveRecord::find()}</li>
+     * <li>{@link CActiveRecord::findAll()}</li>
+     * <li>{@link CActiveRecord::findByPk()}</li>
+     * <li>{@link CActiveRecord::findAllByPk()}</li>
+     * <li>{@link CActiveRecord::findByAttributes()}</li>
+     * <li>{@link CActiveRecord::findAllByAttributes()}</li>
+     * <li>{@link CActiveRecord::count()}</li>
+     * </ul>
 	 *
 	 * Can be set to one of the following:
 	 * <ul>
@@ -155,10 +155,10 @@ class CDbCriteria extends CComponent
 	 * Constructor.
 	 * @param array $data criteria initial property values (indexed by property name)
 	 */
-	public function __construct($data = array())
+	public function __construct($data=array())
 	{
-		foreach ($data as $name => $value)
-			$this->$name = $value;
+		foreach($data as $name=>$value)
+			$this->$name=$value;
 	}
 
 	/**
@@ -167,16 +167,16 @@ class CDbCriteria extends CComponent
 	 */
 	public function __wakeup()
 	{
-		$map = array();
-		$params = array();
-		foreach ($this->params as $name => $value)
+		$map=array();
+		$params=array();
+		foreach($this->params as $name=>$value)
 		{
-			$newName = self::PARAM_PREFIX . self::$paramCount++;
-			$map[$name] = $newName;
-			$params[$newName] = $value;
+			$newName=self::PARAM_PREFIX.self::$paramCount++;
+			$map[$name]=$newName;
+			$params[$newName]=$value;
 		}
-		$this->condition = strtr($this->condition, $map);
-		$this->params = $params;
+		$this->condition=strtr($this->condition,$map);
+		$this->params=$params;
 	}
 
 	/**
@@ -191,18 +191,18 @@ class CDbCriteria extends CComponent
 	 * @param string $operator the operator to join different conditions. Defaults to 'AND'.
 	 * @return CDbCriteria the criteria object itself
 	 */
-	public function addCondition($condition, $operator = 'AND')
+	public function addCondition($condition,$operator='AND')
 	{
-		if (is_array($condition))
+		if(is_array($condition))
 		{
-			if ($condition === array())
+			if($condition===array())
 				return $this;
-			$condition = '(' . implode(') ' . $operator . ' (', $condition) . ')';
+			$condition='('.implode(') '.$operator.' (',$condition).')';
 		}
-		if ($this->condition === '')
-			$this->condition = $condition;
+		if($this->condition==='')
+			$this->condition=$condition;
 		else
-			$this->condition = '(' . $this->condition . ') ' . $operator . ' (' . $condition . ')';
+			$this->condition='('.$this->condition.') '.$operator.' ('.$condition.')';
 		return $this;
 	}
 
@@ -224,14 +224,14 @@ class CDbCriteria extends CComponent
 	 * @param string $like the LIKE operator. Defaults to 'LIKE'. You may also set this to be 'NOT LIKE'.
 	 * @return CDbCriteria the criteria object itself
 	 */
-	public function addSearchCondition($column, $keyword, $escape = true, $operator = 'AND', $like = 'LIKE')
+	public function addSearchCondition($column,$keyword,$escape=true,$operator='AND',$like='LIKE')
 	{
-		if ($keyword == '')
+		if($keyword=='')
 			return $this;
-		if ($escape)
-			$keyword = '%' . strtr($keyword, array('%' => '\%', '_' => '\_', '\\' => '\\\\')) . '%';
-		$condition = $column . " $like " . self::PARAM_PREFIX . self::$paramCount;
-		$this->params[self::PARAM_PREFIX . self::$paramCount++] = $keyword;
+		if($escape)
+			$keyword='%'.strtr($keyword,array('%'=>'\%', '_'=>'\_', '\\'=>'\\\\')).'%';
+		$condition=$column." $like ".self::PARAM_PREFIX.self::$paramCount;
+		$this->params[self::PARAM_PREFIX.self::$paramCount++]=$keyword;
 		return $this->addCondition($condition, $operator);
 	}
 
@@ -247,28 +247,29 @@ class CDbCriteria extends CComponent
 	 * Defaults to 'AND'.
 	 * @return CDbCriteria the criteria object itself
 	 */
-	public function addInCondition($column, $values, $operator = 'AND')
+	public function addInCondition($column,$values,$operator='AND')
 	{
-		if (($n = count($values)) < 1)
-			return $this->addCondition('0=1', $operator); // 0=1 is used because in MSSQL value alone can't be used in WHERE
-		if ($n === 1)
+		if(($n=count($values))<1)
+			return $this->addCondition('0=1',$operator); // 0=1 is used because in MSSQL value alone can't be used in WHERE
+		if($n===1)
 		{
-			$value = reset($values);
-			if ($value === null)
-				return $this->addCondition($column . ' IS NULL');
-			$condition = $column . '=' . self::PARAM_PREFIX . self::$paramCount;
-			$this->params[self::PARAM_PREFIX . self::$paramCount++] = $value;
-		} else
-		{
-			$params = array();
-			foreach ($values as $value)
-			{
-				$params[] = self::PARAM_PREFIX . self::$paramCount;
-				$this->params[self::PARAM_PREFIX . self::$paramCount++] = $value;
-			}
-			$condition = $column . ' IN (' . implode(', ', $params) . ')';
+			$value=reset($values);
+			if($value===null)
+				return $this->addCondition($column.' IS NULL');
+			$condition=$column.'='.self::PARAM_PREFIX.self::$paramCount;
+			$this->params[self::PARAM_PREFIX.self::$paramCount++]=$value;
 		}
-		return $this->addCondition($condition, $operator);
+		else
+		{
+			$params=array();
+			foreach($values as $value)
+			{
+				$params[]=self::PARAM_PREFIX.self::$paramCount;
+				$this->params[self::PARAM_PREFIX.self::$paramCount++]=$value;
+			}
+			$condition=$column.' IN ('.implode(', ',$params).')';
+		}
+		return $this->addCondition($condition,$operator);
 	}
 
 	/**
@@ -284,28 +285,29 @@ class CDbCriteria extends CComponent
 	 * @return CDbCriteria the criteria object itself
 	 * @since 1.1.1
 	 */
-	public function addNotInCondition($column, $values, $operator = 'AND')
+	public function addNotInCondition($column,$values,$operator='AND')
 	{
-		if (($n = count($values)) < 1)
+		if(($n=count($values))<1)
 			return $this;
-		if ($n === 1)
+		if($n===1)
 		{
-			$value = reset($values);
-			if ($value === null)
-				return $this->addCondition($column . ' IS NOT NULL');
-			$condition = $column . '!=' . self::PARAM_PREFIX . self::$paramCount;
-			$this->params[self::PARAM_PREFIX . self::$paramCount++] = $value;
-		} else
-		{
-			$params = array();
-			foreach ($values as $value)
-			{
-				$params[] = self::PARAM_PREFIX . self::$paramCount;
-				$this->params[self::PARAM_PREFIX . self::$paramCount++] = $value;
-			}
-			$condition = $column . ' NOT IN (' . implode(', ', $params) . ')';
+			$value=reset($values);
+			if($value===null)
+				return $this->addCondition($column.' IS NOT NULL');
+			$condition=$column.'!='.self::PARAM_PREFIX.self::$paramCount;
+			$this->params[self::PARAM_PREFIX.self::$paramCount++]=$value;
 		}
-		return $this->addCondition($condition, $operator);
+		else
+		{
+			$params=array();
+			foreach($values as $value)
+			{
+				$params[]=self::PARAM_PREFIX.self::$paramCount;
+				$this->params[self::PARAM_PREFIX.self::$paramCount++]=$value;
+			}
+			$condition=$column.' NOT IN ('.implode(', ',$params).')';
+		}
+		return $this->addCondition($condition,$operator);
 	}
 
 	/**
@@ -319,20 +321,20 @@ class CDbCriteria extends CComponent
 	 * Defaults to 'AND'.
 	 * @return CDbCriteria the criteria object itself
 	 */
-	public function addColumnCondition($columns, $columnOperator = 'AND', $operator = 'AND')
+	public function addColumnCondition($columns,$columnOperator='AND',$operator='AND')
 	{
-		$params = array();
-		foreach ($columns as $name => $value)
+		$params=array();
+		foreach($columns as $name=>$value)
 		{
-			if ($value === null)
-				$params[] = $name . ' IS NULL';
+			if($value===null)
+				$params[]=$name.' IS NULL';
 			else
 			{
-				$params[] = $name . '=' . self::PARAM_PREFIX . self::$paramCount;
-				$this->params[self::PARAM_PREFIX . self::$paramCount++] = $value;
+				$params[]=$name.'='.self::PARAM_PREFIX.self::$paramCount;
+				$this->params[self::PARAM_PREFIX.self::$paramCount++]=$value;
 			}
 		}
-		return $this->addCondition(implode(" $columnOperator ", $params), $operator);
+		return $this->addCondition(implode(" $columnOperator ",$params), $operator);
 	}
 
 	/**
@@ -379,37 +381,40 @@ class CDbCriteria extends CComponent
 	 * @return CDbCriteria the criteria object itself
 	 * @since 1.1.1
 	 */
-	public function compare($column, $value, $partialMatch = false, $operator = 'AND', $escape = true)
+	public function compare($column, $value, $partialMatch=false, $operator='AND', $escape=true)
 	{
-		if (is_array($value))
+		if(is_array($value))
 		{
-			if ($value === array())
+			if($value===array())
 				return $this;
-			return $this->addInCondition($column, $value, $operator);
-		} else
-			$value = "$value";
+			return $this->addInCondition($column,$value,$operator);
+		}
+		else
+			$value="$value";
 
-		if (preg_match('/^(?:\s*(<>|<=|>=|<|>|=))?(.*)$/', $value, $matches))
+		if(preg_match('/^(?:\s*(<>|<=|>=|<|>|=))?(.*)$/',$value,$matches))
 		{
-			$value = $matches[2];
-			$op = $matches[1];
-		} else
-			$op = '';
+			$value=$matches[2];
+			$op=$matches[1];
+		}
+		else
+			$op='';
 
-		if ($value === '')
+		if($value==='')
 			return $this;
 
-		if ($partialMatch)
+		if($partialMatch)
 		{
-			if ($op === '')
-				return $this->addSearchCondition($column, $value, $escape, $operator);
-			if ($op === '<>')
-				return $this->addSearchCondition($column, $value, $escape, $operator, 'NOT LIKE');
-		} else if ($op === '')
-			$op = '=';
+			if($op==='')
+				return $this->addSearchCondition($column,$value,$escape,$operator);
+			if($op==='<>')
+				return $this->addSearchCondition($column,$value,$escape,$operator,'NOT LIKE');
+		}
+		else if($op==='')
+			$op='=';
 
-		$this->addCondition($column . $op . self::PARAM_PREFIX . self::$paramCount, $operator);
-		$this->params[self::PARAM_PREFIX . self::$paramCount++] = $value;
+		$this->addCondition($column.$op.self::PARAM_PREFIX.self::$paramCount,$operator);
+		$this->params[self::PARAM_PREFIX.self::$paramCount++]=$value;
 
 		return $this;
 	}
@@ -430,21 +435,21 @@ class CDbCriteria extends CComponent
 	 * @return CDbCriteria the criteria object itself
 	 * @since 1.1.2
 	 */
-	public function addBetweenCondition($column, $valueStart, $valueEnd, $operator = 'AND')
+	public function addBetweenCondition($column,$valueStart,$valueEnd,$operator='AND')
 	{
-		if ($valueStart === '' || $valueEnd === '')
+		if($valueStart==='' || $valueEnd==='')
 			return $this;
 
-		$paramStart = self::PARAM_PREFIX . self::$paramCount++;
-		$paramEnd = self::PARAM_PREFIX . self::$paramCount++;
-		$this->params[$paramStart] = $valueStart;
-		$this->params[$paramEnd] = $valueEnd;
-		$condition = "$column BETWEEN $paramStart AND $paramEnd";
+		$paramStart=self::PARAM_PREFIX.self::$paramCount++;
+		$paramEnd=self::PARAM_PREFIX.self::$paramCount++;
+		$this->params[$paramStart]=$valueStart;
+		$this->params[$paramEnd]=$valueEnd;
+		$condition="$column BETWEEN $paramStart AND $paramEnd";
 
-		if ($this->condition === '')
-			$this->condition = $condition;
+		if($this->condition==='')
+			$this->condition=$condition;
 		else
-			$this->condition = '(' . $this->condition . ') ' . $operator . ' (' . $condition . ')';
+			$this->condition='('.$this->condition.') '.$operator.' ('.$condition.')';
 		return $this;
 	}
 
@@ -458,140 +463,141 @@ class CDbCriteria extends CComponent
 	 * @param boolean $useAnd whether to use 'AND' to merge condition and having options.
 	 * If false, 'OR' will be used instead. Defaults to 'AND'.
 	 */
-	public function mergeWith($criteria, $useAnd = true)
+	public function mergeWith($criteria,$useAnd=true)
 	{
-		$and = $useAnd ? 'AND' : 'OR';
-		if (is_array($criteria))
-			$criteria = new self($criteria);
-		if ($this->select !== $criteria->select)
+		$and=$useAnd ? 'AND' : 'OR';
+		if(is_array($criteria))
+			$criteria=new self($criteria);
+		if($this->select!==$criteria->select)
 		{
-			if ($this->select === '*')
-				$this->select = $criteria->select;
-			else if ($criteria->select !== '*')
+			if($this->select==='*')
+				$this->select=$criteria->select;
+			else if($criteria->select!=='*')
 			{
-				$select1 = is_string($this->select) ? preg_split('/\s*,\s*/', trim($this->select), -1, PREG_SPLIT_NO_EMPTY) : $this->select;
-				$select2 = is_string($criteria->select) ? preg_split('/\s*,\s*/', trim($criteria->select), -1, PREG_SPLIT_NO_EMPTY) : $criteria->select;
-				$this->select = array_merge($select1, array_diff($select2, $select1));
+				$select1=is_string($this->select)?preg_split('/\s*,\s*/',trim($this->select),-1,PREG_SPLIT_NO_EMPTY):$this->select;
+				$select2=is_string($criteria->select)?preg_split('/\s*,\s*/',trim($criteria->select),-1,PREG_SPLIT_NO_EMPTY):$criteria->select;
+				$this->select=array_merge($select1,array_diff($select2,$select1));
 			}
 		}
 
-		if ($this->condition !== $criteria->condition)
+		if($this->condition!==$criteria->condition)
 		{
-			if ($this->condition === '')
-				$this->condition = $criteria->condition;
-			else if ($criteria->condition !== '')
-				$this->condition = "({$this->condition}) $and ({$criteria->condition})";
+			if($this->condition==='')
+				$this->condition=$criteria->condition;
+			else if($criteria->condition!=='')
+				$this->condition="({$this->condition}) $and ({$criteria->condition})";
 		}
 
-		if ($this->params !== $criteria->params)
-			$this->params = array_merge($this->params, $criteria->params);
+		if($this->params!==$criteria->params)
+			$this->params=array_merge($this->params,$criteria->params);
 
-		if ($criteria->limit > 0)
-			$this->limit = $criteria->limit;
+		if($criteria->limit>0)
+			$this->limit=$criteria->limit;
 
-		if ($criteria->offset >= 0)
-			$this->offset = $criteria->offset;
+		if($criteria->offset>=0)
+			$this->offset=$criteria->offset;
 
-		if ($criteria->alias !== null)
-			$this->alias = $criteria->alias;
+		if($criteria->alias!==null)
+			$this->alias=$criteria->alias;
 
-		if ($this->order !== $criteria->order)
+		if($this->order!==$criteria->order)
 		{
-			if ($this->order === '')
-				$this->order = $criteria->order;
-			else if ($criteria->order !== '')
-				$this->order = $criteria->order . ', ' . $this->order;
+			if($this->order==='')
+				$this->order=$criteria->order;
+			else if($criteria->order!=='')
+				$this->order=$criteria->order.', '.$this->order;
 		}
 
-		if ($this->group !== $criteria->group)
+		if($this->group!==$criteria->group)
 		{
-			if ($this->group === '')
-				$this->group = $criteria->group;
-			else if ($criteria->group !== '')
-				$this->group .= ', ' . $criteria->group;
+			if($this->group==='')
+				$this->group=$criteria->group;
+			else if($criteria->group!=='')
+				$this->group.=', '.$criteria->group;
 		}
 
-		if ($this->join !== $criteria->join)
+		if($this->join!==$criteria->join)
 		{
-			if ($this->join === '')
-				$this->join = $criteria->join;
-			else if ($criteria->join !== '')
-				$this->join .= ' ' . $criteria->join;
+			if($this->join==='')
+				$this->join=$criteria->join;
+			else if($criteria->join!=='')
+				$this->join.=' '.$criteria->join;
 		}
 
-		if ($this->having !== $criteria->having)
+		if($this->having!==$criteria->having)
 		{
-			if ($this->having === '')
-				$this->having = $criteria->having;
-			else if ($criteria->having !== '')
-				$this->having = "({$this->having}) $and ({$criteria->having})";
+			if($this->having==='')
+				$this->having=$criteria->having;
+			else if($criteria->having!=='')
+				$this->having="({$this->having}) $and ({$criteria->having})";
 		}
 
-		if ($criteria->distinct > 0)
-			$this->distinct = $criteria->distinct;
+		if($criteria->distinct>0)
+			$this->distinct=$criteria->distinct;
 
-		if ($criteria->together !== null)
-			$this->together = $criteria->together;
+		if($criteria->together!==null)
+			$this->together=$criteria->together;
 
-		if ($criteria->index !== null)
-			$this->index = $criteria->index;
+		if($criteria->index!==null)
+			$this->index=$criteria->index;
 
-		if (empty($this->scopes))
-			$this->scopes = $criteria->scopes;
-		else if (!empty($criteria->scopes))
+		if(empty($this->scopes))
+			$this->scopes=$criteria->scopes;
+		else if(!empty($criteria->scopes))
 		{
-			$scopes1 = (array)$this->scopes;
-			$scopes2 = (array)$criteria->scopes;
-			foreach ($scopes1 as $k => $v)
+			$scopes1=(array)$this->scopes;
+			$scopes2=(array)$criteria->scopes;
+			foreach($scopes1 as $k=>$v)
 			{
-				if (is_integer($k))
-					$scopes[] = $v;
-				else if (isset($scopes2[$k]))
-					$scopes[] = array($k => $v);
+				if(is_integer($k))
+					$scopes[]=$v;
+				else if(isset($scopes2[$k]))
+					$scopes[]=array($k=>$v);
 				else
-					$scopes[$k] = $v;
+					$scopes[$k]=$v;
 			}
-			foreach ($scopes2 as $k => $v)
+			foreach($scopes2 as $k=>$v)
 			{
-				if (is_integer($k))
-					$scopes[] = $v;
-				else if (isset($scopes1[$k]))
-					$scopes[] = array($k => $v);
+				if(is_integer($k))
+					$scopes[]=$v;
+				else if(isset($scopes1[$k]))
+					$scopes[]=array($k=>$v);
 				else
-					$scopes[$k] = $v;
+					$scopes[$k]=$v;
 			}
-			$this->scopes = $scopes;
+			$this->scopes=$scopes;
 		}
 
-		if (empty($this->with))
-			$this->with = $criteria->with;
-		else if (!empty($criteria->with))
+		if(empty($this->with))
+			$this->with=$criteria->with;
+		else if(!empty($criteria->with))
 		{
-			$this->with = (array)$this->with;
-			foreach ((array)$criteria->with as $k => $v)
+			$this->with=(array)$this->with;
+			foreach((array)$criteria->with as $k=>$v)
 			{
-				if (is_integer($k))
-					$this->with[] = $v;
-				else if (isset($this->with[$k]))
+				if(is_integer($k))
+					$this->with[]=$v;
+				else if(isset($this->with[$k]))
 				{
-					$excludes = array();
-					foreach (array('joinType', 'on') as $opt)
+					$excludes=array();
+					foreach(array('joinType','on') as $opt)
 					{
-						if (isset($this->with[$k][$opt]))
-							$excludes[$opt] = $this->with[$k][$opt];
-						if (isset($v[$opt]))
-							$excludes[$opt] = ($opt === 'on' && isset($excludes[$opt]) && $v[$opt] !== $excludes[$opt]) ?
+						if(isset($this->with[$k][$opt]))
+							$excludes[$opt]=$this->with[$k][$opt];
+						if(isset($v[$opt]))
+							$excludes[$opt]= ($opt==='on' && isset($excludes[$opt]) && $v[$opt]!==$excludes[$opt]) ?
 								"($excludes[$opt]) AND $v[$opt]" : $v[$opt];
 						unset($this->with[$k][$opt]);
 						unset($v[$opt]);
 					}
-					$this->with[$k] = new self($this->with[$k]);
-					$this->with[$k]->mergeWith($v, $useAnd);
-					$this->with[$k] = $this->with[$k]->toArray();
-					if (count($excludes) !== 0)
-						$this->with[$k] = CMap::mergeArray($this->with[$k], $excludes);
-				} else
-					$this->with[$k] = $v;
+					$this->with[$k]=new self($this->with[$k]);
+					$this->with[$k]->mergeWith($v,$useAnd);
+					$this->with[$k]=$this->with[$k]->toArray();
+					if (count($excludes)!==0)
+						$this->with[$k]=CMap::mergeArray($this->with[$k],$excludes);
+				}
+				else
+					$this->with[$k]=$v;
 			}
 		}
 	}
@@ -601,9 +607,9 @@ class CDbCriteria extends CComponent
 	 */
 	public function toArray()
 	{
-		$result = array();
-		foreach (array('select', 'condition', 'params', 'limit', 'offset', 'order', 'group', 'join', 'having', 'distinct', 'scopes', 'with', 'alias', 'index', 'together') as $name)
-			$result[$name] = $this->$name;
+		$result=array();
+		foreach(array('select', 'condition', 'params', 'limit', 'offset', 'order', 'group', 'join', 'having', 'distinct', 'scopes', 'with', 'alias', 'index', 'together') as $name)
+			$result[$name]=$this->$name;
 		return $result;
 	}
 }
