@@ -73,6 +73,9 @@ return CMap::mergeArray(
 			)
 		), */
 		'components' => array(
+			'user' => array(
+				'allowAutoLogin'=>true,
+			),
 			/* load bootstrap components */
 			'bootstrap' => array(
 				'class' => 'common.extensions.bootstrap.components.Bootstrap',
