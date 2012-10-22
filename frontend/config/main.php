@@ -76,10 +76,10 @@ return CMap::mergeArray(
 				'urlSuffix' => '/',
 				'rules' => $params['url.rules']
 			),
+			/* make sure you have your cache set correctly before uncommenting */
+			/* 'cache' => $params['cache.core'], */
+			/* 'contentCache' => $params['cache.content'] */
 		),
-		/* make sure you have your cache set correctly before uncommenting */
-		/* 'cache' => $params['cache.core'], */
-		/* 'contentCache' => $params['cache.content'] */
 	),
 	CMap::mergeArray($mainEnvConfiguration, $mainLocalConfiguration)
 );
