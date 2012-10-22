@@ -15,10 +15,6 @@ class TbRedactorJS extends CInputWidget
 	 */
 	public $lang = 'en';
 	/**
-	 * Html options that will be assigned to the text area
-	 */
-	public $htmlOptions = array();
-	/**
 	 * Editor options that will be passed to the editor
 	 */
 	public $editorOptions = array();
