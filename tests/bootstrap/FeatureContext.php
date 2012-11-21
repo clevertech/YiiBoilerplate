@@ -11,7 +11,7 @@ use Behat\MinkExtension\Context\RawMinkContext;
  * Also uncomment the `useContext` invocation in the constructor.
  */
 // require_once __DIR__.'/YiiContext.php';
-// require_once __DIR__.'/../../common/lib/yii/yiit.php';
+// require_once __DIR__.'/../../common/lib/Yii/yiit.php';
 // Yii::$enableIncludePath = false;
 // Yii::createWebApplication(__DIR__.'/../../common/config/test.php');
 
