@@ -223,6 +223,18 @@ class TbActiveForm extends CActiveForm
 	}
 
 	/**
+	* Renders a WYSIWYG Markdown editor
+	* @param $model
+	* @param $attribute
+	* @param array $htmlOptions
+	* @return string
+	*/
+	public function markdownEditorRow($model, $attribute, $htmlOptions = array())
+	{
+		return $this->inputRow(TbInput::TYPE_MARKDOWNEDITOR, $model, $attribute, null, $htmlOptions);
+	}
+
+	/**
 	 * Renders a WYSIWYG bootstrap editor
 	 * @param $model
 	 * @param $attribute
@@ -232,6 +244,18 @@ class TbActiveForm extends CActiveForm
 	public function html5EditorRow($model, $attribute, $htmlOptions = array())
 	{
 		return $this->inputRow(TbInput::TYPE_HTML5EDITOR, $model, $attribute, null, $htmlOptions);
+	}
+
+	/**
+	 * Renders a WYSIWYG  ckeditor
+	 * @param $model
+	 * @param $attribute
+	 * @param array $htmlOptions
+	 * @return string
+	 */
+	public function ckEditorRow($model, $attribute, $htmlOptions = array())
+	{
+		return $this->inputRow(TbInput::TYPE_CKEDITOR, $model, $attribute, null, $htmlOptions);
 	}
 
 	/**
@@ -298,20 +322,32 @@ class TbActiveForm extends CActiveForm
 	{
 		return $this->inputRow(TbInput::TYPE_DATERANGEPICKER, $model, $attribute, null, $htmlOptions);
 	}
-	
+
 	/**
-     * Renders a timepicker field row.
-     * @param CModel $model the data model
-     * @param string $attribute the attribute
-     * @param array $htmlOptions additional HTML attributes
-     * @return string the generated row
-     * @since 0.10.0
-     */
-    public function timepickerRow($model, $attribute, $htmlOptions = array())
-    {
-        return $this->inputRow(TbInput::TYPE_TIMEPICKER, $model, $attribute, null, $htmlOptions);
-    }
-	
+	 * Renders a timepicker field row.
+	 * @param CModel $model the data model
+	 * @param string $attribute the attribute
+	 * @param array $htmlOptions additional HTML attributes
+	 * @return string the generated row
+	 * @since 0.10.0
+	 */
+	public function timepickerRow($model, $attribute, $htmlOptions = array())
+	{
+		return $this->inputRow(TbInput::TYPE_TIMEPICKER, $model, $attribute, null, $htmlOptions);
+	}
+
+	/**
+	 * Renders a select2 field row
+	 * @param $model
+	 * @param $attribute
+	 * @param array $htmlOptions
+	 * @return string
+	 */
+	public function select2Row($model, $attribute, $htmlOptions = array())
+	{
+		return $this->inputRow(TbInput::TYPE_SELECT2, $model, $attribute, null, $htmlOptions);
+	}
+
 	/**
 	 * Renders a checkbox list for a model attribute.
 	 * This method is a wrapper of {@link CHtml::activeCheckBoxList}.
@@ -360,13 +396,6 @@ class TbActiveForm extends CActiveForm
 	{
 		CHtml::resolveNameID($model, $attribute, $htmlOptions);
 		$select = CHtml::resolveValue($model, $attribute);
-		if (is_array($select) && !empty($select) &&  is_object($select[0])) {
-			$pks = array();
-			foreach ($select as $select_item) {
-				$pks[] = $select_item->getPrimaryKey();
-			}
-			$select = $pks;
-		}
 
 		if ($model->hasErrors($attribute))
 		{
@@ -418,7 +447,7 @@ class TbActiveForm extends CActiveForm
 
 		foreach ($data as $value => $label)
 		{
-			$checked = !is_array($select) && !strcmp($value, $select) || is_array($select) && in_array($value, $select);			
+			$checked = !is_array($select) && !strcmp($value, $select) || is_array($select) && in_array($value, $select);
 			$htmlOptions['value'] = $value;
 			$htmlOptions['id'] = $baseID . '_' . $id++;
 			$option = CHtml::$method($name, $checked, $htmlOptions);
