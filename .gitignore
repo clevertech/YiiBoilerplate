@@ -9,7 +9,7 @@ Thumbs.db
 #netbeans project files
 nbproject
 
-#zend studio project files
+#eclipse, zend studio, aptana or other eclipse like project files
 .buildpath
 .project
 .settings
