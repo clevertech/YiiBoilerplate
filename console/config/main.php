@@ -72,14 +72,14 @@ return CMap::mergeArray(
 					)
 				)
 			),
-//			'db' => array(
-//				'connectionString' => $params['db.connectionString'],
-//				'username' => $params['db.username'],
-//				'password' => $params['db.password'],
-//				'schemaCachingDuration' => YII_DEBUG ? 0 : 86400000, // 1000 days
-//				'enableParamLogging' => YII_DEBUG,
-//				'charset' => 'utf8'
-//			),
+			'db' => array(
+				'connectionString' => $params['db.connectionString'],
+				'username' => $params['db.username'],
+				'password' => $params['db.password'],
+				'schemaCachingDuration' => YII_DEBUG ? 0 : 86400000, // 1000 days
+				'enableParamLogging' => YII_DEBUG,
+				'charset' => 'utf8'
+			),
 			/* uncomment if we require to run commands against test database */
 			/*
 			 'testdb' => array(
