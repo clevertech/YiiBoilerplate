@@ -16,6 +16,7 @@ $this->breadcrumbs = array(
 
 <p>Please fill out the following form with your login credentials:</p>
 
+<?php echo CHtml::errorSummary($model); ?>
 
 <?php $form = $this->beginWidget('CActiveForm', array(
 	'id' => 'login-form',
@@ -31,7 +32,7 @@ $this->breadcrumbs = array(
 	<br/>
 	<?php echo $form->label($model, 'password');?>
 	<?php echo $form->passwordField($model, 'password'); ?>
-	<?php echo $form->label($model, 'password');?>
+	<?php echo $form->error($model, 'password');?>
 	<br/>
 	<?php echo $form->checkBox($model, 'rememberMe'); ?>
 	<?php if ($model->requireCaptcha): ?>

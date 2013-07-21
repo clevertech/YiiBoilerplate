@@ -7,4 +7,5 @@
  * Time: 8:30 PM
  */
 ?>
+<h1>Hello <?php echo Yii::app()->user->name;?></h1>
 This is index view file...
