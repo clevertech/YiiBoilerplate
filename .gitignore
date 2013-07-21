@@ -21,15 +21,6 @@ nbproject
 switch
 index
 
-# runtime and cache directories
-/backend/www/assets
-/backend/runtime
-
-/frontend/www/assets
-/frontend/runtime
-
-/console/runtime
-
 # configuration files created locally by post deployment script or by a developer
 /backend/config/*-env.php
 /backend/config/*-local.php
