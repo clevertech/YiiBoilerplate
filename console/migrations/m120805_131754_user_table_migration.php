@@ -1,10 +1,7 @@
 <?php
+
 /**
- * m120805_131754_user_table_migration.php
- *
- * @author: antonio ramirez <antonio@clevertech.biz>
- * Date: 8/12/12
- * Time: 9:52 PM
+ * Class m120805_131754_user_table_migration
  */
 class m120805_131754_user_table_migration extends CDbMigration
 {
@@ -29,23 +26,7 @@ class m120805_131754_user_table_migration extends CDbMigration
 			PRIMARY KEY (`id`),
 			UNIQUE KEY `username` (`username`),
 			UNIQUE KEY `email` (`email`)
-		) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8');
-
-		/* add demo users */
-		$demoUser = new User();
-		$demoUser->username = "demo";
-		$demoUser->email = "demo@clevertech.biz";
-		$demoUser->password = "clevertech";
-
-		$demoUser->save();
-
-		$adminUser = new User();
-		$adminUser->username = "admin";
-		$adminUser->email = "admin@clevertech.biz";
-		$adminUser->password = "clevertech";
-
-		$adminUser->save();
-
+		) ENGINE=InnoDB DEFAULT CHARSET=utf8');
 	}
 
 	public function down()
