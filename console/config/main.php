@@ -3,37 +3,21 @@
  * main.php
  *
  * Configuration file for console applications
- *
- * @author: antonio ramirez <antonio@clevertech.biz>
- * Date: 7/22/12
- * Time: 12:15 PM
  */
-$consoleConfigDir = dirname(__FILE__);
-
-$root = $consoleConfigDir . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..';
-
-$params = require_once($consoleConfigDir . DIRECTORY_SEPARATOR . 'params.php');
 
 // Setup some default path aliases. These alias may vary from projects.
-Yii::setPathOfAlias('root', $root);
-Yii::setPathOfAlias('common', $root . DIRECTORY_SEPARATOR . 'common');
+Yii::setPathOfAlias('root', __DIR__ . "/../..");
+Yii::setPathOfAlias('common', __DIR__ . "/../../common");
 
 /* uncomment if the following aliases are required */
 //Yii::setPathOfAlias('frontend', $root . DIRECTORY_SEPARATOR . 'frontend');
 //Yii::setPathOfAlias('backend', $root . DIRECTORY_SEPARATOR . 'backend');
 
-$mainLocalFile = $consoleConfigDir . DIRECTORY_SEPARATOR . 'main-local.php';
-$mainLocalConfiguration = file_exists($mainLocalFile) ? require($mainLocalFile) : array();
-
-$mainEnvFile = $consoleConfigDir . DIRECTORY_SEPARATOR . 'main-env.php';
-$mainEnvConfiguration = file_exists($mainEnvFile) ? require($mainEnvFile) : array();
-
 return CMap::mergeArray(
+	require(__DIR__ . "/../../common/config/main.php"),
 	array(
 		// @see http://www.yiiframework.com/doc/api/1.1/CApplication#basePath-detail
 		'basePath' => 'console',
-		// set parameters
-		'params' => $params,
 		// preload components required before running applications
 		// @see http://www.yiiframework.com/doc/api/1.1/CModule#preload-detail
 		'preload' => array('log'),
@@ -41,9 +25,6 @@ return CMap::mergeArray(
 		// setup import paths aliases
 		// @see http://www.yiiframework.com/doc/api/1.1/YiiBase#import-detail
 		'import' => array(
-			'common.components.*',
-			'common.extensions.*',
-			'common.models.*',
 			'application.components.*',
 			'application.models.*',
 			/* uncomment to use frontend models */
@@ -72,30 +53,6 @@ return CMap::mergeArray(
 					)
 				)
 			),
-			'db' => array(
-				'connectionString' => $params['db.connectionString'],
-				'username' => $params['db.username'],
-				'password' => $params['db.password'],
-				'schemaCachingDuration' => YII_DEBUG ? 0 : 86400000, // 1000 days
-				'enableParamLogging' => YII_DEBUG,
-				'charset' => 'utf8'
-			),
-			/* uncomment if we require to run commands against test database */
-			/*
-			 'testdb' => array(
-				'class' => 'CDbConnection',
-				'connectionString' => $params['testdb.connectionString'],
-				'username' => $params['testdb.username'],
-				'password' => $params['testdb.password'],
-				'charset' => 'utf8'
-			),
-			*/
-			'urlManager' => array(
-				'urlFormat' => 'path',
-				'showScriptName' => false,
-				'urlSuffix' => '/',
-				'rules' => $params['url.rules']
-			),
 			/* uncomment and configure to suit your needs */
 			/*
 			 'request' => array(
@@ -103,19 +60,9 @@ return CMap::mergeArray(
 				'baseUrl' => '/bp'
 			),
 			*/
-			/* uncomment and configure upon your project requirements */
-			/*
-			'authManager' => array(
-				'class' => 'CDbAuthManager',
-				'itemTable' => 'auth_item',
-				'itemChildTable' => 'auth_item_child',
-				'assignmentTable' => 'auth_assignment',
-			   ),
-			*/
-			'cache' => $params['cache.core'],
-			'contentCache' => $params['cache.content']
 		),
 	),
-	CMap::mergeArray($mainEnvConfiguration, $mainLocalConfiguration)
+	(file_exists(__DIR__ . '/main-env.php') ? require(__DIR__ . '/main-env.php') : array()),
+	(file_exists(__DIR__ . '/main-local.php') ? require(__DIR__ . '/main-local.php') : array())
 );
 

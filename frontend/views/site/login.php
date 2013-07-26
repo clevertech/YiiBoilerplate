@@ -36,7 +36,8 @@ $this->breadcrumbs = array(
 	<br/>
 	<?php echo $form->checkBox($model, 'rememberMe'); ?>
 	<?php if ($model->requireCaptcha): ?>
-		<p>plain... :)) </p>
+		<?php $this->widget('CCaptcha'); ?>
+		<?php echo $form->textField($model, 'verifyCode'); ?>
 	<?php endif; ?>
 	<div class="actions">
 		<?php echo CHtml::submitButton('Login'); ?>
