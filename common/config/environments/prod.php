@@ -1,8 +1,8 @@
 <?php
 /**
- * params-private.php
+ * params-prod.php
  *
- * Common parameters for the application on private -your local environment
+ * Common parameters for the application on production
  *
  * @author: antonio ramirez <antonio@clevertech.biz>
  * Date: 7/22/12
@@ -22,7 +22,6 @@
  * {DATABASE-PASSWORD} -> Test user password
  */
 return array(
-	'env.code' => 'private',
 	// DB connection configurations
 	'db.name' => '',
 	'db.connectionString' => 'mysql:host={DATABASE-HOST};dbname={DATABASE-NAME}',
@@ -34,5 +33,7 @@ return array(
 	'testdb.connectionString' => 'mysql:host={DATABASE-HOST};dbname={DATABASE-NAME}_test',
 	'testdb.username' => '{DATABASE-USERNAME}',
 	'testdb.password' => '{DATABASE-PASSWORD}',
-
+    'params' => array(
+        'env.code' => 'prod'
+    )
 );

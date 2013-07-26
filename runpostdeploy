@@ -1,3 +1,8 @@
 #!/usr/bin/env php
 <?php
-require_once(dirname(__FILE__)."/common/lib/postdeploy.php");
+require_once(__DIR__ . '/common/lib/Deploy.php');
+
+call_user_func_array(function($argc, $argv) {
+	$deploy = new Deploy();
+	$deploy->run($argc, $argv);
+}, array($argc, $argv));

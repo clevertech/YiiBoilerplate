@@ -1,0 +1,19 @@
+{
+    "name": "clio/clio",
+    "description": "Lightweight utility and helper classes for CLI applications",
+    "keywords": ["cli", "console", "daemon"],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nofriandi Ramenta",
+            "email": "nramenta@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.2"
+    },
+    "autoload": {
+        "psr-0": {"Clio": "src/"}
+    }
+}
