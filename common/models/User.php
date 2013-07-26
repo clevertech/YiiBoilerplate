@@ -155,18 +155,6 @@ class User extends CActiveRecord
 	}
 
 	/**
-	 * Makes sure usernames are lowercase
-	 * (emails by standard can have uppercase letters)
-	 * @return parent::beforeValidate
-	 */
-	public function beforeValidate()
-	{
-		if (!empty($this->username))
-			$this->username = strtolower($this->username);
-		return parent::beforeValidate();
-	}
-
-	/**
 	 * Generates a new validation key (additional security for cookie)
 	 */
 	public function regenerateValidationKey()
