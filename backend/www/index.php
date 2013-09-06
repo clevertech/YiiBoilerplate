@@ -16,19 +16,14 @@ if(YII_DEBUG) {
 }
 
 date_default_timezone_set('UTC');
-
 chdir(dirname(__FILE__).'/../..');
 
-$root=dirname(__FILE__).'/..';
-$common=$root.'/../common';
-
-require_once($common.'/lib/Yii/yii.php');
-$config=require('backend/config/main.php');
-require_once($common.'/components/WebApplication.php');
+require_once('common/lib/Yii/yii.php');
+require_once('common/components/WebApplication.php');
 require_once('common/lib/global.php');
 
 
-$app = Yii::createApplication('WebApplication', $config);
+$app = Yii::createApplication('WebApplication', require('backend/config/main.php'));
 
 /* please, uncomment the following if you are using ZF library */
 /*

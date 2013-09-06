@@ -26,15 +26,10 @@ class LoginForm extends CFormModel {
 	 */
 	public function rules() {
 		return array(
-			array('username, password, email', 'required'),
-			array('username', 'length', 'max' => 45),
-			array('password', 'length', 'max' => 50, 'min' => 6),
+			array('password, username', 'required'),
 			array('verifyCode', 'validateCaptcha'),
 			array('password', 'authenticate'),
 			array('rememberMe', 'boolean'),
-			array('email', 'email'),
-			array('email', 'length', 'max' => 125),
-			array('email', 'exist', 'className' => 'Customer'),
 		);
 	}
 

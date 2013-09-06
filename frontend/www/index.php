@@ -17,19 +17,13 @@ if (YII_DEBUG) {
 }
 
 date_default_timezone_set('UTC');
+chdir(dirname(__FILE__) . '/../..');
 
-chdir(dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..');
+require_once('common/lib/Yii/yii.php');
+require_once('common/components/WebApplication.php');
+require_once('common/lib/global.php');
 
-//$root=dirname(__FILE__).'/..';
-//$common=$root.'/../common';
-
-require_once('common' . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR . 'Yii' . DIRECTORY_SEPARATOR . 'yii.php');
-$config = require('frontend' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'main.php');
-require_once('common' . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . 'WebApplication.php');
-require_once('common' . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR . 'global.php');
-
-
-$app = Yii::createApplication('WebApplication', $config);
+$app = Yii::createApplication('WebApplication', require('frontend/config/main.php'));
 
 /* please, uncomment the following if you are using ZF library */
 /*

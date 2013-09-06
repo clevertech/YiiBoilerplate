@@ -109,6 +109,9 @@ class SiteController extends Controller
 	 */
 	public function actionLogin()
 	{
+		if(!user()->isGuest) {
+			$this->redirect('/');
+		}
 		$model = new LoginForm();
 
 		if (isset($_POST['ajax']) && $_POST['ajax'] === 'login-form')
@@ -120,8 +123,9 @@ class SiteController extends Controller
 		if (isset($_POST['LoginForm']))
 		{
 			$model->attributes = $_POST['LoginForm'];
-			if ($model->validate(array('username', 'password', 'verifyCode')) && $model->login())
+			if ($model->validate(array('username', 'password', 'verifyCode')) && $model->login()) {
 				$this->redirect(user()->returnUrl);
+			}
 		}
 
 		$sent = r()->getParam('sent', 0);

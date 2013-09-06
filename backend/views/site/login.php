@@ -17,11 +17,17 @@ $this->breadcrumbs=array(
 	),
 )); ?>
 
+	<?php echo CHtml::errorSummary($model, null, null, array('class' => 'alert alert-error')); ?>
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
 
 	<?php echo $form->textFieldRow($model, 'username', array('class'=>'span3'));?>
 	<?php echo $form->passwordFieldRow($model, 'password', array('class'=>'span3'));?>
 	<?php echo $form->checkBoxRow($model, 'rememberMe');?>
+
+	<?php if ($model->requireCaptcha): ?>
+		<?php $this->widget('CCaptcha'); ?>
+		<?php echo $form->textField($model, 'verifyCode'); ?>
+	<?php endif; ?>
 
 	<div class="form-actions">
 		<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit','type'=>'primary','label'=>'Submit', 'icon'=>'ok'));?>
