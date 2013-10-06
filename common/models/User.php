@@ -1,12 +1,5 @@
 <?php
 /**
- * User.php
- *
- * @author: antonio ramirez <antonio@clevertech.biz>
- * Date: 7/22/12
- * Time: 11:42 PM
- */
-/**
  * This is the model class for table "{{user}}".
  *
  * The followings are the available columns in table '{{user}}':
@@ -44,7 +37,7 @@ class User extends CActiveRecord
 
 	/**
 	 * Returns the static model of the specified AR class.
-	 * @return Customer the static model class
+	 * @return User the static model class
 	 */
 	public static function model($className = __CLASS__)
 	{
@@ -129,7 +122,6 @@ class User extends CActiveRecord
 	 */
 	public function getFullName()
 	{
-
 		return $this->username;
 	}
 
@@ -141,14 +133,10 @@ class User extends CActiveRecord
 	{
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
-
 		$criteria = new CDbCriteria;
-
 		$criteria->compare('id', $this->id);
 		$criteria->compare('username', $this->username, true);
-		$criteria->compare('password', $this->password, true);
 		$criteria->compare('email', $this->email, true);
-
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria' => $criteria,
 		));
@@ -163,5 +151,4 @@ class User extends CActiveRecord
 			'validation_key' => md5(mt_rand() . mt_rand() . mt_rand()),
 		));
 	}
-
 }
