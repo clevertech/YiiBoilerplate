@@ -2,7 +2,7 @@
 /**
  * test.php
  *
- * configuration file for backend testing
+ * configuration file for frontend testing
  */
 return CMap::mergeArray(
 	require(__DIR__ . '/main.php'),
