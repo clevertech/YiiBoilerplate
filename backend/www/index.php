@@ -1,41 +1,31 @@
 <?php
 /**
- * index.php
+ * backend/www/index.php
+ *
+ * Entry point for backend
  *
  * @author: antonio ramirez <antonio@clevertech.biz>
  * Date: 7/22/12
  * Time: 11:13 AM
+ *
+ * @author: mark safronov <hijarian@gmail.com>
  */
-defined('YII_DEBUG') or define('YII_DEBUG',true);
-defined('YII_TRACE_LEVEL') or define('YII_TRACE_LEVEL',3);
 
-// On dev display all errors
-if(YII_DEBUG) {
-	error_reporting(-1);
-	ini_set('display_errors', true);
-}
+// Loading project default init code for all entry points.
+require __DIR__.'/../../common/bootstrap.php';
 
-date_default_timezone_set('UTC');
-chdir(dirname(__FILE__).'/../..');
+// Setting up the frontend-specific aliases
+Yii::setPathOfAlias('backend', ROOT_DIR .'/backend');
+Yii::setPathOfAlias('www', ROOT_DIR . '/backend/www');
 
-require_once('common/lib/Yii/yii.php');
-require_once('common/components/WebApplication.php');
-require_once('common/lib/global.php');
+// As we are using BootstrapFilter to include Booster, we have to define 'bootstrap' alias ourselves
+Yii::setPathOfAlias('bootstrap', ROOT_DIR . '/vendor/clevertech/yii-booster/src');
 
+// We use our custom-made WebApplication component as base class for backend app.
+require_once ROOT_DIR.'/backend/components/BackendWebApplication.php';
 
-$app = Yii::createApplication('WebApplication', require('backend/config/main.php'));
+Yii::createApplication(
+    'BackendWebApplication',
+    ROOT_DIR.'/backend/config/main.php'
+)->run();
 
-/* please, uncomment the following if you are using ZF library */
-/*
-Yii::import('common.extensions.EZendAutoloader', true);
-
-EZendAutoloader::$prefixes = array('Zend');
-EZendAutoloader::$basePath = Yii::getPathOfAlias('common.lib') . DIRECTORY_SEPARATOR;
-
-Yii::registerAutoloader(array("EZendAutoloader", "loadClass"), true);
-*/
-
-$app->run();
-
-/* uncomment if you wish to debug your resulting config */
-/* echo '<pre>' . dump($config) . '</pre>'; */
