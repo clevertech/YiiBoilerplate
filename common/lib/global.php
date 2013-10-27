@@ -4,7 +4,10 @@
  * Please only include functions are most widely used because this file
  * is included for every request. Functions are less often used are better
  * encapsulated as static methods in helper classes that are loaded on demand.
+ *
+ * @see http://www.yiiframework.com/wiki/31/use-shortcut-functions-to-reduce-typing
  */
+
 /**
  * This is the shortcut to DIRECTORY_SEPARATOR
  */
