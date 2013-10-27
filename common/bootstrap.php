@@ -9,8 +9,8 @@ define('ROOT_DIR', realpath(__DIR__ . '/..'));
 // Depending on various triggers you can enable debug mode for the project here.
 // You can control debug mode with additional Yii console command named `debugmode`: `./yiic debugmode on`
 if (file_exists(ROOT_DIR . '/debugmodeon') // enabled via the flag file
-    || !empty($_SERVER['YII_DEBUG']) // enabled via the $_SERVER var
-    || getenv('YII_DEBUG') // enabled via the environment var
+    or !empty($_SERVER['YII_DEBUG']) // enabled via the $_SERVER var
+    or getenv('YII_DEBUG') // enabled via the environment var
 ) {
     require_once __DIR__ . '/debugmode.php';
 }
@@ -37,6 +37,7 @@ YiiBase::$enableIncludePath = false;
 // Some global aliases
 Yii::setPathOfAlias('root', ROOT_DIR);
 Yii::setPathOfAlias('common', ROOT_DIR . '/common');
+Yii::setPathOfAlias('vendor', ROOT_DIR . '/vendor');
 
 // Global timezone setting
 date_default_timezone_set('UTC');
