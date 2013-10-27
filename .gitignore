@@ -39,4 +39,4 @@ index
 /backend/config/overrides/environment.php
 
 # Marker file to enable debug mode globally.
-/common/debugmodeon
+/debugmodeon
