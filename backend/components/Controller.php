@@ -11,4 +11,21 @@ class Controller extends CController {
 	public $breadcrumbs = array();
 	public $menu = array();
 
+    public function filters()
+    {
+        return array(
+            'accessControl',
+            array('bootstrap.filters.BootstrapFilter - delete'),
+        );
+    }
+
+    public function accessRules()
+    {
+        return array(
+            array('allow', // Allow all actions for logged in users ("@")
+				'users' => array('@'),
+			),
+			array('deny'), // Deny anything else
+		);
+    }
 }
