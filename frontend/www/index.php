@@ -1,41 +1,28 @@
 <?php
 /**
- * index.php
+ * /frontend/www/index.php
+ *
+ * Entry point for the frontend.
  *
  * @author: antonio ramirez <antonio@clevertech.biz>
  * Date: 7/22/12
  * Time: 11:13 AM
+ *
+ * @author: mark safronov <hijarian@gmail.com>
  */
 
-defined('YII_DEBUG') or define('YII_DEBUG', true);
-defined('YII_TRACE_LEVEL') or define('YII_TRACE_LEVEL', 3);
+// Loading project default init code for all entry points.
+require __DIR__.'/../../common/bootstrap.php';
 
-// On dev display all errors
-if (YII_DEBUG) {
-//	error_reporting(-1);
-//	ini_set('display_errors', true);
-}
+// Setting up the frontend-specific aliases
+Yii::setPathOfAlias('frontend', ROOT_DIR .'/frontend');
+Yii::setPathOfAlias('www', ROOT_DIR . '/frontend/www');
 
-date_default_timezone_set('UTC');
-chdir(dirname(__FILE__) . '/../..');
+// We use our custom-made WebApplication component as base class for frontend app.
+require_once ROOT_DIR.'/frontend/components/FrontendWebApplication.php';
 
-require_once('common/lib/Yii/yii.php');
-require_once('common/components/WebApplication.php');
-require_once('common/lib/global.php');
+Yii::createApplication(
+	'FrontendWebApplication',
+	ROOT_DIR.'/frontend/config/main.php'
+)->run();
 
-$app = Yii::createApplication('WebApplication', require('frontend/config/main.php'));
-
-/* please, uncomment the following if you are using ZF library */
-/*
-Yii::import('common.extensions.EZendAutoloader', true);
-
-EZendAutoloader::$prefixes = array('Zend');
-EZendAutoloader::$basePath = Yii::getPathOfAlias('common.lib') . DIRECTORY_SEPARATOR;
-
-Yii::registerAutoloader(array("EZendAutoloader", "loadClass"), true);
-*/
-
-$app->run();
-
-/* uncomment if you wish to debug your resulting config */
-/* echo '<pre>' . dump($config) . '</pre>'; */
