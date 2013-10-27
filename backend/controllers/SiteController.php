@@ -10,31 +10,23 @@
 class SiteController extends Controller
 {
 	/**
-	 * @return array list of action filters (See CController::filter)
-	 */
-	public function filters()
-	{
-		return array('accessControl');
-	}
-
-	/**
+     * Enabling the registration and other basic pages for guest users.
 	 * @return array rules for the "accessControl" filter.
 	 */
 	public function accessRules()
 	{
-		return array(
-			array('allow', // Allow registration form for anyone
-				'actions' => array('index', 'login', 'logout', 'contact', 'captcha', 'error', 'test'),
-			),
-			array('allow', // Allow all actions for logged in users ("@")
-				'users' => array('@'),
-			),
-			array('deny'), // Deny anything else
-		);
+        return array_merge(
+            array(
+                array(
+                    'allow', // Allow registration form for anyone
+                    'actions' => array('index', 'login', 'logout', 'contact', 'captcha', 'error', 'test'),
+                )
+            ),
+            parent::accessRules()
+        );
 	}
 
 	/**
-	 *
 	 * @return array actions
 	 */
 	public function actions()
@@ -57,35 +49,6 @@ class SiteController extends Controller
 	public function actionIndex()
 	{
 		$this->render('index');
-	}
-
-	/**
-	 * Renders contact page
-	 * todo: does nothing but rendering, proper functionality to be created
-	 */
-	public function actionContact()
-	{
-		$model = new ContactForm;
-		if (isset($_POST['ContactForm']))
-		{
-			$model->attributes = $_POST['ContactForm'];
-			if ($model->validate())
-			{
-				/** example code */
-//				$name='=?UTF-8?B?'.base64_encode($model->name).'?=';
-//				$subject='=?UTF-8?B?'.base64_encode($model->subject).'?=';
-//				$headers="From: $name <{$model->email}>\r\n".
-//					"Reply-To: {$model->email}\r\n".
-//					"MIME-Version: 1.0\r\n".
-//					"Content-type: text/plain; charset=UTF-8";
-//
-//				mail(Yii::app()->params['adminEmail'],$subject,$model->body,$headers);
-//				Yii::app()->user->setFlash('contact','Thank you for contacting us. We will respond to you as soon as possible.');
-//				$this->refresh();
-			}
-		}
-		$this->render('contact', array('model' => $model));
-
 	}
 
 	/**
