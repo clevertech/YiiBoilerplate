@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "0b2961ac1b2b0f1908552c137481d27b",
+    "hash": "9efcd2178e8bb4156e3ff4f594b84f11",
     "packages": [
         {
             "name": "behat/behat",
@@ -396,6 +396,62 @@
                 "webdriver"
             ],
             "time": "2013-10-16 14:17:54"
+        },
+        {
+            "name": "clevertech/yii-booster",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/clevertech/YiiBooster.git",
+                "reference": "a5207de31c5baecd18a4577fefaa2872ef8dfedd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/clevertech/YiiBooster/zipball/a5207de31c5baecd18a4577fefaa2872ef8dfedd",
+                "reference": "a5207de31c5baecd18a4577fefaa2872ef8dfedd",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.1.0"
+            },
+            "require-dev": {
+                "ardem/yii-coding-standard": "dev-master",
+                "mayflower/php-codebrowser": "1.0.*@dev",
+                "ncuesta/pinocchio": "dev-master",
+                "phploc/phploc": "*",
+                "phpunit/phpunit": "3.7.*",
+                "sebastian/phpcpd": "*",
+                "squizlabs/php_codesniffer": "1.*",
+                "yiisoft/yii": "1.1.14-rc"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Antonio Ramirez Cobos",
+                    "email": "amigo.cobos@gmail.com",
+                    "homepage": "http://www.ramirezcobos.com",
+                    "role": "Founder and development"
+                },
+                {
+                    "name": "Saphronov Mark",
+                    "email": "hijarian@gmail.com",
+                    "homepage": "http://about.me/hijarian"
+                },
+                {
+                    "name": "Ruslan Fadeev"
+                }
+            ],
+            "description": "Widget toolkit for Yii framework",
+            "homepage": "http://yiibooster.clevertech.biz/",
+            "keywords": [
+                "bootstrap",
+                "yii"
+            ],
+            "time": "2013-10-18 10:12:57"
         },
         {
             "name": "clio/clio",
@@ -1742,16 +1798,16 @@
         },
         {
             "name": "yiisoft/yii",
-            "version": "1.1.14-rc",
+            "version": "1.1.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii.git",
-                "reference": "2d9982d74a92a97124e28a3e19bad9fb083169bc"
+                "reference": "f0fee98ee84f70f1f3652f65562c9670e919cb4e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii/zipball/2d9982d74a92a97124e28a3e19bad9fb083169bc",
-                "reference": "2d9982d74a92a97124e28a3e19bad9fb083169bc",
+                "url": "https://api.github.com/repos/yiisoft/yii/zipball/f0fee98ee84f70f1f3652f65562c9670e919cb4e",
+                "reference": "f0fee98ee84f70f1f3652f65562c9670e919cb4e",
                 "shasum": ""
             },
             "require": {
@@ -1822,7 +1878,7 @@
                 "framework",
                 "yii"
             ],
-            "time": "2013-07-14 13:17:41"
+            "time": "2013-08-12 00:12:08"
         }
     ],
     "packages-dev": [
@@ -1833,6 +1889,7 @@
     ],
     "minimum-stability": "dev",
     "stability-flags": {
+        "clevertech/yii-booster": 20,
         "behat/mink-extension": 20,
         "behat/mink-selenium2-driver": 20,
         "behat/mink-goutte-driver": 20

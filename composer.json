@@ -32,7 +32,7 @@
     "require": {
         "php":">=5.3.0",
         "yiisoft/yii": "1.1.14",
-        "clevertech/yii-booster": "*",
+        "clevertech/yii-booster": "dev-master",
         "phpunit/phpunit": "3.7.*",
         "clio/clio": "0.1.6",
         "behat/mink-extension": "2.0.x-dev",
