@@ -1,15 +1,22 @@
 <?php
-/* setup default time zone */
-date_default_timezone_set('UTC');
+# This is the entry point for console application.
+#
+# We do not use the built-in `yiic.php` because of our own class including order.
 
-/* change dir to root */
-chdir(dirname(__FILE__) . '/..');
+require_once(__DIR__ . '/../common/bootstrap.php');
+# Our own boilerplate for ConsoleApplication
+require_once(ROOT_DIR . '/console/components/ConsoleApplication.php');
 
-/* change to set debug mode */
-// defined('YII_DEBUG') or define('YII_DEBUG',true);
+# fix for fcgi
+defined('STDIN') or define('STDIN', fopen('php://stdin', 'r'));
 
-$config =  'console/config/main.php';
+/** @var ConsoleApplication $app */
+$app = Yii::createApplication(
+    'ConsoleApplication',
+    ROOT_DIR.'/console/config/main.php'
+);
+$app->commandRunner->addCommands(YII_PATH.'/cli/commands');
+$app->commandRunner->addCommands(@getenv('YII_CONSOLE_COMMANDS'));
+$app->run();
 
-require_once('common/lib/Yii/yii.php');
-require_once('common/lib/global.php');
-require_once('common/lib/Yii/yiic.php');
+
