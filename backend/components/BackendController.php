@@ -29,4 +29,31 @@ class BackendController extends CController
 			array('deny'), // Deny anything else
 		);
     }
+
+    public function beforeRender($view)
+    {
+        $result = parent::beforeRender($view);
+        $this->registerAssets();
+        return $result;
+    }
+
+    private function registerAssets()
+    {
+        $publisher = Yii::app()->assetManager;
+        $libraries = $publisher->publish(ROOT_DIR.'/common/packages');
+
+        $registry = Yii::app()->clientScript;
+        $registry
+            ->registerCssFile("{$libraries}/html5boilerplate/normalize.css")
+            ->registerCssFile("{$libraries}/html5boilerplate/main.css")
+            ->registerScriptFile("{$libraries}/modernizrjs/modernizr-2.6.2.min.js", CClientScript::POS_HEAD)
+            ->registerScriptFile("{$libraries}/html5boilerplate/plugins.js", CClientScript::POS_END)
+            ->registerScriptFile("{$libraries}/underscorejs/underscore-min.js", CClientScript::POS_END)
+            ->registerScriptFile("{$libraries}/backbonejs/backbone-min.js", CClientScript::POS_END);
+
+        $backend = $publisher->publish(ROOT_DIR.'/backend/packages');
+        $registry
+            ->registerCssFile("{$backend}/main-ui/main.css")
+            ->registerScriptFile("{$backend}/main-ui/main.js", CClientScript::POS_END);
+    }
 }
