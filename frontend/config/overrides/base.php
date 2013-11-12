@@ -11,18 +11,18 @@ return array(
     'preload' => array('log'),
     // @see http://www.yiiframework.com/doc/api/1.1/CApplication#language-detail
     'language' => 'en',
+
+    'controllerMap' => array(
+        'site' => 'application.controllers.FrontendSiteController'
+    ),
     // uncomment if a theme is used
     /*'theme' => '',*/
     // setup import paths aliases
     // @see http://www.yiiframework.com/doc/api/1.1/YiiBase#import-detail
     'import' => array(
-        // uncomment if behaviors are required
-        // you can also import a specific one
-        /* 'common.extensions.behaviors.*', */
-        // uncomment if validators on common folder are required
-        /* 'common.extensions.validators.*', */
         'application.components.*',
         'application.controllers.*',
+        'application.controllers.actions.*',
         'application.models.*'
     ),
     /* uncomment and set if required */
