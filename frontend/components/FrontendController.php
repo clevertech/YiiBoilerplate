@@ -25,7 +25,7 @@ class FrontendController extends CController
         $registry = Yii::app()->clientScript;
         $registry
             ->registerCssFile("{$libraries}/html5boilerplate/normalize.css")
-            ->registerCssFile("{$libraries}/html5boilerplate/normalize.css")
+            ->registerCssFile("{$libraries}/html5boilerplate/main.css")
             ->registerScriptFile("{$libraries}/modernizrjs/modernizr-2.6.2.min.js", CClientScript::POS_HEAD)
             ->registerScriptFile("{$libraries}/html5boilerplate/plugins.js", CClientScript::POS_END)
             ->registerScriptFile("{$libraries}/underscorejs/underscore-min.js", CClientScript::POS_END)
