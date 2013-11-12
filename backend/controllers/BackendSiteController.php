@@ -40,6 +40,9 @@ class BackendSiteController extends BackendController
 			'page' => array(
 				'class' => 'CViewAction',
 			),
+            'error' => array(
+                'class' => 'SimpleErrorAction'
+            )
 		);
 	}
 
@@ -49,21 +52,6 @@ class BackendSiteController extends BackendController
 	public function actionIndex()
 	{
 		$this->render('index');
-	}
-
-	/**
-	 * Action to render the error
-	 * todo: design proper error page
-	 */
-	public function actionError()
-	{
-		if ($error = app()->errorHandler->error)
-		{
-			if (app()->request->isAjaxRequest)
-				echo $error['message'];
-			else
-				$this->render('error', $error);
-		}
 	}
 
 	/**

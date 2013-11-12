@@ -23,7 +23,8 @@ return array(
         'application.components.*',
         'application.controllers.*',
         'application.controllers.actions.*',
-        'application.models.*'
+        'application.models.*',
+        'common.actions.*',
     ),
     /* uncomment and set if required */
     // @see http://www.yiiframework.com/doc/api/1.1/CModule#setModules-detail

@@ -13,7 +13,7 @@ class FrontendSiteController extends FrontendController
                 'class' => 'LandingPageAction'
             ),
             'error' => array(
-                'class' => 'ErrorAction'
+                'class' => 'SimpleErrorAction'
             )
 		);
 	}

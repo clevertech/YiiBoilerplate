@@ -21,9 +21,11 @@ return array(
         /* 'common.extensions.behaviors.*', */
         // uncomment if validators on common folder are required
         /* 'common.extensions.validators.*', */
-        'backend.components.*',
-        'backend.controllers.*',
-        'backend.models.*'
+        'application.components.*',
+        'application.controllers.*',
+        'application.controllers.actions.*',
+        'application.models.*',
+        'common.actions.*'
     ),
     /* uncomment and set if required */
     // @see http://www.yiiframework.com/doc/api/1.1/CModule#setModules-detail

@@ -1,7 +1,7 @@
 <?php
 /** hijarian @ 12.11.13 13:45 */
 
-class ErrorAction extends CAction
+class SimpleErrorAction extends CAction
 {
     public function run()
     {
