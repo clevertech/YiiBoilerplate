@@ -28,6 +28,9 @@ return array(
     /* uncomment and set if required */
     // @see http://www.yiiframework.com/doc/api/1.1/CModule#setModules-detail
     /* 'modules' => array(), */
+    'controllerMap' => array(
+        'site' => 'BackendSiteController'
+    ),
     'components' => array(
         'bootstrap' => array(
             'class' => 'vendor.clevertech.yii-booster.src.components.Bootstrap'

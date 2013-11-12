@@ -7,7 +7,7 @@
  * Time: 1:21 AM
  */
 
-class SiteController extends Controller
+class BackendSiteController extends BackendController
 {
 	/**
      * Enabling the registration and other basic pages for guest users.
