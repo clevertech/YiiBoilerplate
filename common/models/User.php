@@ -36,15 +36,6 @@ class User extends CActiveRecord
 	public $passwordConfirm;
 
 	/**
-	 * Returns the static model of the specified AR class.
-	 * @return User the static model class
-	 */
-	public static function model($className = __CLASS__)
-	{
-		return parent::model($className);
-	}
-
-	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
@@ -151,4 +142,16 @@ class User extends CActiveRecord
 			'validation_key' => md5(mt_rand() . mt_rand() . mt_rand()),
 		));
 	}
+
+    /**
+	 * Returns the static model of the specified AR class.
+     *
+     * @param string $className
+	 * @return User the static model class
+	 */
+	public static function model($className = __CLASS__)
+	{
+		return parent::model($className);
+	}
+
 }
