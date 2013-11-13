@@ -29,11 +29,25 @@ return array(
     ),
     /* uncomment and set if required */
     // @see http://www.yiiframework.com/doc/api/1.1/CModule#setModules-detail
-    /* 'modules' => array(), */
+    'modules' => array(
+        /* Backend can afford gii support */
+//        'gii' => array(
+//            'class' => 'system.gii.GiiModule',
+//            'password' => 'pick up a password here',
+//            'ipFilters' => array('127.0.0.1'),
+//        )
+    ),
     'controllerMap' => array(
         'site' => 'BackendSiteController'
     ),
     'components' => array(
+        'user' => array(
+            'allowAutoLogin' => true,
+        ),
+        /* The following enhances performance, but will not work in Windows. */
+//        'assetManager' => array(
+//            'linkAssets' => true
+//        ),
         'bootstrap' => array(
             'class' => 'vendor.clevertech.yii-booster.src.components.Bootstrap'
         ),
