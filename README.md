@@ -1,12 +1,23 @@
 # YiiBoilerplate
 Structure for enterprise-grade websites for Yii framework. Already thought-out.
 
+# WORK IN PROGRESS DISCLAIMER
+Current state of the project is a work in progress.
+A massive rewrite was done to the overall design, but it's incomplete.
+You have to understand that this work is being done in a free time of full-time developers from other projects,
+so expect extremely slow response (if any) and changes. Fork button is your friend.
+
 # Requirements
 
 -   **PHP 5.4**.
     Seriously, even [Debian Stable](http://packages.debian.org/stable/php/php5), notorious for slow library upgrades, has version 5.4 now.
     Upgrade right now and/or stop using hosting providers with old PHP versions.
 -   Probably, enabled support for running PHAR archives from console (it has to be enabled via `php.ini`).
+
+
+**Everything below the following line is outdated info, use at your own risk!**
+
+---
 
 # Overview
 
