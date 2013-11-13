@@ -1,7 +1,14 @@
 # YiiBoilerplate
-We use this folder structure setup on [Clevertech](http://www.clevertech.biz) for our own projects. 
+Structure for enterprise-grade websites for Yii framework. Already thought-out.
 
-### Overview
+# Requirements
+
+-   **PHP 5.4**.
+    Seriously, even [Debian Stable](http://packages.debian.org/stable/php/php5), notorious for slow library upgrades, has version 5.4 now.
+    Upgrade right now and/or stop using hosting providers with old PHP versions.
+-   Probably, enabled support for running PHAR archives from console (it has to be enabled via `php.ini`).
+
+# Overview
 
 **YiiBoilerplate**, aims to provide *Yii developers* an application folder structure with sufficient flexibility to satisfy development needs from simple to enterprise applications.
 
