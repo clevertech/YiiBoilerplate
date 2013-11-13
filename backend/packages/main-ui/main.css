@@ -1,0 +1,4 @@
+body {
+    padding-top: 40px; /* compensate for the fixed top navbar */
+    position: relative;
+}
