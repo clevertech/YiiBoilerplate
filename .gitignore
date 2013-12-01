@@ -6,6 +6,18 @@ Thumbs.db
 #phpstorm project files
 .idea
 
+# Vagrant stuff
+.vagrant
+
+# Composer-installed binaries
+bin/behat
+bin/phing
+bin/phpunit
+bin/webunit
+
+# Marker file for production mode
+/PRODUCTION_MODE
+
 #netbeans project files
 nbproject
 
