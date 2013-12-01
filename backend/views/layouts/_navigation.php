@@ -5,17 +5,13 @@ $this->widget(
     array(
         'type' => 'inverse',
         'brand' => 'Project name',
-        'brandUrl' => '#',
+        'brandUrl' => '/',
         'collapse' => true,
         'items' => array(
             array(
                 'class' => 'bootstrap.widgets.TbMenu',
                 'items' => array(
                     array('label' => 'Home', 'url' => array('/site/index')),
-                    array(
-                        'label' => 'About',
-                        'url' => array('/site/page', 'view' => 'about')
-                    ),
                     array(
                         'label' => 'Login',
                         'url' => array('/site/login'),
@@ -31,29 +27,6 @@ $this->widget(
                         'url' => array('/user'),
                         'visible' => !Yii::app()->user->isGuest
                     )
-                ),
-            ),
-            '<form class="navbar-search pull-left" action=""><input type="text" class="search-query span2" placeholder="Search"></form>',
-            array(
-                'class' => 'bootstrap.widgets.TbMenu',
-                'htmlOptions' => array('class' => 'pull-right'),
-                'items' => array(
-                    array('label' => 'Link', 'url' => '#'),
-                    '---',
-                    array(
-                        'label' => 'Dropdown',
-                        'url' => '#',
-                        'items' => array(
-                            array('label' => 'Action', 'url' => '#'),
-                            array('label' => 'Another action', 'url' => '#'),
-                            array(
-                                'label' => 'Something else here',
-                                'url' => '#'
-                            ),
-                            '---',
-                            array('label' => 'Separated link', 'url' => '#'),
-                        )
-                    ),
                 ),
             ),
         ),
