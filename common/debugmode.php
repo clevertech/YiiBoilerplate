@@ -1,13 +1,7 @@
 <?php
 /**
- * This code snippet enables global full debug mode.
- *
- * Whether it'll be executed or not depends on the existence of file named 'debugmodeon' in the project root dir.
- * If such a file exists (contents are not important) then global bootstrap will execute the following code.
-*/
-
-# Our custom marker for debug mode
-define('DEBUG_MODE', true);
+ * Enabling total debug mode
+ */
 
 # Please be sure that both of the following constants are NOT defined elsewhere.
 # `defined` checks were removed intentionally.

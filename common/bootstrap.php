@@ -1,18 +1,12 @@
 <?php
 # This is the global bootstrap file containing code which should be run for *every* entry point.
 
-
 # Path to the real root of project
-define('ROOT_DIR', realpath(__DIR__ . '/..'));
+define('ROOT_DIR', realpath(__DIR__ . '/../'));
 
-# Depending on various triggers you can enable debug mode for the project here.
-# You can control debug mode with additional Yii console command named `debugmode`: `./yiic debugmode on`
-if (file_exists(ROOT_DIR . '/debugmodeon') // enabled via the flag file
-    or !empty($_SERVER['YII_DEBUG']) // enabled via the $_SERVER var
-    or getenv('YII_DEBUG') // enabled via the environment var
-) {
-    require_once __DIR__ . '/debugmode.php';
-}
+# If master ordered us to work in production mode, remember it.
+define('PRODUCTION_MODE', require(__DIR__ . '/check_prod_mode.php'));
+if (!PRODUCTION_MODE) require(__DIR__ . '/debugmode.php');
 
 # If we have autoloader from Composer, use it.
 if (file_exists(ROOT_DIR . '/vendor/autoload.php'))
@@ -24,14 +18,11 @@ if (file_exists(ROOT_DIR . '/vendor/autoload.php'))
 # Launching the Yii framework.
 require_once ROOT_DIR . '/vendor/yiisoft/yii/framework/YiiBase.php';
 # Include our own Yii singleton definition
-require_once(ROOT_DIR.'/common/components/Yii.php');
+require_once ROOT_DIR . '/common/components/Yii.php';
 # Include our own base WebApplication class
-require_once(ROOT_DIR.'/common/components/WebApplication.php');
+require_once ROOT_DIR . '/common/components/WebApplication.php';
 # Include our own helper methods library
-require_once(ROOT_DIR.'/common/lib/global.php');
-
-# Yes, we "want to append additional autoloaders to the default Yii autoloader".
-YiiBase::$enableIncludePath = false;
+require_once ROOT_DIR . '/common/lib/global.php';
 
 # Some global aliases
 Yii::setPathOfAlias('root', ROOT_DIR);
