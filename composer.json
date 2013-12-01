@@ -23,22 +23,20 @@
         "wiki": "https://github.com/clevertech/YiiBoilerplate/wiki",
         "source": "https://github.com/clevertech/YiiBoilerplate"
     },
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://packages.zendframework.com/"
-        }
-    ],
     "require": {
-        "php":">=5.3.0",
+        "php":">=5.4.0",
         "yiisoft/yii": "1.1.14",
         "clevertech/yii-booster": "dev-master",
         "phpunit/phpunit": "3.7.*",
+        "phing/phing": "2.6.1",
         "clio/clio": "0.1.6",
         "behat/mink-extension": "2.0.x-dev",
         "behat/mink-selenium2-driver": "1.1.x-dev",
         "behat/mink-goutte-driver": "1.0.x-dev"
     },
     "require-dev": { },
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "config": {
+        "bin-dir": "bin"
+    }
 }

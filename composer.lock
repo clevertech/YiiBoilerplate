@@ -3,35 +3,36 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "9efcd2178e8bb4156e3ff4f594b84f11",
+    "hash": "4a38e67b3d5d1b33d04409a458508449",
     "packages": [
         {
             "name": "behat/behat",
-            "version": "2.5.x-dev",
+            "version": "3.0.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Behat/Behat.git",
-                "reference": "477c3b8eea10ec1eb839e74397e4c75742897d95"
+                "reference": "7d570d145c82ec5d025cb242dcb5cecf604ebec7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/Behat/zipball/477c3b8eea10ec1eb839e74397e4c75742897d95",
-                "reference": "477c3b8eea10ec1eb839e74397e4c75742897d95",
+                "url": "https://api.github.com/repos/Behat/Behat/zipball/7d570d145c82ec5d025cb242dcb5cecf604ebec7",
+                "reference": "7d570d145c82ec5d025cb242dcb5cecf604ebec7",
                 "shasum": ""
             },
             "require": {
-                "behat/gherkin": "~2.3.0",
-                "php": ">=5.3.1",
-                "symfony/config": "~2.0",
-                "symfony/console": "~2.0",
-                "symfony/dependency-injection": "~2.0",
-                "symfony/event-dispatcher": "~2.0",
-                "symfony/finder": "~2.0",
-                "symfony/translation": "~2.0",
-                "symfony/yaml": "~2.0"
+                "behat/gherkin": "~3.0.3",
+                "php": ">=5.3.3",
+                "symfony/class-loader": "~2.1",
+                "symfony/config": "~2.1",
+                "symfony/console": "~2.1",
+                "symfony/dependency-injection": "~2.1",
+                "symfony/event-dispatcher": "~2.1",
+                "symfony/finder": "~2.1",
+                "symfony/translation": "~2.1",
+                "symfony/yaml": "~2.1"
             },
             "require-dev": {
-                "phpunit/phpunit": "~3.7.19"
+                "phpunit/phpunit": "~3.7.24"
             },
             "suggest": {
                 "behat/mink-extension": "for integration with Mink testing framework",
@@ -42,6 +43,11 @@
                 "bin/behat"
             ],
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-develop": "3.0-dev"
+                }
+            },
             "autoload": {
                 "psr-0": {
                     "Behat\\Behat": "src/"
@@ -65,20 +71,20 @@
                 "Behat",
                 "Symfony2"
             ],
-            "time": "2013-10-01 08:34:20"
+            "time": "2013-11-24 10:59:11"
         },
         {
             "name": "behat/gherkin",
-            "version": "2.3.x-dev",
+            "version": "3.0.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Behat/Gherkin.git",
-                "reference": "2b33963da5525400573560c173ab5c9c057e1852"
+                "reference": "cbc0a34d195bec76eb2b5fb4fad8b9ee524727d4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/Gherkin/zipball/2b33963da5525400573560c173ab5c9c057e1852",
-                "reference": "2b33963da5525400573560c173ab5c9c057e1852",
+                "url": "https://api.github.com/repos/Behat/Gherkin/zipball/cbc0a34d195bec76eb2b5fb4fad8b9ee524727d4",
+                "reference": "cbc0a34d195bec76eb2b5fb4fad8b9ee524727d4",
                 "shasum": ""
             },
             "require": {
@@ -86,19 +92,17 @@
                 "symfony/finder": "~2.0"
             },
             "require-dev": {
-                "symfony/config": "~2.0",
-                "symfony/translation": "~2.0",
-                "symfony/yaml": "~2.0"
+                "symfony/config": "~2.1",
+                "symfony/yaml": "~2.1"
             },
             "suggest": {
                 "symfony/config": "If you want to use Config component to manage resources",
-                "symfony/translation": "If you want to use Symfony2 translations adapter",
                 "symfony/yaml": "If you want to parse features, represented in YAML files"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-develop": "2.2-dev"
+                    "dev-develop": "3.0-dev"
                 }
             },
             "autoload": {
@@ -122,11 +126,12 @@
             "keywords": [
                 "BDD",
                 "Behat",
+                "Cucumber",
                 "DSL",
-                "Symfony2",
+                "gherkin",
                 "parser"
             ],
-            "time": "2013-10-15 11:22:17"
+            "time": "2013-09-15 20:23:37"
         },
         {
             "name": "behat/mink",
@@ -134,12 +139,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Behat/Mink.git",
-                "reference": "8d0458afb33d366d361a041a009be3fcaf880f05"
+                "reference": "7c2ceb716b0bc1984ac31f59ba12c775e38d4cb9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/Mink/zipball/8d0458afb33d366d361a041a009be3fcaf880f05",
-                "reference": "8d0458afb33d366d361a041a009be3fcaf880f05",
+                "url": "https://api.github.com/repos/Behat/Mink/zipball/7c2ceb716b0bc1984ac31f59ba12c775e38d4cb9",
+                "reference": "7c2ceb716b0bc1984ac31f59ba12c775e38d4cb9",
                 "shasum": ""
             },
             "require": {
@@ -181,7 +186,7 @@
                 "testing",
                 "web"
             ],
-            "time": "2013-09-12 16:08:40"
+            "time": "2013-11-30 18:57:53"
         },
         {
             "name": "behat/mink-browserkit-driver",
@@ -189,16 +194,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Behat/MinkBrowserKitDriver.git",
-                "reference": "6580790c180a34ae4344005bb9383b83588da851"
+                "reference": "4d06113478534782c8c85bec2b411613cb28f512"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/MinkBrowserKitDriver/zipball/6580790c180a34ae4344005bb9383b83588da851",
-                "reference": "6580790c180a34ae4344005bb9383b83588da851",
+                "url": "https://api.github.com/repos/Behat/MinkBrowserKitDriver/zipball/4d06113478534782c8c85bec2b411613cb28f512",
+                "reference": "4d06113478534782c8c85bec2b411613cb28f512",
                 "shasum": ""
             },
             "require": {
-                "behat/mink": "~1.5.0",
+                "behat/mink": "~1.5.0@dev",
                 "php": ">=5.3.1",
                 "symfony/browser-kit": "~2.0",
                 "symfony/dom-crawler": "~2.0"
@@ -236,7 +241,7 @@
                 "browser",
                 "testing"
             ],
-            "time": "2013-09-06 09:22:29"
+            "time": "2013-11-22 09:03:53"
         },
         {
             "name": "behat/mink-extension",
@@ -244,16 +249,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Behat/MinkExtension.git",
-                "reference": "ff87f2abe3ea89c280280ea33a7070140bb66652"
+                "reference": "ded8bd80b2d8b7de54b60f816e25f0e3f595d3e7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/MinkExtension/zipball/ff87f2abe3ea89c280280ea33a7070140bb66652",
-                "reference": "ff87f2abe3ea89c280280ea33a7070140bb66652",
+                "url": "https://api.github.com/repos/Behat/MinkExtension/zipball/ded8bd80b2d8b7de54b60f816e25f0e3f595d3e7",
+                "reference": "ded8bd80b2d8b7de54b60f816e25f0e3f595d3e7",
                 "shasum": ""
             },
             "require": {
-                "behat/behat": "~2.5.0",
+                "behat/behat": "~3@dev",
                 "behat/mink": ">=1.4.3,<1.6-dev",
                 "php": ">=5.3.2",
                 "symfony/config": "~2.2"
@@ -286,7 +291,7 @@
                 "test",
                 "web"
             ],
-            "time": "2013-09-25 12:32:58"
+            "time": "2013-11-18 07:54:57"
         },
         {
             "name": "behat/mink-goutte-driver",
@@ -345,16 +350,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Behat/MinkSelenium2Driver.git",
-                "reference": "8278166e9a7727490c4f0371450cff5091c6a8f3"
+                "reference": "c2a63b96628a0dae46eee37cac286f79bd45ad48"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/MinkSelenium2Driver/zipball/8278166e9a7727490c4f0371450cff5091c6a8f3",
-                "reference": "8278166e9a7727490c4f0371450cff5091c6a8f3",
+                "url": "https://api.github.com/repos/Behat/MinkSelenium2Driver/zipball/c2a63b96628a0dae46eee37cac286f79bd45ad48",
+                "reference": "c2a63b96628a0dae46eee37cac286f79bd45ad48",
                 "shasum": ""
             },
             "require": {
-                "behat/mink": "~1.5.0",
+                "behat/mink": "~1.5.0@dev",
                 "instaclick/php-webdriver": "~1.1",
                 "php": ">=5.3.1"
             },
@@ -395,7 +400,7 @@
                 "testing",
                 "webdriver"
             ],
-            "time": "2013-10-16 14:17:54"
+            "time": "2013-11-21 08:21:24"
         },
         {
             "name": "clevertech/yii-booster",
@@ -403,12 +408,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/clevertech/YiiBooster.git",
-                "reference": "a5207de31c5baecd18a4577fefaa2872ef8dfedd"
+                "reference": "a9d0902e8a4c9f45d0f0df2d12acba82f8578ace"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/clevertech/YiiBooster/zipball/a5207de31c5baecd18a4577fefaa2872ef8dfedd",
-                "reference": "a5207de31c5baecd18a4577fefaa2872ef8dfedd",
+                "url": "https://api.github.com/repos/clevertech/YiiBooster/zipball/a9d0902e8a4c9f45d0f0df2d12acba82f8578ace",
+                "reference": "a9d0902e8a4c9f45d0f0df2d12acba82f8578ace",
                 "shasum": ""
             },
             "require": {
@@ -422,7 +427,7 @@
                 "phpunit/phpunit": "3.7.*",
                 "sebastian/phpcpd": "*",
                 "squizlabs/php_codesniffer": "1.*",
-                "yiisoft/yii": "1.1.14-rc"
+                "yiisoft/yii": "1.1.14"
             },
             "type": "library",
             "notification-url": "https://packagist.org/downloads/",
@@ -451,7 +456,7 @@
                 "bootstrap",
                 "yii"
             ],
-            "time": "2013-10-18 10:12:57"
+            "time": "2013-11-13 13:08:24"
         },
         {
             "name": "clio/clio",
@@ -500,12 +505,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fabpot/Goutte.git",
-                "reference": "aea51354c70e1244d887c54a12e49cd6aa41beb4"
+                "reference": "7c3221bbbeecbec9aa5c04cd7cc10e9684de0eb4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Goutte/zipball/aea51354c70e1244d887c54a12e49cd6aa41beb4",
-                "reference": "aea51354c70e1244d887c54a12e49cd6aa41beb4",
+                "url": "https://api.github.com/repos/fabpot/Goutte/zipball/7c3221bbbeecbec9aa5c04cd7cc10e9684de0eb4",
+                "reference": "7c3221bbbeecbec9aa5c04cd7cc10e9684de0eb4",
                 "shasum": ""
             },
             "require": {
@@ -548,7 +553,7 @@
             "keywords": [
                 "scraper"
             ],
-            "time": "2013-10-19 07:57:09"
+            "time": "2013-11-21 05:56:19"
         },
         {
             "name": "guzzle/common",
@@ -750,16 +755,16 @@
         },
         {
             "name": "instaclick/php-webdriver",
-            "version": "1.1",
+            "version": "1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/instaclick/php-webdriver.git",
-                "reference": "786ba0dc9c594fb0b9b8171db852b2224b23811e"
+                "reference": "4e43ece4e3ad1c0601791bb9b376f24f51632ef5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/instaclick/php-webdriver/zipball/786ba0dc9c594fb0b9b8171db852b2224b23811e",
-                "reference": "786ba0dc9c594fb0b9b8171db852b2224b23811e",
+                "url": "https://api.github.com/repos/instaclick/php-webdriver/zipball/4e43ece4e3ad1c0601791bb9b376f24f51632ef5",
+                "reference": "4e43ece4e3ad1c0601791bb9b376f24f51632ef5",
                 "shasum": ""
             },
             "require": {
@@ -804,7 +809,59 @@
                 "webdriver",
                 "webtest"
             ],
-            "time": "2013-10-15 14:53:05"
+            "time": "2013-11-27 16:39:54"
+        },
+        {
+            "name": "phing/phing",
+            "version": "2.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phingofficial/phing.git",
+                "reference": "3f7d71bf561bafea39087250f777b349438cc32e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phingofficial/phing/zipball/3f7d71bf561bafea39087250f777b349438cc32e",
+                "reference": "3f7d71bf561bafea39087250f777b349438cc32e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.0"
+            },
+            "bin": [
+                "bin/phing"
+            ],
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "classes/phing/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "include-path": [
+                "classes"
+            ],
+            "license": [
+                "LGPL3"
+            ],
+            "authors": [
+                {
+                    "name": "Michiel Rook",
+                    "email": "mrook@php.net"
+                },
+                {
+                    "name": "Phing Community",
+                    "homepage": "http://www.phing.info/trac/wiki/Development/Contributors"
+                }
+            ],
+            "description": "PHing Is Not GNU make; it's a PHP project build system or build tool based on Apache Ant.",
+            "homepage": "http://www.phing.info/",
+            "keywords": [
+                "build",
+                "task",
+                "tool"
+            ],
+            "time": "2013-08-26 21:13:03"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -812,12 +869,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "466e7cd2554b4e264c9e3f31216d25ac0e5f3d94"
+                "reference": "10c5b2c8b72a801eaad0031cd6a6a3686909c5a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/466e7cd2554b4e264c9e3f31216d25ac0e5f3d94",
-                "reference": "466e7cd2554b4e264c9e3f31216d25ac0e5f3d94",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/10c5b2c8b72a801eaad0031cd6a6a3686909c5a9",
+                "reference": "10c5b2c8b72a801eaad0031cd6a6a3686909c5a9",
                 "shasum": ""
             },
             "require": {
@@ -865,7 +922,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2013-09-10 08:14:32"
+            "time": "2013-11-01 09:17:11"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -1056,12 +1113,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "598a467a7d234dd78788cd72d5fd58105a1dfd0e"
+                "reference": "236f65cc97d6beaa8fcb8a27b19bd278f3912677"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/598a467a7d234dd78788cd72d5fd58105a1dfd0e",
-                "reference": "598a467a7d234dd78788cd72d5fd58105a1dfd0e",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/236f65cc97d6beaa8fcb8a27b19bd278f3912677",
+                "reference": "236f65cc97d6beaa8fcb8a27b19bd278f3912677",
                 "shasum": ""
             },
             "require": {
@@ -1122,7 +1179,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2013-10-17 23:32:19"
+            "time": "2013-11-06 01:58:51"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -1189,12 +1246,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/BrowserKit.git",
-                "reference": "fc5d0dd10afe707f08ac7b5b4ceecb8119c57498"
+                "reference": "dfd65c6fc7a63837e97c38382a7df56c230b5b9e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/BrowserKit/zipball/fc5d0dd10afe707f08ac7b5b4ceecb8119c57498",
-                "reference": "fc5d0dd10afe707f08ac7b5b4ceecb8119c57498",
+                "url": "https://api.github.com/repos/symfony/BrowserKit/zipball/dfd65c6fc7a63837e97c38382a7df56c230b5b9e",
+                "reference": "dfd65c6fc7a63837e97c38382a7df56c230b5b9e",
                 "shasum": ""
             },
             "require": {
@@ -1211,7 +1268,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.4-dev"
+                    "dev-master": "2.5-dev"
                 }
             },
             "autoload": {
@@ -1235,7 +1292,57 @@
             ],
             "description": "Symfony BrowserKit Component",
             "homepage": "http://symfony.com",
-            "time": "2013-09-27 14:07:49"
+            "time": "2013-11-24 20:17:07"
+        },
+        {
+            "name": "symfony/class-loader",
+            "version": "dev-master",
+            "target-dir": "Symfony/Component/ClassLoader",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/ClassLoader.git",
+                "reference": "d122b8a0ef3bc0153802bbd598c0f6972657a3c3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/ClassLoader/zipball/d122b8a0ef3bc0153802bbd598c0f6972657a3c3",
+                "reference": "d122b8a0ef3bc0153802bbd598c0f6972657a3c3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "symfony/finder": "~2.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.5-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Symfony\\Component\\ClassLoader\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony ClassLoader Component",
+            "homepage": "http://symfony.com",
+            "time": "2013-11-26 16:42:52"
         },
         {
             "name": "symfony/config",
@@ -1244,12 +1351,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Config.git",
-                "reference": "9a3c831697349cf6e9b5302b7beb0b97e6cdac41"
+                "reference": "61b6bb7963508cfadedaf6ed2b04c6c9bd954156"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Config/zipball/9a3c831697349cf6e9b5302b7beb0b97e6cdac41",
-                "reference": "9a3c831697349cf6e9b5302b7beb0b97e6cdac41",
+                "url": "https://api.github.com/repos/symfony/Config/zipball/61b6bb7963508cfadedaf6ed2b04c6c9bd954156",
+                "reference": "61b6bb7963508cfadedaf6ed2b04c6c9bd954156",
                 "shasum": ""
             },
             "require": {
@@ -1259,7 +1366,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.4-dev"
+                    "dev-master": "2.5-dev"
                 }
             },
             "autoload": {
@@ -1283,7 +1390,7 @@
             ],
             "description": "Symfony Config Component",
             "homepage": "http://symfony.com",
-            "time": "2013-09-19 09:47:34"
+            "time": "2013-11-26 16:42:52"
         },
         {
             "name": "symfony/console",
@@ -1292,12 +1399,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Console.git",
-                "reference": "662a2922e0bcb3669e66ab36c20ce508c68b1d46"
+                "reference": "ff8d5444c1b4dc7675aaeecd35f7ed1f0872c242"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Console/zipball/662a2922e0bcb3669e66ab36c20ce508c68b1d46",
-                "reference": "662a2922e0bcb3669e66ab36c20ce508c68b1d46",
+                "url": "https://api.github.com/repos/symfony/Console/zipball/ff8d5444c1b4dc7675aaeecd35f7ed1f0872c242",
+                "reference": "ff8d5444c1b4dc7675aaeecd35f7ed1f0872c242",
                 "shasum": ""
             },
             "require": {
@@ -1312,7 +1419,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.4-dev"
+                    "dev-master": "2.5-dev"
                 }
             },
             "autoload": {
@@ -1336,7 +1443,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "http://symfony.com",
-            "time": "2013-10-23 08:18:42"
+            "time": "2013-11-28 10:27:35"
         },
         {
             "name": "symfony/css-selector",
@@ -1345,12 +1452,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/CssSelector.git",
-                "reference": "13032e63b946d6e3f1ee0f60035298a175ae5088"
+                "reference": "1513e7b4c1f4f8e937a6bc30159793014c0abdb9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/CssSelector/zipball/13032e63b946d6e3f1ee0f60035298a175ae5088",
-                "reference": "13032e63b946d6e3f1ee0f60035298a175ae5088",
+                "url": "https://api.github.com/repos/symfony/CssSelector/zipball/1513e7b4c1f4f8e937a6bc30159793014c0abdb9",
+                "reference": "1513e7b4c1f4f8e937a6bc30159793014c0abdb9",
                 "shasum": ""
             },
             "require": {
@@ -1359,7 +1466,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.4-dev"
+                    "dev-master": "2.5-dev"
                 }
             },
             "autoload": {
@@ -1387,7 +1494,7 @@
             ],
             "description": "Symfony CssSelector Component",
             "homepage": "http://symfony.com",
-            "time": "2013-10-16 11:59:56"
+            "time": "2013-11-24 20:17:07"
         },
         {
             "name": "symfony/dependency-injection",
@@ -1396,12 +1503,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/DependencyInjection.git",
-                "reference": "48a1803399404ff780de635da7e9eb746c655c65"
+                "reference": "6482bdb5b265514489750877867abeda5d34bdd7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/DependencyInjection/zipball/48a1803399404ff780de635da7e9eb746c655c65",
-                "reference": "48a1803399404ff780de635da7e9eb746c655c65",
+                "url": "https://api.github.com/repos/symfony/DependencyInjection/zipball/6482bdb5b265514489750877867abeda5d34bdd7",
+                "reference": "6482bdb5b265514489750877867abeda5d34bdd7",
                 "shasum": ""
             },
             "require": {
@@ -1420,7 +1527,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.4-dev"
+                    "dev-master": "2.5-dev"
                 }
             },
             "autoload": {
@@ -1444,7 +1551,7 @@
             ],
             "description": "Symfony DependencyInjection Component",
             "homepage": "http://symfony.com",
-            "time": "2013-09-29 19:43:28"
+            "time": "2013-11-26 16:42:52"
         },
         {
             "name": "symfony/dom-crawler",
@@ -1453,12 +1560,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/DomCrawler.git",
-                "reference": "c932bcb795eeb34e981fef9ce7c4ee76e43a97b7"
+                "reference": "4e076e13b9f3c8533a1b9bc3e0517ae143501892"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/DomCrawler/zipball/c932bcb795eeb34e981fef9ce7c4ee76e43a97b7",
-                "reference": "c932bcb795eeb34e981fef9ce7c4ee76e43a97b7",
+                "url": "https://api.github.com/repos/symfony/DomCrawler/zipball/4e076e13b9f3c8533a1b9bc3e0517ae143501892",
+                "reference": "4e076e13b9f3c8533a1b9bc3e0517ae143501892",
                 "shasum": ""
             },
             "require": {
@@ -1473,7 +1580,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.4-dev"
+                    "dev-master": "2.5-dev"
                 }
             },
             "autoload": {
@@ -1497,7 +1604,7 @@
             ],
             "description": "Symfony DomCrawler Component",
             "homepage": "http://symfony.com",
-            "time": "2013-10-01 08:36:55"
+            "time": "2013-11-24 20:17:07"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -1506,12 +1613,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/EventDispatcher.git",
-                "reference": "d51d78b34c1d9dcc384ba48155105fe99284dd67"
+                "reference": "805980381ccb3d8d92c51860323e7646e9219df6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/d51d78b34c1d9dcc384ba48155105fe99284dd67",
-                "reference": "d51d78b34c1d9dcc384ba48155105fe99284dd67",
+                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/805980381ccb3d8d92c51860323e7646e9219df6",
+                "reference": "805980381ccb3d8d92c51860323e7646e9219df6",
                 "shasum": ""
             },
             "require": {
@@ -1527,7 +1634,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.4-dev"
+                    "dev-master": "2.5-dev"
                 }
             },
             "autoload": {
@@ -1551,7 +1658,7 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "http://symfony.com",
-            "time": "2013-10-17 11:48:11"
+            "time": "2013-11-28 10:27:35"
         },
         {
             "name": "symfony/filesystem",
@@ -1560,12 +1667,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Filesystem.git",
-                "reference": "e558fd5d593ebe083dca199f52aed5374ab7b57a"
+                "reference": "c136348f53ef538f1a3fa0b25b73c9c3bf223b31"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Filesystem/zipball/e558fd5d593ebe083dca199f52aed5374ab7b57a",
-                "reference": "e558fd5d593ebe083dca199f52aed5374ab7b57a",
+                "url": "https://api.github.com/repos/symfony/Filesystem/zipball/c136348f53ef538f1a3fa0b25b73c9c3bf223b31",
+                "reference": "c136348f53ef538f1a3fa0b25b73c9c3bf223b31",
                 "shasum": ""
             },
             "require": {
@@ -1574,7 +1681,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.4-dev"
+                    "dev-master": "2.5-dev"
                 }
             },
             "autoload": {
@@ -1598,7 +1705,7 @@
             ],
             "description": "Symfony Filesystem Component",
             "homepage": "http://symfony.com",
-            "time": "2013-09-27 14:57:51"
+            "time": "2013-11-24 20:17:07"
         },
         {
             "name": "symfony/finder",
@@ -1607,12 +1714,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Finder.git",
-                "reference": "e2ce3164ab58b4d54612e630571f158035ee8603"
+                "reference": "46881af03b48e942001e8e9450c2c4ccaeccfc8d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Finder/zipball/e2ce3164ab58b4d54612e630571f158035ee8603",
-                "reference": "e2ce3164ab58b4d54612e630571f158035ee8603",
+                "url": "https://api.github.com/repos/symfony/Finder/zipball/46881af03b48e942001e8e9450c2c4ccaeccfc8d",
+                "reference": "46881af03b48e942001e8e9450c2c4ccaeccfc8d",
                 "shasum": ""
             },
             "require": {
@@ -1621,7 +1728,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.4-dev"
+                    "dev-master": "2.5-dev"
                 }
             },
             "autoload": {
@@ -1645,7 +1752,7 @@
             ],
             "description": "Symfony Finder Component",
             "homepage": "http://symfony.com",
-            "time": "2013-09-19 09:47:34"
+            "time": "2013-11-26 16:42:52"
         },
         {
             "name": "symfony/process",
@@ -1654,12 +1761,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Process.git",
-                "reference": "27b0fc645a557b2fc7bc7735cfb05505de9351be"
+                "reference": "ceb4dd952716ddf634c2476bbd64a5b4eccf547d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Process/zipball/27b0fc645a557b2fc7bc7735cfb05505de9351be",
-                "reference": "27b0fc645a557b2fc7bc7735cfb05505de9351be",
+                "url": "https://api.github.com/repos/symfony/Process/zipball/ceb4dd952716ddf634c2476bbd64a5b4eccf547d",
+                "reference": "ceb4dd952716ddf634c2476bbd64a5b4eccf547d",
                 "shasum": ""
             },
             "require": {
@@ -1668,7 +1775,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.4-dev"
+                    "dev-master": "2.5-dev"
                 }
             },
             "autoload": {
@@ -1692,7 +1799,7 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "http://symfony.com",
-            "time": "2013-10-10 05:53:18"
+            "time": "2013-11-24 20:17:07"
         },
         {
             "name": "symfony/translation",
@@ -1701,12 +1808,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Translation.git",
-                "reference": "8addaff4947de4a9342318de62a078d74b1bd603"
+                "reference": "478cca9fd8bc1e8ced4159ab26f0e7c08ec7571b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Translation/zipball/8addaff4947de4a9342318de62a078d74b1bd603",
-                "reference": "8addaff4947de4a9342318de62a078d74b1bd603",
+                "url": "https://api.github.com/repos/symfony/Translation/zipball/478cca9fd8bc1e8ced4159ab26f0e7c08ec7571b",
+                "reference": "478cca9fd8bc1e8ced4159ab26f0e7c08ec7571b",
                 "shasum": ""
             },
             "require": {
@@ -1723,7 +1830,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.4-dev"
+                    "dev-master": "2.5-dev"
                 }
             },
             "autoload": {
@@ -1747,7 +1854,7 @@
             ],
             "description": "Symfony Translation Component",
             "homepage": "http://symfony.com",
-            "time": "2013-10-10 14:19:44"
+            "time": "2013-11-28 10:27:35"
         },
         {
             "name": "symfony/yaml",
@@ -1756,12 +1863,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Yaml.git",
-                "reference": "1f7cabb841e62ec49615bd965ac780fd994b3f64"
+                "reference": "1481f096caead542c2dfadd67d9fd6124d97e273"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Yaml/zipball/1f7cabb841e62ec49615bd965ac780fd994b3f64",
-                "reference": "1f7cabb841e62ec49615bd965ac780fd994b3f64",
+                "url": "https://api.github.com/repos/symfony/Yaml/zipball/1481f096caead542c2dfadd67d9fd6124d97e273",
+                "reference": "1481f096caead542c2dfadd67d9fd6124d97e273",
                 "shasum": ""
             },
             "require": {
@@ -1770,7 +1877,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.4-dev"
+                    "dev-master": "2.5-dev"
                 }
             },
             "autoload": {
@@ -1794,7 +1901,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "http://symfony.com",
-            "time": "2013-10-17 11:48:11"
+            "time": "2013-11-26 16:42:52"
         },
         {
             "name": "yiisoft/yii",
@@ -1895,7 +2002,7 @@
         "behat/mink-goutte-driver": 20
     },
     "platform": {
-        "php": ">=5.3.0"
+        "php": ">=5.4.0"
     },
     "platform-dev": [
 
