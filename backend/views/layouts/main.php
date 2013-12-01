@@ -13,7 +13,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title><?php echo CHtml::encode($this->pageTitle); ?></title>
+    <title><?= CHtml::encode($this->pageTitle); ?></title>
 </head>
 
 <body>
@@ -21,7 +21,7 @@
 <?php $this->renderPartial('//layouts/_navigation');?>
 <!-- NAVIGATION END -->
 
-    <!-- CONTENT WRAPPER BEGIN -->
+<!-- CONTENT WRAPPER BEGIN -->
 <div class="container">
     <?php if (isset($this->breadcrumbs)): ?>
         <?php $this->widget(
@@ -35,7 +35,7 @@
 	<div class="row">
 
         <!-- CONTENT BEGIN -->
-		<?php echo $content; ?>
+		<?= $content; ?>
         <!-- CONTENT END -->
 
     </div>
@@ -45,7 +45,7 @@
 		<footer>
 			Copyright &copy; <?php echo date('Y'); ?> by My Company.<br/>
 			All Rights Reserved.<br/>
-			<?php echo Yii::powered(); ?>
+			<?= Yii::powered(); ?>
 		</footer>
 	</div>
 

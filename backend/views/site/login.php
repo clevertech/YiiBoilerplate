@@ -1,32 +1,43 @@
 <?php
-$this->pageTitle=Yii::app()->name . ' - Login';
-$this->breadcrumbs=array(
-	'Login',
-);
+/**
+ * @var User $model
+ */
+
+$this->pageTitle = Yii::app()->name . ' - Login';
+$this->breadcrumbs = ['Login'];
 ?>
 
 <p>Please fill out the following form with your login credentials:</p>
 
+<!-- Login Form BEGIN -->
 <div class="form">
-	<?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm', array(
-	'id'=>'login-form',
-	'enableClientValidation'=>true,
-	'htmlOptions'=>array('class'=>'well'),
-	'clientOptions'=>array(
-		'validateOnSubmit'=>true,
-	),
-)); ?>
 
-	<?php echo CHtml::errorSummary($model, null, null, array('class' => 'alert alert-error')); ?>
+<?php
+/** @var TbActiveForm $form */
+$form = $this->beginWidget(
+	'bootstrap.widgets.TbActiveForm',
+	array(
+		'id' => 'login-form',
+		'enableClientValidation' => true,
+		'htmlOptions' => ['class' => 'well'],
+		'clientOptions' => array(
+			'validateOnSubmit'=>true,
+		),
+	)
+);
+
+echo CHtml::errorSummary($model, null, null, array('class' => 'alert alert-error'));
+?>
+
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
 
-	<?php echo $form->textFieldRow($model, 'username', array('class'=>'span3'));?>
-	<?php echo $form->passwordFieldRow($model, 'password', array('class'=>'span3'));?>
-	<?php echo $form->checkBoxRow($model, 'rememberMe');?>
+	<?= $form->textFieldRow($model, 'username', array('class'=>'span3'));?>
+	<?= $form->passwordFieldRow($model, 'password', array('class'=>'span3'));?>
+	<?= $form->checkBoxRow($model, 'rememberMe');?>
 
 	<?php if ($model->requireCaptcha): ?>
 		<?php $this->widget('CCaptcha'); ?>
-		<?php echo $form->textField($model, 'verifyCode'); ?>
+		<?= $form->textField($model, 'verifyCode'); ?>
 	<?php endif; ?>
 
 	<div class="form-actions">
@@ -34,5 +45,7 @@ $this->breadcrumbs=array(
 		<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'reset','label'=>'Reset'));?>
 	</div>
 
-	<?php $this->endWidget(); ?>
-</div><!-- form -->
+<?php $this->endWidget(); ?>
+
+</div>
+<!-- Login Form END -->

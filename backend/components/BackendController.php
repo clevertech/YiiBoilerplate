@@ -8,8 +8,10 @@
  */
 class BackendController extends CController
 {
-
+	/** @var array This will be pasted into breadcrumbs widget in layout */
 	public $breadcrumbs = array();
+
+	/** @var array This will be pasted into menu widget in sidebar portlet in two-column layout */
 	public $menu = array();
 
     public function filters()

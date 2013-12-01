@@ -1,4 +1,11 @@
-<?php $this->beginContent('//layouts/main'); ?>
+<?php
+/**
+ * @var string $content
+ * @var BackendController $this
+ */
+
+$this->beginContent('//layouts/main');
+?>
 <div class="span8">
     <?php echo $content; ?>
 </div>
