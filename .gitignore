@@ -1,9 +1,12 @@
-# cache directories
+# Cache directories
 Thumbs.db
 *.DS_Store
 *.empty
 
-#phpstorm project files
+# sass cache files
+*.sass-cache
+
+# phpStorm project files
 .idea
 
 # Vagrant stuff
@@ -18,16 +21,13 @@ bin/webunit
 # Marker file for production mode
 /PRODUCTION_MODE
 
-#netbeans project files
+# Netbeans project files
 nbproject
 
-#eclipse, zend studio, aptana or other eclipse like project files
+# Eclipse, Zend studio, Aptana or other eclipse like project files
 .buildpath
 .project
 .settings
-
-# sass cache files
-*.sass-cache
 
 # mac deployment helpers
 switch
@@ -50,5 +50,3 @@ index
 /console/config/overrides/environment.php
 /backend/config/overrides/environment.php
 
-# Marker file to enable debug mode globally.
-/debugmodeon
