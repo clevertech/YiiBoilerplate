@@ -19,6 +19,7 @@ bin/phploc
 bin/pdepend
 bin/phpmd
 bin/phpcpd
+bin/phpcs
 bin/phpunit
 bin/webunit
 

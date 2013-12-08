@@ -8,7 +8,7 @@
 
     <import file="filesets.xml" />
 
-    <target name="check" depends="phploc, coverage, pdepend, phpcpd, phpmd" />
+    <target name="check" depends="phploc, coverage, pdepend, phpcpd, phpmd, phpcs" />
 
     <target name="phploc" depends="prepare-reports-dir">
         <!--
@@ -95,6 +95,19 @@
             <arg value="--fuzzy" />
             <arg value="--progress" />
             <arg line="${fileset.sources.phpcpd}" />
+        </exec>
+    </target>
+
+    <target name="phpcs" depends="prepare-reports-dir">
+        <exec executable="bin/phpcs" dir="." passthru="true">
+            <arg value="--extensions=php" />
+            <!-- Tab-width param is quite important, phpcs will treat tabs as single spaces without it. -->
+            <arg value="--tab-width=4" />
+
+            <arg value="--standard=carcass/ruleset.xml" />
+            <arg value="--report-checkstyle=reports/checkstyle.xml" />
+
+            <arg line="${fileset.sources.phpcs}" />
         </exec>
     </target>
 </project>
