@@ -50,3 +50,5 @@ index
 /console/config/overrides/environment.php
 /backend/config/overrides/environment.php
 
+# Behat local config installed (leading slash matters)
+/behat-local.yml

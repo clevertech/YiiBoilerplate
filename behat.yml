@@ -1,0 +1,28 @@
+default:
+    paths:
+        bootstrap: '%behat.paths.base%/tests/specs/contexts'
+    formatter:
+        name: 'pretty'
+    extensions:
+        Behat\MinkExtension\Extension:
+            default_session: goutte
+            goutte: ~
+            javascript_session: selenium2
+            selenium2: ~
+frontend:
+    paths:
+        features: '%behat.paths.base%/tests/specs/features/frontend'
+# the following you have to define in your "behat-local.yml"
+#  extensions:
+#    Behat\MinkExtension\Extension:
+#      base_url: 'http://localhost:8080'
+backend:
+    paths:
+        features: '%behat.paths.base%/tests/specs/features/backend'
+# the following you have to define in your "behat-local.yml"
+#  extensions:
+#    Behat\MinkExtension\Extension:
+#      base_url: 'http://localhost:8081'
+
+imports:
+    - 'behat-local.yml'

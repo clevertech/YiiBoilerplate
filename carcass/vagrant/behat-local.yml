@@ -1,0 +1,8 @@
+frontend:
+  extensions:
+    Behat\MinkExtension\Extension:
+      base_url: 'http://localhost:8080'
+backend:
+  extensions:
+    Behat\MinkExtension\Extension:
+      base_url: 'http://localhost:8081'
