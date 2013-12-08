@@ -30,9 +30,9 @@
         "phpunit/phpunit": "3.7.*",
         "phing/phing": "2.6.1",
         "clio/clio": "0.1.6",
-        "behat/mink-extension": "2.0.x-dev",
-        "behat/mink-selenium2-driver": "1.1.x-dev",
-        "behat/mink-goutte-driver": "1.0.x-dev"
+        "behat/mink-extension": "v1.2.0",
+        "behat/mink-selenium2-driver": "v1.1.1",
+        "behat/mink-goutte-driver": "v1.0.9"
     },
     "require-dev": { },
     "minimum-stability": "dev",
