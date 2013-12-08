@@ -32,7 +32,8 @@
         "clio/clio": "0.1.6",
         "behat/mink-extension": "v1.2.0",
         "behat/mink-selenium2-driver": "v1.1.1",
-        "behat/mink-goutte-driver": "v1.0.9"
+        "behat/mink-goutte-driver": "v1.0.9",
+        "netwing/selenium-server-standalone": "2.37.0"
     },
     "require-dev": { },
     "minimum-stability": "dev",

@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+/usr/bin/env java -jar vendor/netwing/selenium-server-standalone/selenium-server-standalone-2.37.0.jar "$@"
+

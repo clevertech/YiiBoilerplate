@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "f4ea531dbdbe49508c8b55e6291d5853",
+    "hash": "23f7b7ba97f503f3792d0415fc50582a",
     "packages": [
         {
             "name": "behat/behat",
@@ -809,6 +809,38 @@
                 "webtest"
             ],
             "time": "2013-12-03 03:42:59"
+        },
+        {
+            "name": "netwing/selenium-server-standalone",
+            "version": "2.37.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/netwing/selenium-server.git",
+                "reference": "51c30133de16eef4d41d2a5e7ebee88aa53f6ea4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/netwing/selenium-server/zipball/51c30133de16eef4d41d2a5e7ebee88aa53f6ea4",
+                "reference": "51c30133de16eef4d41d2a5e7ebee88aa53f6ea4",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "OpenQA",
+                    "homepage": "http://seleniumhq.org/"
+                }
+            ],
+            "description": "Composer distribution of Selenium Server Standalone, the browser automation framework.",
+            "keywords": [
+                "selenium",
+                "testing"
+            ],
+            "time": "2013-11-12 15:03:18"
         },
         {
             "name": "phing/phing",
