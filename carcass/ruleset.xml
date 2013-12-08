@@ -22,6 +22,7 @@
     <exclude-pattern>*/lib/*</exclude-pattern>
     <exclude-pattern>*/extensions/*</exclude-pattern>
     <exclude-pattern>*/runtime/*</exclude-pattern>
+    <exclude-pattern>*/assets/*</exclude-pattern>
 
     <rule ref="PEAR.Classes.ClassDeclaration" />
     <rule ref="Generic.Classes.DuplicateClassName" />

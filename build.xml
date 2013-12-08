@@ -8,7 +8,7 @@
 
     <import file="filesets.xml" />
 
-    <target name="check" depends="phploc, coverage, pdepend, phpcpd, phpmd, phpcs" />
+    <target name="check" depends="phploc, coverage, pdepend, phpcpd, phpmd, phpcs, codebrowser" />
 
     <target name="phploc" depends="prepare-reports-dir">
         <!--
@@ -63,6 +63,7 @@
     </target>
 
     <target name="coverage" depends="prepare-reports-dir">
+        <delete dir="reports/coverage" />
         <exec executable="bin/phpunit" dir="." passthru="true">
             <arg value="--coverage-clover" />
             <arg value="reports/clover.xml" />
@@ -108,6 +109,14 @@
             <arg value="--report-checkstyle=reports/checkstyle.xml" />
 
             <arg line="${fileset.sources.phpcs}" />
+        </exec>
+    </target>
+
+    <target name="codebrowser" depends="prepare-reports-dir">
+        <exec executable="bin/phpcb" dir="." passthru="true">
+            <arg value="--log=reports" />
+            <arg value="--extensions=php" />
+            <arg value="--output=reports/codebrowser" />
         </exec>
     </target>
 </project>
