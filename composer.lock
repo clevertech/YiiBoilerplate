@@ -3,8 +3,243 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "c1b7d48426d3778867bb282b285fa1a2",
+    "hash": "ffbf90d114dd1efe9707cd0debb5945c",
     "packages": [
+        {
+            "name": "clevertech/yii-booster",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/clevertech/YiiBooster.git",
+                "reference": "a9d0902e8a4c9f45d0f0df2d12acba82f8578ace"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/clevertech/YiiBooster/zipball/a9d0902e8a4c9f45d0f0df2d12acba82f8578ace",
+                "reference": "a9d0902e8a4c9f45d0f0df2d12acba82f8578ace",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.1.0"
+            },
+            "require-dev": {
+                "ardem/yii-coding-standard": "dev-master",
+                "mayflower/php-codebrowser": "1.0.*@dev",
+                "ncuesta/pinocchio": "dev-master",
+                "phploc/phploc": "*",
+                "phpunit/phpunit": "3.7.*",
+                "sebastian/phpcpd": "*",
+                "squizlabs/php_codesniffer": "1.*",
+                "yiisoft/yii": "1.1.14"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Antonio Ramirez Cobos",
+                    "email": "amigo.cobos@gmail.com",
+                    "homepage": "http://www.ramirezcobos.com",
+                    "role": "Founder and development"
+                },
+                {
+                    "name": "Saphronov Mark",
+                    "email": "hijarian@gmail.com",
+                    "homepage": "http://about.me/hijarian"
+                },
+                {
+                    "name": "Ruslan Fadeev"
+                }
+            ],
+            "description": "Widget toolkit for Yii framework",
+            "homepage": "http://yiibooster.clevertech.biz/",
+            "keywords": [
+                "bootstrap",
+                "yii"
+            ],
+            "time": "2013-11-13 13:08:24"
+        },
+        {
+            "name": "clio/clio",
+            "version": "0.1.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nramenta/clio.git",
+                "reference": "7f23f7855ac998b7367a2861fb5ccc3a30641b4f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nramenta/clio/zipball/7f23f7855ac998b7367a2861fb5ccc3a30641b4f",
+                "reference": "7f23f7855ac998b7367a2861fb5ccc3a30641b4f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Clio": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nofriandi Ramenta",
+                    "email": "nramenta@gmail.com"
+                }
+            ],
+            "description": "Lightweight utility and helper classes for CLI applications",
+            "keywords": [
+                "cli",
+                "console",
+                "daemon"
+            ],
+            "time": "2013-01-01 06:21:36"
+        },
+        {
+            "name": "phing/phing",
+            "version": "2.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phingofficial/phing.git",
+                "reference": "3f7d71bf561bafea39087250f777b349438cc32e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phingofficial/phing/zipball/3f7d71bf561bafea39087250f777b349438cc32e",
+                "reference": "3f7d71bf561bafea39087250f777b349438cc32e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.0"
+            },
+            "bin": [
+                "bin/phing"
+            ],
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "classes/phing/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "include-path": [
+                "classes"
+            ],
+            "license": [
+                "LGPL3"
+            ],
+            "authors": [
+                {
+                    "name": "Michiel Rook",
+                    "email": "mrook@php.net"
+                },
+                {
+                    "name": "Phing Community",
+                    "homepage": "http://www.phing.info/trac/wiki/Development/Contributors"
+                }
+            ],
+            "description": "PHing Is Not GNU make; it's a PHP project build system or build tool based on Apache Ant.",
+            "homepage": "http://www.phing.info/",
+            "keywords": [
+                "build",
+                "task",
+                "tool"
+            ],
+            "time": "2013-08-26 21:13:03"
+        },
+        {
+            "name": "yiisoft/yii",
+            "version": "1.1.14",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/yii.git",
+                "reference": "f0fee98ee84f70f1f3652f65562c9670e919cb4e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/yii/zipball/f0fee98ee84f70f1f3652f65562c9670e919cb4e",
+                "reference": "f0fee98ee84f70f1f3652f65562c9670e919cb4e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.1.0"
+            },
+            "bin": [
+                "framework/yiic"
+            ],
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Qiang Xue",
+                    "email": "qiang.xue@gmail.com",
+                    "homepage": "http://www.yiiframework.com/",
+                    "role": "Founder and project lead"
+                },
+                {
+                    "name": "Alexander Makarov",
+                    "email": "sam@rmcreative.ru",
+                    "homepage": "http://rmcreative.ru/",
+                    "role": "Core framework development"
+                },
+                {
+                    "name": "Maurizio Domba",
+                    "homepage": "http://mdomba.info/",
+                    "role": "Core framework development"
+                },
+                {
+                    "name": "Carsten Brandt",
+                    "email": "mail@cebe.cc",
+                    "homepage": "http://cebe.cc/",
+                    "role": "Core framework development"
+                },
+                {
+                    "name": "Wei Zhuo",
+                    "email": "weizhuo@gmail.com",
+                    "role": "Project site maintenance and development"
+                },
+                {
+                    "name": "Sebastián Thierer",
+                    "email": "sebas@artfos.com",
+                    "role": "Component development"
+                },
+                {
+                    "name": "Jeffrey Winesett",
+                    "email": "jefftulsa@gmail.com",
+                    "role": "Documentation and marketing"
+                },
+                {
+                    "name": "Timur Ruziev",
+                    "email": "resurtm@gmail.com",
+                    "homepage": "http://resurtm.com/",
+                    "role": "Core framework development"
+                },
+                {
+                    "name": "Paul Klimov",
+                    "email": "klimov.paul@gmail.com",
+                    "role": "Core framework development"
+                }
+            ],
+            "description": "Yii Web Programming Framework",
+            "homepage": "http://www.yiiframework.com/",
+            "keywords": [
+                "framework",
+                "yii"
+            ],
+            "time": "2013-08-12 00:12:08"
+        }
+    ],
+    "packages-dev": [
         {
             "name": "behat/behat",
             "version": "2.5.x-dev",
@@ -402,103 +637,6 @@
             "time": "2013-06-02 19:09:45"
         },
         {
-            "name": "clevertech/yii-booster",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/clevertech/YiiBooster.git",
-                "reference": "a9d0902e8a4c9f45d0f0df2d12acba82f8578ace"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/clevertech/YiiBooster/zipball/a9d0902e8a4c9f45d0f0df2d12acba82f8578ace",
-                "reference": "a9d0902e8a4c9f45d0f0df2d12acba82f8578ace",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.1.0"
-            },
-            "require-dev": {
-                "ardem/yii-coding-standard": "dev-master",
-                "mayflower/php-codebrowser": "1.0.*@dev",
-                "ncuesta/pinocchio": "dev-master",
-                "phploc/phploc": "*",
-                "phpunit/phpunit": "3.7.*",
-                "sebastian/phpcpd": "*",
-                "squizlabs/php_codesniffer": "1.*",
-                "yiisoft/yii": "1.1.14"
-            },
-            "type": "library",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Antonio Ramirez Cobos",
-                    "email": "amigo.cobos@gmail.com",
-                    "homepage": "http://www.ramirezcobos.com",
-                    "role": "Founder and development"
-                },
-                {
-                    "name": "Saphronov Mark",
-                    "email": "hijarian@gmail.com",
-                    "homepage": "http://about.me/hijarian"
-                },
-                {
-                    "name": "Ruslan Fadeev"
-                }
-            ],
-            "description": "Widget toolkit for Yii framework",
-            "homepage": "http://yiibooster.clevertech.biz/",
-            "keywords": [
-                "bootstrap",
-                "yii"
-            ],
-            "time": "2013-11-13 13:08:24"
-        },
-        {
-            "name": "clio/clio",
-            "version": "0.1.6",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nramenta/clio.git",
-                "reference": "7f23f7855ac998b7367a2861fb5ccc3a30641b4f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nramenta/clio/zipball/7f23f7855ac998b7367a2861fb5ccc3a30641b4f",
-                "reference": "7f23f7855ac998b7367a2861fb5ccc3a30641b4f",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.2"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Clio": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Nofriandi Ramenta",
-                    "email": "nramenta@gmail.com"
-                }
-            ],
-            "description": "Lightweight utility and helper classes for CLI applications",
-            "keywords": [
-                "cli",
-                "console",
-                "daemon"
-            ],
-            "time": "2013-01-01 06:21:36"
-        },
-        {
             "name": "fabpot/goutte",
             "version": "dev-master",
             "source": {
@@ -874,58 +1012,6 @@
             ],
             "description": "Official version of pdepend to be handled with Composer",
             "time": "2013-12-04 17:46:00"
-        },
-        {
-            "name": "phing/phing",
-            "version": "2.6.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phingofficial/phing.git",
-                "reference": "3f7d71bf561bafea39087250f777b349438cc32e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phingofficial/phing/zipball/3f7d71bf561bafea39087250f777b349438cc32e",
-                "reference": "3f7d71bf561bafea39087250f777b349438cc32e",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.2.0"
-            },
-            "bin": [
-                "bin/phing"
-            ],
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "classes/phing/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "include-path": [
-                "classes"
-            ],
-            "license": [
-                "LGPL3"
-            ],
-            "authors": [
-                {
-                    "name": "Michiel Rook",
-                    "email": "mrook@php.net"
-                },
-                {
-                    "name": "Phing Community",
-                    "homepage": "http://www.phing.info/trac/wiki/Development/Contributors"
-                }
-            ],
-            "description": "PHing Is Not GNU make; it's a PHP project build system or build tool based on Apache Ant.",
-            "homepage": "http://www.phing.info/",
-            "keywords": [
-                "build",
-                "task",
-                "tool"
-            ],
-            "time": "2013-08-26 21:13:03"
         },
         {
             "name": "phploc/phploc",
@@ -2156,94 +2242,7 @@
             "description": "The classes contained within this repository extend the standard DOM to use exceptions at all occasions of errors instead of PHP warnings or notices. They also add various custom methods and shortcuts for convenience and to simplify the usage of DOM.",
             "homepage": "https://github.com/theseer/fDOMDocument",
             "time": "2013-10-03 16:53:34"
-        },
-        {
-            "name": "yiisoft/yii",
-            "version": "1.1.14",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/yiisoft/yii.git",
-                "reference": "f0fee98ee84f70f1f3652f65562c9670e919cb4e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii/zipball/f0fee98ee84f70f1f3652f65562c9670e919cb4e",
-                "reference": "f0fee98ee84f70f1f3652f65562c9670e919cb4e",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.1.0"
-            },
-            "bin": [
-                "framework/yiic"
-            ],
-            "type": "library",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Qiang Xue",
-                    "email": "qiang.xue@gmail.com",
-                    "homepage": "http://www.yiiframework.com/",
-                    "role": "Founder and project lead"
-                },
-                {
-                    "name": "Alexander Makarov",
-                    "email": "sam@rmcreative.ru",
-                    "homepage": "http://rmcreative.ru/",
-                    "role": "Core framework development"
-                },
-                {
-                    "name": "Maurizio Domba",
-                    "homepage": "http://mdomba.info/",
-                    "role": "Core framework development"
-                },
-                {
-                    "name": "Carsten Brandt",
-                    "email": "mail@cebe.cc",
-                    "homepage": "http://cebe.cc/",
-                    "role": "Core framework development"
-                },
-                {
-                    "name": "Wei Zhuo",
-                    "email": "weizhuo@gmail.com",
-                    "role": "Project site maintenance and development"
-                },
-                {
-                    "name": "Sebastián Thierer",
-                    "email": "sebas@artfos.com",
-                    "role": "Component development"
-                },
-                {
-                    "name": "Jeffrey Winesett",
-                    "email": "jefftulsa@gmail.com",
-                    "role": "Documentation and marketing"
-                },
-                {
-                    "name": "Timur Ruziev",
-                    "email": "resurtm@gmail.com",
-                    "homepage": "http://resurtm.com/",
-                    "role": "Core framework development"
-                },
-                {
-                    "name": "Paul Klimov",
-                    "email": "klimov.paul@gmail.com",
-                    "role": "Core framework development"
-                }
-            ],
-            "description": "Yii Web Programming Framework",
-            "homepage": "http://www.yiiframework.com/",
-            "keywords": [
-                "framework",
-                "yii"
-            ],
-            "time": "2013-08-12 00:12:08"
         }
-    ],
-    "packages-dev": [
-
     ],
     "aliases": [
 

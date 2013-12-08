@@ -27,9 +27,11 @@
         "php":">=5.4.0",
         "yiisoft/yii": "1.1.14",
         "clevertech/yii-booster": "dev-master",
-        "phpunit/phpunit": "3.7.*",
         "phing/phing": "2.6.1",
-        "clio/clio": "0.1.6",
+        "clio/clio": "0.1.6"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*",
         "behat/mink-extension": "v1.2.0",
         "behat/mink-selenium2-driver": "v1.1.1",
         "behat/mink-goutte-driver": "v1.0.9",
@@ -38,7 +40,6 @@
         "pdepend/pdepend": "1.1.3",
         "phpmd/phpmd": "1.5.0"
     },
-    "require-dev": { },
     "minimum-stability": "dev",
     "config": {
         "bin-dir": "bin"
