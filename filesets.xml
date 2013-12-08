@@ -5,4 +5,6 @@
 
     <property name="fileset.sources.pdepend" value="common,console,frontend,backend" />
 
+    <property name="fileset.sources.phpmd" value="common,console,frontend,backend" />
+
 </project>

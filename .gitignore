@@ -17,6 +17,7 @@ bin/behat
 bin/phing
 bin/phploc
 bin/pdepend
+bin/phpmd
 bin/phpunit
 bin/webunit
 

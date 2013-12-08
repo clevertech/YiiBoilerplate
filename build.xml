@@ -8,7 +8,7 @@
 
     <import file="filesets.xml" />
 
-    <target name="check" depends="phploc, coverage, pdepend" />
+    <target name="check" depends="phploc, coverage, pdepend, phpmd" />
 
     <target name="phploc" depends="prepare-reports-dir">
         <!--
@@ -68,6 +68,20 @@
             <arg value="reports/clover.xml" />
             <arg value="--coverage-html" />
             <arg value="reports/coverage" />
+        </exec>
+    </target>
+
+    <target name="phpmd" depends="prepare-reports-dir">
+        <exec executable="bin/phpmd" dir="." passthru="true">
+            <arg value="--reportfile" />
+            <arg value="reports/phpmd.xml" />
+
+            <arg value="--exclude" />
+            <arg value="config,lib,extensions,runtime,views,www,migrations" />
+
+            <arg value="${fileset.sources.phpmd}" />
+            <arg value="xml" />
+            <arg value="carcass/phpmd.xml" />
         </exec>
     </target>
 </project>
