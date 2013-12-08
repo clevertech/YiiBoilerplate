@@ -4,4 +4,27 @@
             <directory>tests/units</directory>
         </testsuite>
     </testsuites>
+
+    <filter>
+        <whitelist>
+            <directory suffix=".php">common</directory>
+            <directory suffix=".php">console</directory>
+            <directory suffix=".php">frontend</directory>
+            <directory suffix=".php">backend</directory>
+
+            <exclude>
+                <file>common/bootstrap.php</file>
+                <file>common/check_prod_mode.php</file>
+                <file>common/debugmodeon.php</file>
+                <directory>*/runtime</directory>
+                <directory>*/config</directory>
+                <directory>*/extensions</directory>
+                <directory>*/lib</directory>
+                <directory>*/views</directory>
+                <directory>*/www</directory>
+                <directory>console/migrations</directory>
+            </exclude>
+
+        </whitelist>
+    </filter>
 </phpunit>

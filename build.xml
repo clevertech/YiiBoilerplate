@@ -8,7 +8,7 @@
 
     <import file="filesets.xml" />
 
-    <target name="check" depends="phploc" />
+    <target name="check" depends="phploc, coverage, pdepend" />
 
     <target name="phploc" depends="prepare-reports-dir">
         <!--
@@ -44,4 +44,30 @@
         <mkdir dir="reports" />
     </target>
 
+    <target name="pdepend" depends="prepare-reports-dir">
+        <exec executable="bin/pdepend" dir="." passthru="true">
+
+            <arg value="--ignore=config,lib,extensions,runtime,views,www" />
+
+            <!-- Note that this option is for INPUT file, not GENERATED one! -->
+            <arg value="--coverage-report=reports/clover.xml" />
+
+            <arg value="--summary-xml=reports/pdepend.xml" />
+
+            <arg value="--jdepend-chart=reports/jdepend.svg" />
+
+            <arg value="--overview-pyramid=reports/overview.svg" />
+
+            <arg value="${fileset.sources.pdepend}" />
+        </exec>
+    </target>
+
+    <target name="coverage" depends="prepare-reports-dir">
+        <exec executable="bin/phpunit" dir="." passthru="true">
+            <arg value="--coverage-clover" />
+            <arg value="reports/clover.xml" />
+            <arg value="--coverage-html" />
+            <arg value="reports/coverage" />
+        </exec>
+    </target>
 </project>
