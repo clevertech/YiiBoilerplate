@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="Boilerplate"
+         default="check"
+         description="Boilerplate for a web application, fully prepared for real work.">
+
+    <property file="project.properties" />
+
+    <import file="filesets.xml" />
+
+    <target name="check" depends="phploc" />
+
+    <target name="phploc" depends="prepare-reports-dir">
+        <!--
+        NO we DO NOT use built-in PHPLOCTask, because it has no real control over filesets
+        to check and works only with globally-installed PHPLOC
+        -->
+        <exec executable="bin/phploc" dir="." passthru="true">
+            <arg value="--verbose" />
+            <arg value="--progress" />
+
+            <arg value="--exclude" />
+            <arg value="config" />
+            <arg value="--exclude" />
+            <arg value="lib" />
+            <arg value="--exclude" />
+            <arg value="extensions" />
+            <arg value="--exclude" />
+            <arg value="runtime" />
+            <arg value="--exclude" />
+            <arg value="views" />
+            <arg value="--exclude" />
+            <arg value="www" />
+
+            <arg value="--log-xml" />
+            <arg value="reports/phploc.xml" />
+
+            <!-- This "line" instead of "value" is extremely important, it allows us to specify several tokens as an argument -->
+            <arg line="${fileset.sources.phploc}" />
+        </exec>
+    </target>
+
+    <target name="prepare-reports-dir">
+        <mkdir dir="reports" />
+    </target>
+
+</project>
