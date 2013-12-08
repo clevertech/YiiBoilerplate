@@ -3,6 +3,8 @@
 
     <property name="fileset.sources.phploc" value="common console frontend backend" />
 
+    <property name="fileset.sources.phpcpd" value="common console frontend backend" />
+
     <property name="fileset.sources.pdepend" value="common,console,frontend,backend" />
 
     <property name="fileset.sources.phpmd" value="common,console,frontend,backend" />

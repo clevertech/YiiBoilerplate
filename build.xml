@@ -8,7 +8,7 @@
 
     <import file="filesets.xml" />
 
-    <target name="check" depends="phploc, coverage, pdepend, phpmd" />
+    <target name="check" depends="phploc, coverage, pdepend, phpcpd, phpmd" />
 
     <target name="phploc" depends="prepare-reports-dir">
         <!--
@@ -82,6 +82,19 @@
             <arg value="${fileset.sources.phpmd}" />
             <arg value="xml" />
             <arg value="carcass/phpmd.xml" />
+        </exec>
+    </target>
+
+    <!-- We deliberately do not exclude anything to get duplication not necessarily in class definitions -->
+    <target name="phpcpd" depends="prepare-reports-dir">
+        <exec executable="bin/phpcpd" dir="." passthru="true">
+            <arg value="--log-pmd" />
+            <arg value="reports/phpcpd.xml" />
+            <arg value="--min-lines" />
+            <arg value="4" />
+            <arg value="--fuzzy" />
+            <arg value="--progress" />
+            <arg line="${fileset.sources.phpcpd}" />
         </exec>
     </target>
 </project>

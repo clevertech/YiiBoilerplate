@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "ffbf90d114dd1efe9707cd0debb5945c",
+    "hash": "d964f3d15da5e8bba8a5c63fc9135399",
     "packages": [
         {
             "name": "clevertech/yii-booster",
@@ -1555,6 +1555,57 @@
             "time": "2013-10-22 21:25:12"
         },
         {
+            "name": "sebastian/phpcpd",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/phpcpd.git",
+                "reference": "346c909de7adc3979988a6505a80814c8562d6b3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpcpd/zipball/346c909de7adc3979988a6505a80814c8562d6b3",
+                "reference": "346c909de7adc3979988a6505a80814c8562d6b3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "phpunit/php-timer": ">=1.0.4",
+                "sebastian/finder-facade": ">=1.1.0",
+                "sebastian/version": ">=1.0.0",
+                "symfony/console": ">=2.2.0",
+                "theseer/fdomdocument": "~1.4"
+            },
+            "bin": [
+                "composer/bin/phpcpd"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
+                }
+            ],
+            "description": "Copy/Paste Detector (CPD) for PHP code.",
+            "homepage": "https://github.com/sebastianbergmann/phpcpd",
+            "time": "2013-11-08 09:05:42"
+        },
+        {
             "name": "sebastian/version",
             "version": "dev-master",
             "source": {
@@ -2205,16 +2256,16 @@
         },
         {
             "name": "theseer/fdomdocument",
-            "version": "dev-master",
+            "version": "1.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/theseer/fDOMDocument.git",
-                "reference": "de4c6607576ec35b839d20a051c650b334117d6e"
+                "reference": "871515e1a48aa216627ad7cbfc3516d0838578e1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/theseer/fDOMDocument/zipball/de4c6607576ec35b839d20a051c650b334117d6e",
-                "reference": "de4c6607576ec35b839d20a051c650b334117d6e",
+                "url": "https://api.github.com/repos/theseer/fDOMDocument/zipball/871515e1a48aa216627ad7cbfc3516d0838578e1",
+                "reference": "871515e1a48aa216627ad7cbfc3516d0838578e1",
                 "shasum": ""
             },
             "require": {
@@ -2239,9 +2290,9 @@
                     "role": "lead"
                 }
             ],
-            "description": "The classes contained within this repository extend the standard DOM to use exceptions at all occasions of errors instead of PHP warnings or notices. They also add various custom methods and shortcuts for convenience and to simplify the usage of DOM.",
+            "description": "The classes contained within this repository extend the standard DOM to use exceptions at all occasions of errors instead of PHP warnings or notices. They also add various custom methods and shortcuts for convinience and to simplify the usage of DOM.",
             "homepage": "https://github.com/theseer/fDOMDocument",
-            "time": "2013-10-03 16:53:34"
+            "time": "2013-06-30 12:26:39"
         }
     ],
     "aliases": [

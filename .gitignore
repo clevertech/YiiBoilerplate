@@ -18,6 +18,7 @@ bin/phing
 bin/phploc
 bin/pdepend
 bin/phpmd
+bin/phpcpd
 bin/phpunit
 bin/webunit
 
