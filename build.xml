@@ -4,8 +4,6 @@
          default="check"
          description="Boilerplate for a web application, fully prepared for real work.">
 
-    <property file="project.properties" />
-
     <import file="filesets.xml" />
 
     <target name="check" depends="phploc, coverage, pdepend, phpcpd, phpmd, phpcs, codebrowser" />
