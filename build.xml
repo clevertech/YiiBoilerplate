@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project name="Boilerplate"
-         default="check"
+         default="all"
          description="Boilerplate for a web application, fully prepared for real work.">
 
     <import file="filesets.xml" />
 
+    <target name="all" depends="doc, check" />
+    <target name="doc" depends="apigen" />
     <target name="check" depends="phploc, coverage, pdepend, phpcpd, phpmd, phpcs, codebrowser" />
 
     <target name="phploc" depends="prepare-reports-dir">
@@ -115,6 +117,14 @@
             <arg value="--log=reports" />
             <arg value="--extensions=php" />
             <arg value="--output=reports/codebrowser" />
+        </exec>
+    </target>
+
+    <target name="apigen" depends="prepare-reports-dir">
+        <exec executable="bin/apigen.php" dir="." passthru="true">
+            <arg value="--config" />
+            <arg value="carcass/apigen.cfg" />
+            <arg line="${fileset.sources.apigen}" />
         </exec>
     </target>
 </project>

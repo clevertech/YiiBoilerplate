@@ -11,4 +11,6 @@
 
     <property name="fileset.sources.phpmd" value="common,console,frontend,backend" />
 
+    <property name="fileset.sources.apigen" value="--source=common --source=console --source=frontend --source=backend" />
+
 </project>

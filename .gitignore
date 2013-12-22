@@ -13,6 +13,7 @@ Thumbs.db
 .vagrant
 
 # Composer-installed binaries
+bin/apigen*
 bin/behat
 bin/phing
 bin/phploc
