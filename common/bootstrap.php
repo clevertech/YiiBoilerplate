@@ -21,8 +21,6 @@ require_once ROOT_DIR . '/vendor/yiisoft/yii/framework/YiiBase.php';
 require_once ROOT_DIR . '/common/components/Yii.php';
 # Include our own base WebApplication class
 require_once ROOT_DIR . '/common/components/WebApplication.php';
-# Include our own helper methods library
-require_once ROOT_DIR . '/common/lib/global.php';
 
 # Some global aliases
 Yii::setPathOfAlias('root', ROOT_DIR);
