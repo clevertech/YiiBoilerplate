@@ -318,9 +318,46 @@ Side note regarding phpStorm usage with Yii-based applications: if you want Yii 
 by hitting F4 over the component name in expressions like `Yii::app()->request`, you have to write `@property` doc blocks
 for your WebApplication class assigning proper class names to the component IDs. It increases human-readability, too.
 
-
 ====
 
 > [![Clevertech](http://clevertech.biz/images/slir/w54-h36-c54:36/images/site/index/home/clevertech-logo.png)](http://www.clevertech.biz)    
 well-built beautifully designed web applications  
 [www.clevertech.biz](http://www.clevertech.biz)
+
+[yii]: http://www.yiiframework.com/
+[yii-default-structure]: http://www.yiiframework.com/doc/guide/1.1/en/basics.convention#directory
+[yiiboilerplate]: https://github.com/clevertech/YiiBoilerplate
+[uncle-bob-the-screaming-architecture]: http://blog.8thlight.com/uncle-bob/2011/09/30/Screaming-Architecture.html
+[vagrant]: http://docs.vagrantup.com/v2/getting-started/
+[virtualbox]: https://www.virtualbox.org/
+[php-5.4-changelog]: http://www.php.net/manual/en/migration54.new-features.php
+[atdd]: http://guide.agilealliance.org/guide/atdd.html
+[goos]: http://www.growing-object-oriented-software.com/
+[behat]: http://behat.org/
+[phpunit]: http://phpunit.de/
+[gherkin]: http://docs.behat.org/guides/1.gherkin.html
+[phpqatools]: http://phpqatools.org/
+[phing]: http://www.phing.info/
+[phpcs]: http://pear.php.net/PHP_CodeSniffer
+[phpcpd]: http://github.com/sebastianbergmann/phpcpd
+[phploc]: http://github.com/sebastianbergmann/phploc
+[phpmd]: http://phpmd.org/
+[pdepend]: http://pdepend.org/
+[phpcb]: https://github.com/Mayflower/PHP_CodeBrowser
+[apigen]: http://apigen.org/
+[ubuntu1204]: http://releases.ubuntu.com/precise/
+[composer]: http://getcomposer.org/
+[mink]: http://mink.behat.org/
+[mink-extension]: http://extensions.behat.org/mink/
+[yii-booster]: http://yii-booster.clevertech.biz/
+[selenium]: http://docs.seleniumhq.org/
+[composer.lock]: http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file
+[yiic]: http://www.yiiframework.com/doc/guide/1.1/en/topics.console
+[selenium-driver]: https://github.com/Behat/MinkSelenium2Driver
+[phantomjs]: http://phantomjs.org/
+[zombie]: http://zombie.labnotes.org/
+[yii-booster-docs]: http://yii-booster.clevertech.biz/widgets/
+[html5-boilerplate]: http://html5boilerplate.com/
+[bootstrap]: http://getbootstrap.com/
+[bsd-license]: http://opensource.org/licenses/BSD-2-Clause
+[yii-boilerplate-issues]: https://github.com/clevertech/YiiBoilerplate/issues
