@@ -1,14 +1,26 @@
 <?php
-/** hijarian @ 12.11.13 15:44 */
-
+/**
+ * Controller action for logging users in using the login form containing username and password.
+ *
+ * It is statically dependent on the LoginForm model representing the authentication form.
+ *
+ * @author Mark Safronov marks@clevertech.biz
+ * @copyright 2013 Clevertech
+ * @license BSD
+ * @package YiiBoilerplate\Backend
+ */
 class PasswordLoginAction extends CAction
 {
+    /**
+     * If there were no login attempt or it failed render login form page
+     * otherwise redirect him to wherever he should return to.
+     *
+     * Also, this endpoint serves as the AJAX endpoint for client-side validation of login info.
+     */
     public function run()
     {
         $user = Yii::app()->user;
-
-        if (!$user->isGuest)
-            $this->controller->redirect('/');
+        $this->redirectAwayAlreadyAuthenticatedUsers($user);
 
         $model = new LoginForm();
 
@@ -25,8 +37,7 @@ class PasswordLoginAction extends CAction
                 $this->controller->redirect($user->returnUrl);
         }
 
-        $sent = $request->getParam('sent', 0);
-        $this->controller->render('login', compact( 'model', 'sent' ));
+        $this->controller->render('login', compact('model'));
     }
 
     /**
@@ -36,12 +47,22 @@ class PasswordLoginAction extends CAction
     private function respondIfAjaxRequest($request, $model)
     {
         $ajaxRequest = $request->getPost('ajax', false);
-        if ($ajaxRequest and $ajaxRequest === 'login-form') {
-            echo CActiveForm::validate(
-                $model,
-                array('username', 'password', 'verifyCode')
-            );
-            Yii::app()->end();
-        }
+        if (!$ajaxRequest or $ajaxRequest !== 'login-form')
+            return;
+
+        echo CActiveForm::validate(
+            $model,
+            array('username', 'password', 'verifyCode')
+        );
+        Yii::app()->end();
+    }
+
+    /**
+     * @param $user
+     */
+    private function redirectAwayAlreadyAuthenticatedUsers($user)
+    {
+        if (!$user->isGuest)
+            $this->controller->redirect('/');
     }
 } 
