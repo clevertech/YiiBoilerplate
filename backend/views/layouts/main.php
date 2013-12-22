@@ -1,5 +1,8 @@
 <?php
 /**
+ * Main layout file for the whole backend.
+ * It is based on Twitter Bootstrap classes inside HTML5Boilerplate.
+ *
  * @var BackendController $this
  * @var string $content
  */

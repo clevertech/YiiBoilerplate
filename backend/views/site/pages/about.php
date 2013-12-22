@@ -1,4 +1,8 @@
 <?php
+/**
+ * @var BackendController $this
+ */
+
 $this->pageTitle=Yii::app()->name . ' - About';
 $this->breadcrumbs=array(
 	'About',

@@ -1,6 +1,8 @@
 <?php
-/* @var $this UserController */
-/* @var $model User */
+/**
+ * @var UserController $this
+ * @var User $model
+*/
 
 $this->breadcrumbs=array(
 	'Users'=>array('index'),

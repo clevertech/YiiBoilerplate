@@ -1,7 +1,9 @@
 <?php
-/* @var $this UserController */
-/* @var $model User */
-/* @var $form CActiveForm */
+/**
+ * @var UserController $this
+ * @var User $model
+ * @var CActiveForm $form
+ */
 ?>
 
 <div class="form">

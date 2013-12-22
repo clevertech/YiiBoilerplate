@@ -1,6 +1,8 @@
 <?php
-/* @var $this UserController */
-/* @var $dataProvider CActiveDataProvider */
+/**
+ * @var UserController $this
+ * @var CActiveDataProvider $dataProvider
+ */
 
 $this->breadcrumbs=array(
 	'Users',

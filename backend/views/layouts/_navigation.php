@@ -1,5 +1,10 @@
 <?php
-/** hijarian @ 12.11.13 15:34 */
+/**
+ * Top menu definition.
+ *
+ * @var BackendController $this
+ */
+
 $this->widget(
     'bootstrap.widgets.TbNavbar',
     array(
