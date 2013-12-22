@@ -4,7 +4,7 @@
          default="all"
          description="Boilerplate for a web application, fully prepared for real work.">
 
-    <import file="filesets.xml" />
+    <import file="carcass/filesets.xml" />
 
     <target name="all" depends="doc, check" />
     <target name="doc" depends="apigen" />
