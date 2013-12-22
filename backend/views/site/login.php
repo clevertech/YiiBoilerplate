@@ -1,6 +1,6 @@
 <?php
 /**
- * @var LoginForm $model
+ * @var BackendLoginForm $model
  *
  * @var BackendController $this
  */
@@ -37,7 +37,7 @@ echo CHtml::errorSummary($model, null, null, array('class' => 'alert alert-error
 	<?= $form->passwordFieldRow($model, 'password', array('class'=>'span3'));?>
 	<?= $form->checkBoxRow($model, 'rememberMe');?>
 
-	<?php if ($model->requireCaptcha): ?>
+	<?php if ($model->isCaptchaRequired()): ?>
 		<?php $this->widget('CCaptcha'); ?>
 		<?= $form->textField($model, 'verifyCode'); ?>
 	<?php endif; ?>

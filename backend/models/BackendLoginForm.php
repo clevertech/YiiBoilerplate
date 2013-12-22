@@ -1,28 +1,63 @@
 <?php
 /**
- * LoginForm.php
+ * Model class for login form at backend
  *
- * @author: antonio ramirez <antonio@clevertech.biz>
- * Date: 7/22/12
- * Time: 8:37 PM
+ * This form is almost default implementation of the login from the Yii tutorials.
+ * Captcha was added and the code to limit max number of failed login attempts.
+ *
+ * @author Mark Safronov marks@clevertech.biz
+ * @copyright 2013 Clevertech
+ * @license BSD
+ * @package YiiBoilerplate\Backend
  */
-
 class BackendLoginForm extends CFormModel
 {
+    /**
+     * Max number of allowed failed login attempts before we show captcha.
+     *
+     * @var int
+     */
+    const MAX_LOGIN_ATTEMPTS = 3;
 
-	// maximum number of login attempts before display captcha
-	const MAX_LOGIN_ATTEMPTS = 3;
-
+    /**
+     * User name
+     *
+     * @var string
+     */
 	public $username;
+
+    /**
+     * User password
+     *
+     * @var string
+     */
 	public $password;
-	public $email;
+
+    /**
+     * Whether to login user for some amount of time or until end of session.
+     *
+     * @var bool
+     */
 	public $rememberMe;
+
+    /**
+     * Captcha code
+     *
+     * @var string
+     */
 	public $verifyCode;
+
+    /** @var CUserIdentity */
 	private $_identity;
+
+    /** @var User */
 	private $_user = null;
 
 	/**
-	 * Model rules
+	 * Validation rules
+     *
+     * @see CModel::rules()
+     *
 	 * @return array
 	 */
 	public function rules()
@@ -37,6 +72,9 @@ class BackendLoginForm extends CFormModel
 
 	/**
 	 * Returns attribute labels
+     *
+     * @see CModel::attributeLabels()
+     *
 	 * @return array
 	 */
 	public function attributeLabels()
@@ -48,36 +86,42 @@ class BackendLoginForm extends CFormModel
 	}
 
 	/**
-	 * Authenticates user input against DB
-	 * @param $attribute
-	 * @param $params
+	 * Inline validator for password field.
+     *
+	 * @param string
+     * @param array
 	 */
 	public function authenticate($attribute, $params)
     {
-		if (!$this->hasErrors()) {
-			$this->_identity = new AdminIdentity($this->username, $this->password);
-			if (!$this->_identity->authenticate()) {
-				if (($user = $this->user) !== null && $user->login_attempts < 100)
-					$user->saveAttributes(array('login_attempts' => $user->login_attempts + 1));
-				$this->addError('username', Yii::t('errors', 'Incorrect username and/or password.'));
-				$this->addError('password', Yii::t('errors', 'Incorrect username and/or password.'));
-			}
-		}
+        if ($this->hasErrors())
+            return;
+
+        $this->_identity = new AdminIdentity($this->username, $this->password);
+        if ($this->_identity->authenticate())
+            return;
+
+        if ($this->user !== null and $this->user->login_attempts < 100)
+            $this->user->saveAttributes(array('login_attempts' => $this->user->login_attempts + 1));
+
+        $this->addError('username', Yii::t('errors', 'Incorrect username and/or password.'));
+        $this->addError('password', Yii::t('errors', 'Incorrect username and/or password.'));
 	}
 
 	/**
-	 * Validates captcha code
-	 * @param $attribute
-	 * @param $params
+	 * Inline validator for captcha code
+     *
+	 * @param string
+	 * @param array
 	 */
 	public function validateCaptcha($attribute, $params)
     {
-		if ($this->getRequireCaptcha())
+		if ($this->isCaptchaRequired())
 			CValidator::createValidator('captcha', $this, $attribute, $params)->validate($this);
 	}
 
 	/**
 	 * Login
+     *
 	 * @return bool
 	 */
 	public function login()
@@ -86,7 +130,9 @@ class BackendLoginForm extends CFormModel
 			$this->_identity = new AdminIdentity($this->username, $this->password);
 			$this->_identity->authenticate();
 		}
-		if ($this->_identity->errorCode === AdminIdentity::ERROR_NONE) {
+
+		if ($this->_identity->isAuthenticated)
+        {
 			$duration = $this->rememberMe ? 3600 * 24 * 30 : 0; // 30 days
 			Yii::app()->user->login($this->_identity, $duration);
 			return true;
@@ -96,15 +142,15 @@ class BackendLoginForm extends CFormModel
 	}
 
 	/**
-	 * Returns
-	 * @return null
+     * Caching getter for user model associated with given username.
+     *
+	 * @return User
 	 */
 	public function getUser()
     {
-		if ($this->_user === null) {
-			$attribute = strpos($this->username, '@') ? 'email' : 'username';
-			$this->_user = User::model()->find(array('condition' => $attribute . '=:loginname', 'params' => array(':loginname' => $this->username)));
-		}
+		if ($this->_user === null)
+			$this->_user = User::model()->findByAttributes(['username' => $this->username]);
+
 		return $this->_user;
 	}
 
@@ -112,7 +158,7 @@ class BackendLoginForm extends CFormModel
 	 * Returns whether it requires captcha or not
 	 * @return bool
 	 */
-	public function getRequireCaptcha()
+	public function isCaptchaRequired()
     {
 		return ($user = $this->user) !== null && $user->login_attempts >= self::MAX_LOGIN_ATTEMPTS;
 	}
