@@ -1,11 +1,14 @@
 <?php
-/** hijarian @ 27.10.13 12:59 */
-
 /**
- * Class BackendWebApplication.
- * This is the helper class for you to have backend-specific stuff in WebApplication instance.
- * Note that you might want to describe your application components
+ * Overridden CWebApplication instance for any stuff related only to backend entry point.
+ *
+ * Note that you might want to describe your backend application components
  * using `@property` declarations in this docblock.
+ *
+ * @author Mark Safronov marks@clevertech.biz
+ * @copyright 2013 Clevertech
+ * @license BSD
+ * @package YiiBoilerplate\Backend
  */
 class BackendWebApplication extends WebApplication
 {
