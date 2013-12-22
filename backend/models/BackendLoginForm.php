@@ -7,7 +7,8 @@
  * Time: 8:37 PM
  */
 
-class LoginForm extends CFormModel {
+class BackendLoginForm extends CFormModel
+{
 
 	// maximum number of login attempts before display captcha
 	const MAX_LOGIN_ATTEMPTS = 3;
@@ -24,7 +25,8 @@ class LoginForm extends CFormModel {
 	 * Model rules
 	 * @return array
 	 */
-	public function rules() {
+	public function rules()
+    {
 		return array(
 			array('password, username', 'required'),
 			array('verifyCode', 'validateCaptcha'),
@@ -37,7 +39,8 @@ class LoginForm extends CFormModel {
 	 * Returns attribute labels
 	 * @return array
 	 */
-	public function attributeLabels() {
+	public function attributeLabels()
+    {
 		return array(
 			'username' => Yii::t('labels', 'Username or e-mail'),
 			'rememberMe' => Yii::t('labels', 'Remember me next time'),
@@ -49,7 +52,8 @@ class LoginForm extends CFormModel {
 	 * @param $attribute
 	 * @param $params
 	 */
-	public function authenticate($attribute, $params) {
+	public function authenticate($attribute, $params)
+    {
 		if (!$this->hasErrors()) {
 			$this->_identity = new AdminIdentity($this->username, $this->password);
 			if (!$this->_identity->authenticate()) {
@@ -66,7 +70,8 @@ class LoginForm extends CFormModel {
 	 * @param $attribute
 	 * @param $params
 	 */
-	public function validateCaptcha($attribute, $params) {
+	public function validateCaptcha($attribute, $params)
+    {
 		if ($this->getRequireCaptcha())
 			CValidator::createValidator('captcha', $this, $attribute, $params)->validate($this);
 	}
@@ -75,7 +80,8 @@ class LoginForm extends CFormModel {
 	 * Login
 	 * @return bool
 	 */
-	public function login() {
+	public function login()
+    {
 		if ($this->_identity === null) {
 			$this->_identity = new AdminIdentity($this->username, $this->password);
 			$this->_identity->authenticate();
@@ -85,13 +91,16 @@ class LoginForm extends CFormModel {
 			Yii::app()->user->login($this->_identity, $duration);
 			return true;
 		}
+
+        return false;
 	}
 
 	/**
 	 * Returns
 	 * @return null
 	 */
-	public function getUser() {
+	public function getUser()
+    {
 		if ($this->_user === null) {
 			$attribute = strpos($this->username, '@') ? 'email' : 'username';
 			$this->_user = User::model()->find(array('condition' => $attribute . '=:loginname', 'params' => array(':loginname' => $this->username)));
@@ -103,7 +112,8 @@ class LoginForm extends CFormModel {
 	 * Returns whether it requires captcha or not
 	 * @return bool
 	 */
-	public function getRequireCaptcha() {
+	public function getRequireCaptcha()
+    {
 		return ($user = $this->user) !== null && $user->login_attempts >= self::MAX_LOGIN_ATTEMPTS;
 	}
 

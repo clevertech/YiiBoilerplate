@@ -22,7 +22,7 @@ class PasswordLoginAction extends CAction
         $user = Yii::app()->user;
         $this->redirectAwayAlreadyAuthenticatedUsers($user);
 
-        $model = new LoginForm();
+        $model = new BackendLoginForm();
 
         $request = Yii::app()->request;
 
