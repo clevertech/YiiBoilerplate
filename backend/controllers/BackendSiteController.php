@@ -1,56 +1,55 @@
 <?php
 /**
- * SiteController.php
+ * Default controller for the backend entry point.
  *
- * @author: antonio ramirez <antonio@clevertech.biz>
- * Date: 7/24/12
- * Time: 1:21 AM
+ * For convenience we have all login-related stuff here, along with landing page, error page and static pages renderer.
+ *
+ * @author Mark Safronov marks@clevertech.biz
+ * @copyright 2013 Clevertech
+ * @license BSD
+ * @package YiiBoilerplate\Backend
  */
-
 class BackendSiteController extends BackendController
 {
 	/**
-	 * @return array actions
+     * The actions defined in separate action classes and bound to this class by IDs.
+     *
+     * @see http://www.yiiframework.com/doc/api/1.1/CController#actions-detail
+     *
+	 * @return array
 	 */
 	public function actions()
 	{
-		return array(
-			'captcha' => array(
+		return [
+			'captcha' => [
 				'class' => 'CCaptchaAction',
 				'backColor' => 0xFFFFFF,
 				'foreColor' => 0x0099CC,
-			),
+			],
 			'page' => 'CViewAction',
             'error' => 'SimpleErrorAction',
             'login' => 'PasswordLoginAction',
             'logout' => 'LogoutAction',
             'index' => 'BackendHomePageAction'
-		);
+		];
 	}
 
 	/**
-     * Enabling the registration and other basic pages for guest users.
-	 * @return array rules for the "accessControl" filter.
+     * Rules for CAccessControlFilter.
+     *
+     * We enable the registration and other basic pages for guest users.
+     *
+     * @see http://www.yiiframework.com/doc/api/1.1/CController#accessRules-detail
+     *
+	 * @return array Rules for the "accessControl" filter.
 	 */
 	public function accessRules()
 	{
         return array_merge(
-            array(
-                array(
-                    'allow', // Allow registration form for anyone
-                    'actions' => array('index', 'login', 'logout', 'captcha', 'error'),
-                )
-            ),
+            [
+                [ 'allow', 'actions' => ['index', 'login', 'logout', 'captcha', 'error'] ]
+            ],
             parent::accessRules()
         );
 	}
-
-	/**
-	 * Renders index page
-	 */
-	public function actionIndex()
-	{
-		$this->render('index');
-	}
-
 }
