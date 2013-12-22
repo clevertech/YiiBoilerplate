@@ -1,24 +1,43 @@
 <?php
-
+/**
+ * CRUD for managing User models.
+ *
+ * This is the UserController verbatim generated using Gii module.
+ * Almost no changes were done to the code.
+ *
+ * @author Mark Safronov marks@clevertech.biz
+ * @copyright 2013 Clevertech
+ * @license BSD
+ * @package YiiBoilerplate\Backend
+ */
 class UserController extends BackendController
 {
 	/**
-	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
-	 * using two-column layout. See 'protected/views/layouts/column2.php'.
-	 */
-	public $layout='//layouts/column2';
+     * We override the layout to be two-column one. We'll put the CRUD menu in sidebar.
+     *
+     * @see http://www.yiiframework.com/doc/api/1.1/CController#layout-detail
+     *
+     * @var string Layout used for rendering views
+     */
+	public $layout = '//layouts/column2';
 
-	/**
-	 * @return array action filters
-	 */
+    /**
+     * Additional behavior associated with different routes in the controller.
+     *
+     * We allow only POST requests to "delete" action, everything else is default for backend.
+     *
+     * @see http://www.yiiframework.com/doc/api/1.1/CController#filters-detail
+     * @see http://www.yiiframework.com/doc/api/1.1/CAccesControlFilter
+     * @see http://yii-booster.clevertech.biz/getting-started.html#initialization
+     *
+     * @return array
+     */
 	public function filters()
 	{
         return array_merge(
-            array(
-                array(
-                    'postOnly + delete'
-                )
-            ),
+            [
+                [ 'postOnly + delete' ]
+            ],
             parent::filters()
         );
 	}
@@ -55,9 +74,8 @@ class UserController extends BackendController
 	 */
 	public function actionView($id)
 	{
-		$this->render('view',array(
-			'model'=>$this->loadModel($id),
-		));
+        $model = $this->loadModel($id);
+		$this->render('view', compact('model'));
 	}
 
 	/**
@@ -78,9 +96,7 @@ class UserController extends BackendController
 				$this->redirect(array('view','id'=>$model->id));
 		}
 
-		$this->render('create',array(
-			'model'=>$model,
-		));
+		$this->render('create', compact('model'));
 	}
 
 	/**
@@ -102,9 +118,7 @@ class UserController extends BackendController
 				$this->redirect(array('view','id'=>$model->id));
 		}
 
-		$this->render('update',array(
-			'model'=>$model,
-		));
+		$this->render('update', compact('model'));
 	}
 
 	/**
@@ -127,9 +141,7 @@ class UserController extends BackendController
 	public function actionIndex()
 	{
 		$dataProvider=new CActiveDataProvider('User');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
+		$this->render('index', compact('dataProvider'));
 	}
 
 	/**
@@ -142,9 +154,7 @@ class UserController extends BackendController
 		if(isset($_GET['User']))
 			$model->attributes=$_GET['User'];
 
-		$this->render('admin',array(
-			'model'=>$model,
-		));
+		$this->render('admin', compact('model'));
 	}
 
 	/**
@@ -158,7 +168,7 @@ class UserController extends BackendController
 	{
 		$model=User::model()->findByPk($id);
 		if($model===null)
-			throw new CHttpException(404,'The requested page does not exist.');
+			throw new CHttpException(404, 'The requested page does not exist.');
 		return $model;
 	}
 
