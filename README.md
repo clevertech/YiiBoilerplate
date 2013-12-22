@@ -1,46 +1,95 @@
 # YiiBoilerplate
 Structure for enterprise-grade websites for Yii framework. Already thought-out.
 
-# WORK IN PROGRESS DISCLAIMER
-Current state of the project is a work in progress.
-A massive rewrite was done to the overall design, but it's incomplete.
-You have to understand that this work is being done in a free time of full-time developers from other projects,
-so expect extremely slow response (if any) and changes. Fork button is your friend.
+While making websites with [Yii framework][yii] for medium-sized businesses over and over again, we adopted a standard way of structuring the project over time.
+It was initially based on the following premises:
+
+1. Separate public ("frontend") and administrator's ("backend") sides to different domains for security purposes.
+2. Have an application configuration modular, so we can have parts of it committed to VCS repository for everyone and parts of it being crafted for every specific developer.
+
+This two premises have lead to significant changes from the [traditional project structure, described in Yii tutorial][yii-default-structure]. It even affected the terminology, creating two new terms "entry point" and "environment".
+
+For quite some time we were building Yii-based websites using this structure and it proved really effective. This article will describe to you the all-new [YiiBoilerplate][yiiboilerplate] with all the new features added in that time.
+
+We do really hope that you'll benefit from this boilerplate project template.
+
+# Being a Boilerplate
+
+We must make a note first that YiiBoilerplate is neither a library nor an another framework.
+It's a *boilerplate*, stuff you use as a starting point for your work.
+
+As a consequence of this, do not bother thinking about "updates" or "future versions" of YiiBoilerplate after you started your project over it. Just adapt it to your needs as you wish.
 
 # Requirements
 
 -   **PHP 5.4**.
     Seriously, even [Debian Stable](http://packages.debian.org/stable/php/php5), notorious for slow library upgrades, has version 5.4 now.
     Upgrade right now and/or stop using hosting providers with old PHP versions.
--   Probably, enabled support for running PHAR archives from console (it has to be enabled via `php.ini`).
+-   Probably, **enabled support for running PHAR archives from console** (it has to be enabled via `php.ini`).
+-   *Optional*: **Java** to be able to run Selenium.
+-   *Optional*: **Virtualbox** and **Vagrant** for the easiest local deploy ever.
 
-# phpStorm tweaks
+# Easiest initial deploy ever
 
-To fully utilize phpStorm's autocompletion feature we have to do some tweaks to instruct it to ignore some files
-from 3rd-party libraries.
+1.  Install [Vagrant][vagrant] (not covered by this article).
 
-1.  We use our custom `Yii` class, to utilize the F4 button over the `Yii::app()` invocation
-    and to regain control over this singleton in general.
-    However, this leads to duplicate definitions as far as phpStorm is concerned.
+2.  Install [Virtualbox][virtualbox] (not covered by this article).
 
-    1.  In `File -> Settings -> PHP` under *Include Path* section find the entry ending in `yiisoft/yii` entry
-        and change it so it will end in `yiisoft/yii/framework`.
-    2.  Similarly change the entry ending in `clevertech/yii-booster` so that it ends in `clevertech/yii-booster/src`.
-    3.  In `File -> Settings -> File Types` under *Ignore files and folders* section
-        append the string `;framework/Yii.php;tests/fakes/Yii.php` verbatim.
+3.  If you have PHP 5.4+ installed already ([and you should have, because it's awesome][php-5.4-changelog]), you've just installed all prequisites for YiiBoilerplate.
 
-2.  Also, Behat distribution shipped with Composer includes the `FeatureContext` class which conflicts with our own.
-    In `File -> Settings -> PHP` under *Include Path* section find the entry ending in `behat/behat` and append `src` to it.
-    This will exclude the tests code from Behat library index.
+4.  Now just clone the YiiBoilerplate repo:
 
-Please note that due to the indexing mechanism of phpStorm you will either need to change the PHP include paths each time
-you make changes in `composer.json` or to disable the auto-reindexing of Composer-installed libraries altogether.
+        git clone git@github.com:clevertech/YiiBoilerplate.git <yourprojectname>
 
-Side note regarding phpStorm usage with Yii-based applications: if you want Yii application components to be accessible
-by hitting F4 over the component name in expressions like `Yii::app()->request`, you have to write `@property` doc blocks
-for your WebApplication class assigning proper class names to the component IDs. It increases human-readability, too.
+5.  Inside cloned directory run and wait for complete:
 
-# Top-level Directories
+        vagrant up
+
+6.  You're done. Open up the [http://localhost:8080/](http://localhost:8080/). It's your future frontend. Open up [http://localhost:8081/](http://localhost:8081/). It's your future backend. You can start working.
+    Don't forget to `vagrant halt` the virtual machine before turning off your workstation, virtualbox can fail to shut itself down in time before `kill -9` arrives.
+
+# Manual preparations
+
+Consult the `carcass/vagrant/prepare-precise64.sh` and `carcass/vagrant/setup-app.sh` scripts for example.
+
+# Get a full health report for a project
+
+We integrated almost everything from the [PHP QA Tools project][phpqatools], over the [Phing build system][phing].
+
+To get all possible static code analysis reports for your project and the API documentation, just run:
+
+    bin/phing
+
+It will generate the following reports in the `reports` folder:
+
+* Report of the code style violations in Checkstyle format from [PHP Code Sniffer][phpcs]
+* Code coverage report in Clover format from [PHPUnit][phpunit]
+* Code duplications report in XML from [PHP Copy-Paste Detector][phpcpd]
+* Codebase size report in XML from [PHPLOC][phploc]
+* Various problems report in XML from [PHP Mess Detector][phpmd]
+* Report in XML from [PDepend][pdepend]
+* Two code metrics schematics in SVG from PDepend
+* Code coverage report in HTML format from PHPUnit
+* HTML pages tree with all of your codebase with all above problems highlighted from [PHP Code Browser][phpcb]
+* and, finally, the autogenerated API documentation in HTML from [ApiGen][apigen].
+
+We believe it'll be sufficient for you to get an idea about the state of your codebase.
+Of course to generate code coverage reports this reporter has to run all unit tests, too, so you get regression testing as a side effect, assuming that your unit tests are really fast.
+
+# Overview
+
+Now, let's delve into internals.
+
+YiiBoilerplate was designed for medium-sized Yii-based web applications of any kind.
+By "meduim-sized" we mean 10 to 100 unique routes.
+Again, it has a harness to support two-tier test-first development, with [Behat][behat] for end-to-end acceptance tests and [PHPUnit][phpunit] for both pure unit tests and integration tests.
+
+Basically, YiiBoilerplate is a bunch of files and folders you commit to your VCS repo as your "initial commit", then start working for real.
+It consists of a proof-of-concept website, having one-page blank frontend and an admin side with rudimentary UI and a password-based authentication already done.
+
+You can read the whole "table of contents" for the various directories of the YiiBoilerplate in `README.md` files inside that directories.
+
+## Top-level Directories
 
 1.  `backend`
 
@@ -86,240 +135,189 @@ for your WebApplication class assigning proper class names to the component IDs.
     All third-party dependencies are installed by Composer in here, even Selenium.
     You will not see this directory initially, it's auto-generated when needed.
 
-**Everything below the following line is outdated info, use at your own risk!**
+## Configuration tree
 
----
+Most complex part of the YiiBoilerplate application is the configuration, built from set of different parts.
 
-# Overview
+Basically, configuration for backend, console and frontend entry points is being constructed from the following parts, later ones overriding previous ones:
 
-**YiiBoilerplate**, aims to provide *Yii developers* an application folder structure with sufficient flexibility to satisfy development needs from simple to enterprise applications.
+1. Base common config.
+2. Environment-specific common config.
+3. Local overrides for common config.
+4. Base entry point-specific config.
+5. Environment-specific entry point-specific config.
+6. Local overrides for entry-point-specific config.
 
-It may look a little bit too complex at first sight but, at Clevertech, we understand that needs may vary along the development life cycle of a product in order to fulfill customer's requirements and that commonly forces developers to modify the initial folder structure, thus making very hard for a new developer to jump in and 'understand' where everything is located.
+For frontend entry point the corresponding files would be:
 
-In order to avoid such time consuming tasks, **ease the life of our beloved developers** and increase productivity, we make use of this folder structure template for our projects.
+1. `common/config/overrides/base.php`
+2. `common/config/overrides/environment.php`
+3. `common/config/overrides/local.php`
+4. `frontend/config/overrides/base.php`
+5. `frontend/config/overrides/environment.php`
+6. `frontend/config/overrides/local.php`
 
-### Overall Structure
-Below the directory structure we are using:
+Local overrides and environment overrides can be absent.
 
-	/
-    backend/
-        components/
-	config/
-            environments/
-            	main-private.php *
-            	main-prod.php
-      			params-private.php *
-      			params-prod.php
-    	main-env.php *
-    	main-local.php *
-    	main.php
-    	params-env.php *
-    	params-local.php *
-    	params.php
-    	test.php
-	controllers/
-		SiteController.php
-		...
-	extensions/
-            behaviors/
-            validators/
-        lib/
-        models/
-        	FormModel.php
-        	...
-        modules/
-        runtime/ *
-        views/
-        	layouts/
-        	site/
-        widgets/
-        www/
-            assets/ *
-            css/
-            images/
-            js/
-            themes/
-            index.php
-            .htaccess
-    common/
-        components/
-        config/
-            environments/
-            	params-private.php *
-            	params-prod.php
-            params-env.php *
-            params-local.php *
-            params.php
-        data/
-        extensions/
-        	behaviors/
-        	validators/
-        lib/
-            Behat/
-            Pear/
-            Yii/
-            Zend/
-        messages/
-        models/
-        widgets/
-    console/
-		commands/
-		components/
-		config/
-	    	environments/
-		lib/
-		migrations/
-        models/
-        runtime/ *
-        yiic.php
-    frontend/
-		components/
-		config/
-	    	environments/
-	    		main-private.php *
-	    		main-prod.php
-	    		params-private.php *
-	    		params-prod.php
-	    	main-env.php *
-	    	main-local.php
-	    	main.php
-	    	params-env.php *
-	    	params-local.php *
-	    	params.php
-	    	test.php
-		controllers/
-		extensions/
-			behaviors/
-			validators/
-		lib/
-		models/	
-		modules/	
-		runtime/ *
-		views/
-    		layouts/
-    		site/
-		www/
-	    	assets/ *
-	    	css/
-	    	files/
-	    	images/
-            	js/
-            	less/
-            index.php
-            robots.txt
-            .htaccess
-    tests/
-        bootstrap/
-            FeatureContext.php
-            YiiContext.php
-        features/
-            Startup.feature
-        behat.yml
-    
-    INSTALL.md
-    README.md
-    runbehat
-    runpostdeploy
-    yiic
-    yiic.bat
+You can trace the resulting tree of `require` calls starting from `frontend/config/main.php` file.
+That's the file you really use as the configuration file for application.
+In reality it's just a four-line builder constructing the resulting configuration tree from six different parts specified above.
 
-When working in a team development environment, using any of the VCS (Version Control System) available (i.e. Git, SVN), the files and folders marked with an asterisk should **not** be included in the revision system.
+### Local overrides
 
-###Top Level Directories
-At the top-most level, we have:  
-  
-* ***backend***: the backend application which will be mainly used by site administrators to manage the whole system (avoiding admin modules at frontend application to avoid confusion)   
-* ***console***: the console application that is compound of the console commands required for the system.   
-* ***frontend***: the frontend application that is the main interface for end users. On a website development, this would be what the site users would see.  
-* ***common***: the directory whose content is shared among  all the above applications.
-* ***test***: the folder where we include all of our BDD system tests.
+Local overrides are simple. That's the snippets of configuration containing the non-portable parts like database access credentials.
 
-The whole application is divided into three applications: backend, fronted and console. Following [the directory structure of the yii project site](http://www.yiiframework.com/wiki/155/the-directory-structure-of-the-yii-project-site), with some twist on its configuration. The common folder is to store all files (extensions, components, behaviors, models, etc… ) that are shared among the mentioned applications.
+`config/overrides` subdirectory in all of `common`, `frontend`, `console` and `backend` directories contains the `local-example.php` file which you can copy as `local.php` and immediately use.
 
-###Application Directories
-The directory structure of each application is very similar. For example **backend** and **frontend** both share the same directory structure with a slight variation at the ***www*** folder of the **frontend** and the inclusion of bootstrap theme and extensions for the **backend**, to easy the task to create Administrative panels.
+These overrides are not to be committed to the repository as they contain the settings specific to each developer's machine.
 
-The shared folder structure is this one:  
+### Environment overrides
 
-* ***components***: contains components (i.e. helpers, application components) that are only used by this application  
-* ***config***: contains application specific configuration files.
-* ***controllers***: contains controller classes
-* ***extensions***: Yii extensions that are only used by this application
-* ***lib***: third-party libraries that are only used by this application
-* ***models***: contains model classes that are specific for this application
-* ***modules***: contains modules that are only used by this application
-* ***views***: stores controller actions view scripts
-* ***widgets***: stores Yii widgets only used by this application. 
-* ***www***: the web root for this application.
+Configuration snippets for different environments are placed inside `config/environments` directories.
+You can specify things there like the different database paths, caching mechanisms, some OS-specific parameters, or anything you want.
+To activate the desired environment, you are expected to copy needed configuration snippet from inside `config/environments` subdir and place it into `config/overrides/` under the name `environment.php`. As it's an obviously mundane and boring to hell task it's automated for you by invoking the following command:
 
-We have created **extensions** and **widgets** folders, that could had been obviously included in the **components** folder, in order to clearly differentiate the types of components that could exist into a Yii application and easy the task to find them. So, for example, developers won't search for a widget that renders a jQuery UI plugin within a folder that has application wide components, or helpers, or extensions, or… 
+    bin/yiic environment set --id=<environmentname>
 
-The directory structure for **console** application differs from the others as it doesn't require **controllers**, **views**, **widgets**, and **www**. It has a **commands** directory to store all console command class files.
+Of course, each `config/environments` subdirectory in all of entry points should have a configuration snippet named `<environmentname>`.
 
-When developing a large project with a long development cycle, we constantly need to adjust the database structure. For this reason, we also use the DB migration feature to keep track of database changes. We store all DB migrations under the **migrations** directory in **console**.
+Environment overrides are to be committed to the repository as they contain the proven set of settings intended to adapt the application to different working conditions.
 
-###The Common Directory
-The common directory contains the files that are shared among applications. For example, every application may need to access the database using ActiveRecord. Therefore, we can store the AR model classes under the common directory. Similarly, if some helper or widget classes are used in more than one application, we should also put them under common to avoid duplication of code.
+Nothing forces you to really use this system of environment-specific settings. Configuration builder will happily live without these files.
 
-To facilitate the maintenance of code, we organize the common directory in a structure similar to that of an application. For example, we have components, models, lib, etc.
+## Vagrant
+
+YiiBoilerplate includes [Vagrant][vagrant] harness which you can use as you wish.
+`Vagrantfile` is set up to use the default `precise64` box, which is Virtualbox image loaded with blank [Ubuntu 12.04][ubuntu1204].
+
+As YiiBoilerplate is a rudimentary web application, we prepared a set of scripts to deploy it to Vagrant virtual machine.
+They are located at `carcass/vagrant` subdirectory.
+Two scripts, which are used as provisioning scripts for Vagrant, can be used as an examples of automatic deploy of the YiiBoilerplate application to any *nix-based system:
+
+* `prepare-precise64.sh` is a script to install the required tech stack for common database-backed web application to Ubuntu 12.04: PHP 5.4, apache, mysql, git etc. and create the database.
+* `setup-app.sh` is a script to install the application to prepared system: generate configs, required runtime directories, install dependencies.
+
+You are encouraged to read through them yourself, they're not so hard to comprehend.
+
+## Composer
+
+All 3rd-party components of YiiBoilerplate, including Yii itself, are managed by the [Composer][composer].
+You get [Behat][behat]+[Mink][mink]+[MinkExtension][mink-extension], [PHPUnit][phpunit], full stack of [PHP Quality Assurance toolchain][phpqatools], [Phing][phing], [ApiGen][apigen], [Yii][yii] and [YiiBooster][yii-booster] as your dependencies. Even [Selenium][selenium] was packaged into Composer so it's being installed, too.
+
+Using Composer greatly reduces the size of your application codebase checked into the repository.
+To ensure that everyone in your team gets exactly the same versions of the 3rd-party software,
+Composer generates a special file called [`composer.lock`][composer.lock], which you commit to the repository instead of the whole `vendor` folder, and the presense of this file will indicate to Composer what exact versions of software to maintain in a given codebase.
+YiiBoilerplate repo contains such a file so you can be reasonably sure that at least its developers managed to run boilerplate application using the set of dependencies specified in there.
+
+`composer.json` was tweaked so you will get all executables inside `bin` subdirectory.
+
+## Phing
+
+Most possibly you'll need the build system for your application, so we included the PHP-based one, namely, [Phing][phing].
+
+Build file included in YiiBoilerplate contains the targets allowing you to generate the comprehensive set of reports about the health of your application.
+
+Results of running the default target by issuing `bin/phing` from root of codebase was already described before.
+
+Please note that the set of source directories for each different tool being run by Phing is specified in separate build file `carcass/filesets.xml`.
+We're sorry, but various directories excluded from analysis you have to hack inside the main build file, in case you'll change the structure of a project.
+
+## Yiic
+
+[Usual console runner from Yii][yiic] was moved to `bin` subdirectory. As Composer is configured to install executables into the same directory, it was done to prevent you from using the default console runner instead of the one built-in to YiiBoilerplate, which you have total control over.
+
+Whole `console` subdirectory is for this console entry point to the application.
+
+So, to run any console command built-in to Yii or defined by you in `console/commands`, you have to run `bin/yiic <command>` from root of codebase (instead of more short `./yiic`).
+
+We have found this an acceptable trade-off.
+
+## Behat
+
+As an acceptance tests driver we included [Behat][behat]+[Mink][mink]+[MinkExtension][mink-extension] combo over the [Selenium2][selenium-driver] driver.
+
+This gives you arguably the best PHP-based acceptance testing solution out there.
+Gherkin syntax allows you and your QA team and perhaps even your client to specify the desired behavior of the application in human language, which is the clear win.
+Selenium uses real browser to manipulate the web GUI of your application, and does this *insanely* fast, so you will not need to cope with any of shortcomings of the headless browsers like [phantomJS][phantomjs] or [Zombie][zombie].
+
+All required configuration was already done.
+`behat.yml` config file is placed into the root of codebase for your convenience, so you'll be able to run Behat without the hassle of specifying the path to config file in command line arguments.
+You need to do only one thing: place a config called `behat-local.yml` into the root of codebase, in which you specify the only non-portable setting: base URL for Mink to be able to connect to your web application.
+If you run Vagrant virtual machine, provisioning script will place the `behat-local.yml` pointing to its URLs automatically. So you can look at `carcass/vagrant/behat-local.yml` file to understand what is needed from you.
+
+If you use the default setup based on Selenium, you have to run the `bin/selenium` helper script
+which just launches Selenium, taking up one console terminal.
+
+All of your specs related to frontend are expected to be placed into `tests/specs/frontend`.
+You run them all using the simple invocation `bin/behat -p frontend`.
+
+All of your specs related to backend are expected to be placed into `tests/specs/backend`.
+You run them all using the simple invocation `bin/behat -p backend`.
+
+Both sets of the specs use the same context class located in the `tests/specs/contexts/FeatureContext.php`. All of your test steps definitions should be placed there.
+Please note that a single `FeatureContext` class is just a starting point, nothing prevents you from structuring your acceptance test harness as you see fit.
+
+## PHPUnit
+
+For unit testing we included the [PHPUnit][phpunit] library as the Composer dependency.
+Its executable is in `bin`, along with all other executables,
+and by default you run all unit tests at once, as they have to be crazy fast anyway.
+Its `phpunit.xml` config file is placed in the root of codebase for your convenience, so you'll be able to run PHPUnit as `bin/phpunit` and be freed from specifying the path to config file.
+
+Config file we included in YiiBoilerplate does not have any code coverage setup definitions.
+To get a code coverage you are expected to use Phing target named `coverage` as follows: `bin/phing coverage`, which specifies code coverage settings using command line switches.
+
+Our intention was to make a harness to support *only pure isolated unit tests*, so you get totally clean environment inside test cases.
+In case where you need the integration test, we prepared the bootstrap script for PHPUnit which does the common initialization of YiiBoilerplate application as defined in `common/bootstrap.php` and does some tricks the same way `yiit.php` script does. This bootstrap script is essentially the fourth entry point to your application.
+
+So when you run:
+
+    bin/phpunit --bootstrap carcass/phpunit.bootstrap.php
+
+You run your test cases in the environment where the Yii class is defined and all usual setup is done so you can freely instantiate WebApplication instances as you see fit and using any configuration you want in your tests.
+
+## YiiBooster
+
+For backend side of the application, we included our other library, [YiiBooster][yii-booster] as a Composer dependency, and made the configuration required to attach it.
+
+So, in effect, you'll get the total power of YiiBooster to make the UI of your backend.
+You are expected to skim through the [YiiBooster documentation][yii-booster-docs] to learn what widgets you get from this toolkit.
+
+Frontend, in contrast, is completely blank [HTML5Boilerplate][html5-boilerplate], because judging from our own experience, public side of the application is unique for every project anyway, so default styles from [Twitter Bootstrap][bootstrap] will not find any place there.
 
 
-<span style="float:right;">***- source: [Yii Framework Site](http://www.yiiframework.com/wiki/155/the-directory-structure-of-the-yii-project-site#hh3)***</span>
-<div style="clear:both">&nbsp;</div>
+# License
 
-###Application Configurations
-Applications of the same system usually share some common configurations, such as DB connection configuration, application parameters, etc. In order to eliminate duplication of code, we should extract these common configurations and store them in a central place. In our setting, we put them under the config directory in **common**.
+All of the code by default is licensed by [BSD license][bsd-license], as all opensource work from Clevertech.
 
-####How to configure the application
-The configuration for this boilerplate is not that complicated as it seems at first sight. As mentioned before, if our system has both **backend** and **frontend** applications and they both share the same DB configuration. We just need to configure one of the files on the **config** sub-directory under the **common** folder.
+However, as you most possibly will change everything inside the codebase over time, you can probably treat the code as being in public domain. Our terms and intention is that you can adapt anything inside YiiBoilerplate to your needs.
 
-The files within the config folder of each application and common folder requires a bit of explanation. When working in a team environment, different developers may have different development environments. These environments are also often different from the production environment. This is why the configuration folders on each application contains a list of files that try to avoid interference among the different environments. 
+# phpStorm tweaks
 
-As you can see, the config folders include a set of files:
+To fully utilize phpStorm's autocompletion feature we have to do some tweaks to instruct it to ignore some files
+from 3rd-party libraries.
 
-* environments/***params-private.php***: This is to have the application parameters required for the developer on its development environment.
-* environments/**params-prod.php**: This is to have the application parameters required for the application on **production**
-* environments/**main-private.php**: The application configuration settings required for the developer on its development environment.
-* environments/**main-prod.php**: The application configuration settings required for the application on **production**
-* **main-env.php**: This file will be override with the  environment specific application configuration selected by the **runpostDeploy** script (as we are going to explain after)
-* **main-local.php**: This is the application configuration options for the developer*
-* **params-env.php**: This will be override with the environment specific parameters selected by the **runpostdeploy** script 
-* **params-local.php**: The application parameters for the developer*
-* **params.php**: The application parameters
-* **test.php**: Test application configuration options
+1.  We use our custom `Yii` class, to utilize the F4 button over the `Yii::app()` invocation
+    and to regain control over this singleton in general.
+    However, this leads to duplicate definitions as far as phpStorm is concerned.
 
+    1.  In `File -> Settings -> PHP` under *Include Path* section find the entry ending in `yiisoft/yii` entry
+        and change it so it will end in `yiisoft/yii/framework`.
+    2.  Similarly change the entry ending in `clevertech/yii-booster` so that it ends in `clevertech/yii-booster/src`.
+    3.  In `File -> Settings -> File Types` under *Ignore files and folders* section
+        append the string `;framework/Yii.php;tests/fakes/Yii.php` verbatim.
 
-The configuration tree override in the following way:
+2.  Also, Behat distribution shipped with Composer includes the `FeatureContext` class which conflicts with our own.
+    In `File -> Settings -> PHP` under *Include Path* section find the entry ending in `behat/behat` and append `src` to it.
+    This will exclude the tests code from Behat library index.
 
-***local settings > environment specific > main configuration file*** 
+Please note that due to the indexing mechanism of phpStorm you will either need to change the PHP include paths each time
+you make changes in `composer.json` or to disable the auto-reindexing of Composer-installed libraries altogether.
 
-That means that local settings override environment specific and its result override main configuration file. And this is true for all configurations folders being the common configuration folder settings predominant over the application specific one:
+Side note regarding phpStorm usage with Yii-based applications: if you want Yii application components to be accessible
+by hitting F4 over the component name in expressions like `Yii::app()->request`, you have to write `@property` doc blocks
+for your WebApplication class assigning proper class names to the component IDs. It increases human-readability, too.
 
-**common shared params > application params**
-**common shared config > application config**
-
-There is a slight difference between the ****-private.php*** and the ****-local.php** files. The first ones are automatically read with the ***runpostdeploy*** script and it could be settings that developers sitting on same machines in internal networks, and the latest is the programmer's configurations. 
-
-The base configuration should be put under version control, like regular source code, so that it can be shared by every developer. The local configuration should **not** be put under version control and should only exist in each developer's working directory.
-
-
-####The _runpostdeploy_ script
-The project has a very useful script that automatically creates the required and **not** shared folders for a Yii application: the **runtime** and **assets** folders, extracts the configuration settings specified for a specific environment and copies them to the ****-env.php*** files and runs migrations when not on private environments -we believe that migrations should be always run manually by developers on their machines.
-
-From the application's root folder, to run the script simply do:
-
-```
-./runpostdeploy environmentType migrations
-```
-
-* **environmentType** (required): can be "any" of the ones you configure on the **environments** folders (i.e. `./runpostdeploy private` to use ****-private.php*** configurations)
-* **migrations** (optional): could be "**migrate**"" or "**no-migrate**". 
-	* migrate: will run migrations
-	* no-migrate: will not run migrations (on private wont run them anyway)
-
-###YiiBooster library
-We have included [YiiBooster](http://yii-booster.clevertech.biz) widget library to the boilerplate. For more information regarding this library and its use
-please visit [YiiBooster Site](http://yii-booster.clevertech.biz).
 
 ====
 
