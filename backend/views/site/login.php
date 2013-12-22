@@ -1,6 +1,8 @@
 <?php
 /**
- * @var User $model
+ * @var LoginForm $model
+ *
+ * @var BackendController $this
  */
 
 $this->pageTitle = Yii::app()->name . ' - Login';
