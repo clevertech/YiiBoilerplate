@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+Build file contains the hand-crafted targets to run various tools from PHP Quality Assurance Toolchain project.
+We do not use tasks built into Phing, because they have no real control over filesets to check
+and work only with globally-installed executables. We, on the other hand, install everything in `vendor/` and `bin/`.
 
+By running `bin/phing` without specifying targets, you get the API documentation, code coverage and a set of reports
+regarding code quality, all inside the `reports` directory.
+-->
 <project name="Boilerplate"
          default="all"
          description="Boilerplate for a web application, fully prepared for real work.">
@@ -11,10 +18,6 @@
     <target name="check" depends="phploc, coverage, pdepend, phpcpd, phpmd, phpcs, codebrowser" />
 
     <target name="phploc" depends="prepare-reports-dir">
-        <!--
-        NO we DO NOT use built-in PHPLOCTask, because it has no real control over filesets
-        to check and works only with globally-installed PHPLOC
-        -->
         <exec executable="bin/phploc" dir="." passthru="true">
             <arg value="--verbose" />
             <arg value="--progress" />

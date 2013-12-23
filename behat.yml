@@ -1,3 +1,14 @@
+# Configuration file for Behat.
+
+# Behat is loaded with MinkExtension
+# Normal session is Goutte
+# Javascript session is Selenium2
+# You have two profiles: frontend and backend
+# callable as `bin/behat -p frontend` and `bin/behat -p backend`, respectively.
+# For Selenium to find your web application you have to make `behat-local.yml`
+# config and put a base_url definition there.
+# Example of `behat-local.yml` you can see in `carcass/vagrant/`.
+
 default:
     paths:
         bootstrap: '%behat.paths.base%/tests/specs/contexts'
