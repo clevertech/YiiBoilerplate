@@ -15,9 +15,6 @@ return [
         'site' => 'FrontendSiteController'
     ],
     'components' => [
-        'assetManager' => [
-            'linkAssets' => true // WARNING: do not work in Windows!
-        ],
         'errorHandler' => [
             // Installing our own error page.
             'errorAction' => 'site/error'

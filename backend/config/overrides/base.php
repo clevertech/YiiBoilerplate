@@ -20,9 +20,6 @@ return [
             // `bootstrap` path alias was defined in global init script
             'class' => 'bootstrap.components.Bootstrap'
         ],
-        'assetManager' => [
-            'linkAssets' => true // WARNING: do not work in Windows!
-        ],
         'errorHandler' => array(
             // Installing our own error page.
             'errorAction' => 'site/error'
