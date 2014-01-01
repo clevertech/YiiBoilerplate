@@ -5,9 +5,6 @@
  * In here we have the behavior common to all backend routes, such as registering assets required for UI
  * and enforcing access control policy.
  *
- * @author Mark Safronov marks@clevertech.biz
- * @copyright 2013 Clevertech
- * @license BSD
  * @package YiiBoilerplate\Backend
  */
 abstract class BackendController extends CController

@@ -5,9 +5,6 @@
  * This is the override of basic CUserIdentity which authenticates users using User model,
  * i. e. it assumes that you will have administrator users and normal users in the same database table.
  *
- * @author Mark Safronov marks@clevertech.biz
- * @copyright 2013 Clevertech
- * @license BSD
  * @package YiiBoilerplate\Backend
  */
 class AdminIdentity extends CUserIdentity
