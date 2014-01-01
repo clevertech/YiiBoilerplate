@@ -4,6 +4,9 @@
  * You can look what the current environment is by issuing the command: `yiic environment`
  * You can set different environment by issuing the command: `yiic environment set --id=<ENV_ID>`
  */
+
+use Clio\Console;
+
 class EnvironmentCommand extends CConsoleCommand
 {
 
@@ -49,12 +52,30 @@ EOD;
     public function actionIndex()
     {
         $config = (require ROOT_DIR . '/common/config/main.php');
-        if (empty($config['params']['env.code'])) {
-            echo "It seems that current common config doesn't define any environment code.\n";
-        } else {
-            echo "Current global environment code is `{$config['params']['env.code']}`.\n";
-            echo "Note that it can be overridden by configs of individual entry points (don't do this yourself, though).\n";
+        if (empty($config['params']['env.code']))
+        {
+            Console::output($this->note("It seems that current common config doesn't define any environment code."));
         }
+        else
+        {
+            $value_str = $this->value($config['params']['env.code']);
+            Console::output(
+                "Current global environment code is {$value_str}."
+            );
+            Console::output(
+                $this->note("Note that it can be overridden by configs of individual entry points (don't do this yourself, though).")
+            );
+        }
+    }
+
+    private function note($msg)
+    {
+        return "%B{$msg}%n";
+    }
+
+    private function value($msg)
+    {
+        return "`%C%_{$msg}%n`";
     }
 
     public function actionSet($id)
@@ -64,23 +85,31 @@ EOD;
             $source = "{$dir}/environments/{$id}.php";
             if(!file_exists($source))
             {
-                echo "No config file found for this environment in {$dir}\n";
+                Console::output(
+                    $this->note("No config file found for this environment in ")
+                    . $this->value($dir)
+                    . "."
+                );
                 continue;
             }
 
             $destination = $dir . '/overrides/environment.php';
 
-            printf(
+            $conversion_report = sprintf(
                 "%s\n  => %s ...",
                 str_replace(ROOT_DIR . '/', '', $source),
                 str_replace(ROOT_DIR . '/', '', $destination)
             );
 
+            Console::stdout($conversion_report); // no EOL, please
+
             // WARNING: current `config/overrides/environment.php` will be ERASED!
             copy($source, $destination);
-            echo "done.\n";
+            Console::output("done.");
         }
 
-        echo "\nOperation completed.\n";
+        Console::output(
+            $this->note("Operation completed.")
+        );
     }
 }
