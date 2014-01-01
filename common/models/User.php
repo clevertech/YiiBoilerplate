@@ -33,7 +33,9 @@ class User extends CActiveRecord
 	public $passwordConfirm;
 
 	/**
-	 * @return string the associated database table name
+     * Name of the database table associated with this ActiveRecord
+     *
+	 * @return string
 	 */
 	public function tableName()
 	{
@@ -70,7 +72,10 @@ class User extends CActiveRecord
 	}
 
 	/**
-	 * @return array validation rules for model attributes.
+     * Validation rules for model attributes.
+     *
+     * @see http://www.yiiframework.com/wiki/56/
+	 * @return array
 	 */
 	public function rules()
 	{
@@ -90,7 +95,9 @@ class User extends CActiveRecord
 	}
 
 	/**
-	 * @return array customized attribute labels (name=>label)
+     * Customized attribute labels (attr=>label)
+     *
+	 * @return array
 	 */
 	public function attributeLabels()
 	{
@@ -105,26 +112,18 @@ class User extends CActiveRecord
 	}
 
 	/**
-	 * Helper property function
-	 * @return string the full name of the customer
-	 */
-	public function getFullName()
-	{
-		return $this->username;
-	}
-
-	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
 	 */
 	public function search()
 	{
-		// Warning: Please modify the following code to remove attributes that
-		// should not be searched.
+        $PARTIAL = true;
+
 		$criteria = new CDbCriteria;
 		$criteria->compare('id', $this->id);
-		$criteria->compare('username', $this->username, true);
-		$criteria->compare('email', $this->email, true);
+		$criteria->compare('username', $this->username, $PARTIAL);
+		$criteria->compare('email', $this->email, $PARTIAL);
+
 		return new CActiveDataProvider(get_class($this), compact('criteria'));
 	}
 
