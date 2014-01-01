@@ -31,8 +31,6 @@ regarding code quality, all inside the `reports` directory.
             <arg value="--exclude" />
             <arg value="runtime" />
             <arg value="--exclude" />
-            <arg value="views" />
-            <arg value="--exclude" />
             <arg value="www" />
 
             <arg value="--log-xml" />
@@ -50,7 +48,7 @@ regarding code quality, all inside the `reports` directory.
     <target name="pdepend" depends="prepare-reports-dir">
         <exec executable="bin/pdepend" dir="." passthru="true">
 
-            <arg value="--ignore=config,lib,extensions,runtime,views,www" />
+            <arg value="--ignore=config,lib,extensions,runtime,views,www,migrations/template" />
 
             <!-- Note that this option is for INPUT file, not GENERATED one! -->
             <arg value="--coverage-report=reports/clover.xml" />
