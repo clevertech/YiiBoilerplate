@@ -4,9 +4,6 @@
  *
  * For convenience we have all login-related stuff here, along with landing page, error page and static pages renderer.
  *
- * @author Mark Safronov marks@clevertech.biz
- * @copyright 2013 Clevertech
- * @license BSD
  * @package YiiBoilerplate\Backend
  */
 class BackendSiteController extends BackendController

@@ -4,9 +4,6 @@
  *
  * It is statically dependent on the LoginForm model representing the authentication form.
  *
- * @author Mark Safronov marks@clevertech.biz
- * @copyright 2013 Clevertech
- * @license BSD
  * @package YiiBoilerplate\Backend
  */
 class PasswordLoginAction extends CAction

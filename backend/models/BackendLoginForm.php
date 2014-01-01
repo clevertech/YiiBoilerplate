@@ -5,9 +5,6 @@
  * This form is almost default implementation of the login from the Yii tutorials.
  * Captcha was added and the code to limit max number of failed login attempts.
  *
- * @author Mark Safronov marks@clevertech.biz
- * @copyright 2013 Clevertech
- * @license BSD
  * @package YiiBoilerplate\Backend
  */
 class BackendLoginForm extends CFormModel

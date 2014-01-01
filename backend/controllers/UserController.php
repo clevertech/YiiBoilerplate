@@ -5,9 +5,6 @@
  * This is the UserController verbatim generated using Gii module.
  * Almost no changes were done to the code.
  *
- * @author Mark Safronov marks@clevertech.biz
- * @copyright 2013 Clevertech
- * @license BSD
  * @package YiiBoilerplate\Backend
  */
 class UserController extends BackendController
