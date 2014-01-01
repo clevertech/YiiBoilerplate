@@ -5,12 +5,12 @@
  *
  * Copy this example file in the same directory but renaming it to just `local.php`
  */
-return array(
-    'components' => array(
-        'db' => array(
+return [
+    'components' => [
+        'db' => [
             'connectionString' => 'mysql:host=127.0.0.1;dbname=boilerplate',
             'username' => 'boilerplate',
             'password' => 'boilerplate',
-        )
-    ),
-);
+        ]
+    ],
+];

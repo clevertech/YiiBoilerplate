@@ -1,66 +1,41 @@
-<?php /** hijarian @ 27.10.13 13:03 */
+<?php
 /**
- * Base overrides for backend application
+ * Base config overrides for backend application
  */
-return array(
-    // @see http://www.yiiframework.com/doc/api/1.1/CApplication#basePath-detail
+return [
+    // So our relative path aliases will resolve against the `/backend` subdirectory and not nonexistent `/protected`
     'basePath' => 'backend',
-    // set parameters
-    // preload components required before running applications
-    // @see http://www.yiiframework.com/doc/api/1.1/CModule#preload-detail
-    'preload' => array('log'),
-    // @see http://www.yiiframework.com/doc/api/1.1/CApplication#language-detail
-    'language' => 'en',
-    // uncomment if a theme is used
-    /*'theme' => '',*/
-    // setup import paths aliases
-    // @see http://www.yiiframework.com/doc/api/1.1/YiiBase#import-detail
-    'import' => array(
-        // uncomment if behaviors are required
-        // you can also import a specific one
-        /* 'common.extensions.behaviors.*', */
-        // uncomment if validators on common folder are required
-        /* 'common.extensions.validators.*', */
-        'application.components.*',
+    'import' => [
         'application.controllers.*',
         'application.controllers.actions.*',
-        'application.models.*',
         'common.actions.*'
-    ),
-    /* uncomment and set if required */
-    // @see http://www.yiiframework.com/doc/api/1.1/CModule#setModules-detail
-    'modules' => array(
-        /* Backend can afford gii support */
-//        'gii' => array(
-//            'class' => 'system.gii.GiiModule',
-//            'password' => 'pick up a password here',
-//            'ipFilters' => array('127.0.0.1'),
-//        )
-    ),
-    'controllerMap' => array(
+    ],
+    'controllerMap' => [
+        // Overriding the controller ID so we have prettier URLs without meddling with URL rules
         'site' => 'BackendSiteController'
-    ),
-    'components' => array(
-        'user' => array(
-            'allowAutoLogin' => true,
-        ),
-        /* The following enhances performance, but will not work in Windows. */
-//        'assetManager' => array(
-//            'linkAssets' => true
-//        ),
-        'bootstrap' => array(
-            'class' => 'vendor.clevertech.yii-booster.src.components.Bootstrap'
-        ),
+    ],
+    'components' => [
+        // Backend uses the YiiBooster package for its UI
+        'bootstrap' => [
+            // `bootstrap` path alias was defined in global init script
+            'class' => 'bootstrap.components.Bootstrap'
+        ],
+        'assetManager' => [
+            'linkAssets' => true // WARNING: do not work in Windows!
+        ],
         'errorHandler' => array(
-            // @see http://www.yiiframework.com/doc/api/1.1/CErrorHandler#errorAction-detail
+            // Installing our own error page.
             'errorAction' => 'site/error'
         ),
-        'urlManager' => array(
-            'rules' => array(
+        'urlManager' => [
+            // Some sane usability rules
+            'rules' => [
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
-            )
-        ),
-    ),
-);
+
+                // Your other rules here...
+            ]
+        ],
+    ],
+];

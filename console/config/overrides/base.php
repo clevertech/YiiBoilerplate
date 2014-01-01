@@ -1,49 +1,15 @@
 <?php
-/** hijarian @ 12.11.13 12:15 */
-
-return array(
-    // @see http://www.yiiframework.com/doc/api/1.1/CApplication#basePath-detail
+/**
+ * Overrides for configuration when we're in console application, i. e., in context of `yiic`.
+ */
+return [
+    // Changing `application` path alias to point at `/console` subdirectory
     'basePath' => 'console',
-    // preload components required before running applications
-    // @see http://www.yiiframework.com/doc/api/1.1/CModule#preload-detail
-    'preload' => array('log'),
-    // setup import paths aliases
-    // @see http://www.yiiframework.com/doc/api/1.1/YiiBase#import-detail
-    'import' => array(
-        'application.components.*',
-        'application.models.*',
-        /* uncomment to use frontend models */
-        /*'root.frontend.models.*',*/
-        /* uncomment to use frontend components */
-        /*'root.frontend.components.*',*/
-        /* uncomment to use backend components */
-        /*'root.backend.components.*',*/
-    ),
-    /* locate migrations folder if necessary */
-    'commandMap' => array(
-        'migrate' => array(
+    'commandMap' => [
+        'migrate' => [
             'class' => 'system.cli.commands.MigrateCommand',
-            /* change if required */
-            'migrationPath' => 'root.console.migrations'
-        )
-    ),
-    'components' => array(
-        'log' => array(
-            'class' => 'CLogRouter',
-            'routes' => array(
-                'main' => array(
-                    'class' => 'CFileLogRoute',
-                    'levels' => 'error, warning',
-                    'filter' => 'CLogFilter'
-                )
-            )
-        ),
-        /* uncomment and configure to suit your needs */
-        /*
-         'request' => array(
-            'hostInfo' => 'http://localhost',
-            'baseUrl' => '/bp'
-        ),
-        */
-    ),
-);
+            'migrationPath' => 'application.migrations',
+            'templateFile' => 'application.migrations.template.template'
+        ]
+    ],
+];

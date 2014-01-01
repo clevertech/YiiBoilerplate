@@ -6,5 +6,9 @@
  * Copy this example file in the same directory but renaming it to just `local.php`
  */
 return array(
-    // Initially you have no reason to have backend-specific local overrides
+    'modules' => array(
+        'gii' => array(
+            'password' => 'pick your password here'
+        )
+    )
 );

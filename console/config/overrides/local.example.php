@@ -1,2 +1,7 @@
 <?php
-/** hijarian @ 12.11.13 12:15 */ 
+/**
+ * Your personal overrides for console entry point.
+ */
+return [
+    // Normally you have absolutely no reason to override anything in console entry point just for yourself.
+];

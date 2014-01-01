@@ -1,30 +1,47 @@
-<?php /** hijarian @ 27.10.13 13:10 */
-
-return array(
-    'import' => array(
+<?php
+/**
+ * Configuration parameters common to all entry points.
+ */
+return [
+    'preload' => ['log'],
+    'import' => [
         'common.components.*',
         'common.models.*',
-    ),
-    'components' => array(
-        'db' => array(
-            'schemaCachingDuration' => YII_DEBUG ? 0 : 86400000, // 1000 days
-            'enableParamLogging' => YII_DEBUG,
+        // The following two imports are polymorphic and will resolve against wherever the `basePath` is pointing to.
+        // We have components and models in all entry points anyway
+        'application.components.*',
+        'application.models.*'
+    ],
+    'components' => [
+        'db' => [
+            'schemaCachingDuration' => PRODUCTION_MODE ? 86400000 : 0, // 86400000 == 60*60*24*1000 seconds == 1000 days
+            'enableParamLogging' => !PRODUCTION_MODE,
             'charset' => 'utf8'
-        ),
-        'urlManager' => array(
+        ],
+        'urlManager' => [
             'urlFormat' => 'path',
             'showScriptName' => false,
             'urlSuffix' => '/',
-        ),
-        'cache' => extension_loaded('apc') ?
-                array(
+        ],
+        'cache' => extension_loaded('apc')
+                ? [
                     'class' => 'CApcCache',
-                ) :
-                array(
+                ]
+                : [
                     'class' => 'CDbCache',
                     'connectionID' => 'db',
                     'autoCreateCacheTable' => true,
                     'cacheTableName' => 'cache',
-                ),
-    )
-);
+                ],
+        'log' => [
+            'class' => 'CLogRouter',
+            'routes' => [
+                'logFile' => [
+                    'class' => 'CFileLogRoute',
+                    'levels' => 'error, warning',
+                    'filter' => 'CLogFilter'
+                ],
+            ]
+        ],
+    ]
+];

@@ -1,11 +1,10 @@
 <?php
 /**
- * prod.php
- *
- * Common parameters for the application on production
+ * Overrides for all entry points on local development workstations.
+ * Note that this is NOT your personal overrides like the passwords.
+ * Such changes should end in `/common/overrides/local.php`
  */
-return array(
-	'params' => array(
-		'env.code' => 'prod'
-	)
-);
+return [
+    'params' => ['env.code' => 'prod']
+];
+

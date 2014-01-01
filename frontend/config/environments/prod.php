@@ -1,8 +1,8 @@
 <?php
 /**
- * prod.php
- *
- * This file will be copied to `../main-env.php` configuration file for `prod` environment.
- * @see Deploy::createEnvConfigs()
+ * Specific config overrides for frontend entry point at production server.
  */
-return array();
+return [
+    // Normally you don't have anything to specify for frontend entry point at production server.
+];
+

@@ -1,8 +1,14 @@
 <?php
 /**
- * prod.php
- *
- * This file will be copied to `../main-env.php` configuration file for `private` environment.
- * @see Deploy::createEnvConfigs()
+ * Specific config overrides for backend entry point at local developer workstation.
  */
-return array();
+return [
+    // Backend entry point at local can afford Gii support (DO NOT ALLOW it on production!)
+    'modules' => [
+        'gii' => [
+            'class' => 'system.gii.GiiModule',
+            'ipFilters' => ['127.0.0.1'],
+            // Password will be set in the local config (see `local.example.php`)
+        ]
+    ],
+];

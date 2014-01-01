@@ -1,8 +1,8 @@
 <?php
 /**
- * private.php
- *
- * This file will be copied to `../main-env.php` configuration file for `private` environment.
- * @see Deploy::createEnvConfigs()
+ * Specific config overrides for console entry point at local development workstations.
  */
-return array();
+return [
+    // Normally you don't have anything to specify for console application at your local.
+];
+

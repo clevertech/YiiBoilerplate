@@ -1,19 +1,9 @@
 <?php
 /**
- * private.php
- *
- * Common parameters for the application on private -your local environment
+ * Overrides for all entry points on local development workstations.
+ * Note that this is NOT your personal overrides like the passwords.
+ * Such changes should end in `/common/overrides/local.php`
  */
-return array(
-	'modules' => array(
-        // This way gii will be available only in "private" environment set
-        // More than that, it will generate code in whatever endpoint it is placed.
-		'gii' => array(
-			'class' => 'system.gii.GiiModule',
-			'password' => 'clevertech'
-		)
-	),
-	'params' => array(
-		'env.code' => 'private'
-	)
-);
+return [
+	'params' => ['env.code' => 'private']
+];
