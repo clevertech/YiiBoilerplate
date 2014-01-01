@@ -1,12 +1,12 @@
 <?php
+
+use Clio\Console;
+
 /**
  * A command to easily switch between the environments.
  * You can look what the current environment is by issuing the command: `yiic environment`
  * You can set different environment by issuing the command: `yiic environment set --id=<ENV_ID>`
  */
-
-use Clio\Console;
-
 class EnvironmentCommand extends CConsoleCommand
 {
 
@@ -15,6 +15,11 @@ class EnvironmentCommand extends CConsoleCommand
      */
     private $config_dirs;
 
+    /**
+     * What to do before running any action.
+     *
+     * We are just setting up the defaults here.
+     */
     public function init()
     {
         $this->config_dirs = array(
@@ -25,6 +30,12 @@ class EnvironmentCommand extends CConsoleCommand
         );
     }
 
+    /**
+     * What to show to user when he run `yiic help environment`
+     *
+     * @see CConsoleCommand.getHelp
+     * @return string Short description of what this command does.
+     */
     public function getHelp()
     {
         return <<<EOD
@@ -49,23 +60,27 @@ EOD;
 
     }
 
+    /**
+     * Default action.
+     *
+     * Will be called either by `yiic environment index` or just by `yiic environment`.
+     */
     public function actionIndex()
     {
         $config = (require ROOT_DIR . '/common/config/main.php');
         if (empty($config['params']['env.code']))
         {
             Console::output($this->note("It seems that current common config doesn't define any environment code."));
+            return;
         }
-        else
-        {
-            $value_str = $this->value($config['params']['env.code']);
-            Console::output(
-                "Current global environment code is {$value_str}."
-            );
-            Console::output(
-                $this->note("Note that it can be overridden by configs of individual entry points (don't do this yourself, though).")
-            );
-        }
+
+        $value_str = $this->value($config['params']['env.code']);
+        Console::output(
+            "Current global environment code is {$value_str}."
+        );
+        Console::output(
+            $this->note("Note that it can be overridden by configs of individual entry points (don't do this yourself, though).")
+        );
     }
 
     private function note($msg)
@@ -78,6 +93,15 @@ EOD;
         return "`%C%_{$msg}%n`";
     }
 
+    /**
+     * Action to set the new environment.
+     *
+     * It's just the copying of the config overrides
+     * from <entry_point>/config/environments/<id>.php to <entry_point>/config/overrides/environment.php
+     * This action automates this mundane task.
+     *
+     * @param string $id ID of the environment to set.
+     */
     public function actionSet($id)
     {
         foreach ($this->config_dirs as $dir)
