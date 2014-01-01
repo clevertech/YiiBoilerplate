@@ -26,15 +26,10 @@
  */
 class User extends CActiveRecord
 {
-
-	/**
-	 * @var string attribute used for new passwords on user's edition
-	 */
+	/** @var string Field to hold a new password when user updates it. */
 	public $newPassword;
 
-	/**
-	 * @var string attribute used to confirmation fields
-	 */
+	/** @var string Password confirmation. Is used only in validation on login. */
 	public $passwordConfirm;
 
 	/**
@@ -46,8 +41,14 @@ class User extends CActiveRecord
 	}
 
 	/**
-	 * Behaviors
-	 * @return array
+	 * Behaviors associated with this ActiveRecord.
+     *
+     * We are using the APasswordBehavior because it allows neat things
+     * like changing the password hashing methods without rebuilding the whole user database.
+     *
+     * @see https://github.com/phpnode/YiiPassword
+     *
+	 * @return array Configuration for the behavior classes.
 	 */
 	public function behaviors()
 	{
@@ -62,10 +63,6 @@ class User extends CActiveRecord
 						"class" => "ABcryptPasswordStrategy",
 						"workFactor" => 14,
 						"minLength" => 8
-					),
-					"legacy" => array(
-						"class" => "ALegacyMd5PasswordStrategy",
-						'minLength' => 8
 					)
 				),
 			)
@@ -80,8 +77,6 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('email', 'required', 'on' => 'checkout'),
-			array('email', 'unique', 'on' => 'checkout', 'message' => Yii::t('validation', 'Email has already been taken.')),
 			array('email', 'email'),
 			array('username, email', 'unique'),
 			array('passwordConfirm', 'compare', 'compareAttribute' => 'newPassword', 'message' => Yii::t('validation', "Passwords don't match")),
@@ -90,7 +85,7 @@ class User extends CActiveRecord
 			array('requires_new_password, login_attempts', 'numerical', 'integerOnly' => true),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, password, salt, password_strategy , requires_new_password , email', 'safe', 'on' => 'search'),
+			array('id, username, email', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -130,9 +125,7 @@ class User extends CActiveRecord
 		$criteria->compare('id', $this->id);
 		$criteria->compare('username', $this->username, true);
 		$criteria->compare('email', $this->email, true);
-		return new CActiveDataProvider(get_class($this), array(
-			'criteria' => $criteria,
-		));
+		return new CActiveDataProvider(get_class($this), compact('criteria'));
 	}
 
 	/**
@@ -140,13 +133,13 @@ class User extends CActiveRecord
 	 */
 	public function regenerateValidationKey()
 	{
-		$this->saveAttributes(array(
-			'validation_key' => md5(mt_rand() . mt_rand() . mt_rand()),
-		));
+        $validation_key = md5(mt_rand() . mt_rand() . mt_rand());
+		$this->saveAttributes(compact('validation_key'));
 	}
 
     /**
 	 * Returns the static model of the specified AR class.
+     * Mandatory method for ActiveRecord descendants.
      *
      * @param string $className
 	 * @return User the static model class
