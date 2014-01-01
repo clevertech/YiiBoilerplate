@@ -1,6 +1,11 @@
 <?php
-/** hijarian @ 12.11.13 13:45 */
-
+/**
+ * Generic action to display errors.
+ *
+ * Usable on both frontend and backend.
+ * If the request was AJAX one, just output the message.
+ * Otherwise, render error view.
+ */
 class SimpleErrorAction extends CAction
 {
     public function run()
