@@ -6,44 +6,37 @@ $this->pageTitle=Yii::app()->name; ?>
 
 <h1>Welcome to <i><?php echo CHtml::encode(Yii::app()->name); ?></i></h1>
 
-<?php Yii::app()->user->setFlash('success', '<strong>Well done!</strong> You have successfully created your Yii application.');?>
-<?php $this->widget('bootstrap.widgets.TbAlert'); ?>
+<p>
+    This is the administrative side ("backend") of your application.
+    Everything related to it is contained inside <code>/backend</code> subdirectory.
+    You can treat this directory as a <code>/protected</code> subdirectory equivalent.
+    Backend includes YiiBooster as a widget toolkit, which is composed of both Twitter Bootstrap and jQuery UI toolkits.
+</p>
 
-<p>You may change the content of this page by modifying the following two files:</p>
+<p>Points of interest:</p>
+
 <ul>
-	<li>View file: <code><?= __FILE__; ?></code></li>
-	<li>Layout file: <code><?= $this->getLayoutFile('main'); ?></code></li>
+    <li>
+        <p>
+            <code>/backend/components/BackendController.php</code> is the base for all backend controllers.
+            It registers all required styles and scripts for common backend UI.
+        </p>
+    </li>
+    <li>
+        <p>Layout is <code>/backend/views/layouts/main.php</code>.</p>
+    </li>
+    <li>
+        <p>
+            Password-based login is already implemented for the backend.
+            You can look at its mechanics starting at <code>/backend/controllers/actions/PasswordLoginAction.php</code>.
+        </p>
+        <p>
+            Login/password can be seen in plaintext inside the second migration in <code>/console/migrations/</code>,
+            which creates users in DB.
+        </p>
+    </li>
 </ul>
 
-<p>For more details on how to further develop this application, please read
-the <a href="http://www.yiiframework.com/doc/">documentation</a>.
-Feel free to ask in the <a href="http://www.yiiframework.com/forum/">forum</a>,
-should you have any questions.</p>
 
-<?php
 
-$gridDataProvider = new CArrayDataProvider(array(
-	array('id'=>1, 'firstName'=>'Mark', 'lastName'=>'Otto', 'language'=>'CSS'),
-	array('id'=>2, 'firstName'=>'Jacob', 'lastName'=>'Thornton', 'language'=>'JavaScript'),
-	array('id'=>3, 'firstName'=>'Stu', 'lastName'=>'Dent', 'language'=>'HTML'),
-));
 
-?>
-<?php $this->widget('bootstrap.widgets.TbGridView', array(
-	'type'=>'striped bordered condensed',
-	'dataProvider'=>$gridDataProvider,
-	'template'=>"{items}",
-	'columns'=>array(
-		array('name'=>'id', 'header'=>'#'),
-		array('name'=>'firstName', 'header'=>'First name'),
-		array('name'=>'lastName', 'header'=>'Last name'),
-		array('name'=>'language', 'header'=>'Language'),
-		array(
-			'class'=>'bootstrap.widgets.TbButtonColumn',
-			'viewButtonUrl'=>'Yii::app()->controller->createUrl("view",array("id"=>$data["id"]))',
-			'updateButtonUrl'=>'Yii::app()->controller->createUrl("update",array("id"=>$data["id"]))',
-			'deleteButtonUrl'=>'Yii::app()->controller->createUrl("delete",array("id"=>$data["id"]))',
-			'htmlOptions'=>array('style'=>'width: 50px'),
-		),
-	),
-)); ?>
