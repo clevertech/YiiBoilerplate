@@ -6,6 +6,8 @@ use Clio\Console;
  * A command to easily switch between the environments.
  * You can look what the current environment is by issuing the command: `yiic environment`
  * You can set different environment by issuing the command: `yiic environment set --id=<ENV_ID>`
+ *
+ * @package YiiBoilerplate\Console
  */
 class EnvironmentCommand extends CConsoleCommand
 {

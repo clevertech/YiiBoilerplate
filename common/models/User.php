@@ -23,6 +23,8 @@
  * @property integer $status
  *
  * @method bool verifyPassword
+ *
+ * @package YiiBoilerplate\Models
  */
 class User extends CActiveRecord
 {

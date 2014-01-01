@@ -1,6 +1,9 @@
 <?php
-/** hijarian @ 27.10.13 12:17 */
-
+/**
+ * Yii global class under our control.
+ *
+ * @package YiiBoilerplate
+ */
 class Yii extends YiiBase
 {
     /**

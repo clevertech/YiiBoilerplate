@@ -1,9 +1,8 @@
 <?php
-
 /**
  * Delete this migration if you don't need a demo users
  *
- * Class m130721_220705_add_demo_users
+ * @package migrations
  */
 class m130721_220705_add_demo_users extends CDbMigration
 {

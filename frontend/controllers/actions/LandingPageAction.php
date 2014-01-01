@@ -1,6 +1,8 @@
 <?php
 /**
  * Most basic landing page rendering action possible.
+ *
+ * @package YiiBoilerplate\Frontend\Actions
  */
 class LandingPageAction extends CAction
 {

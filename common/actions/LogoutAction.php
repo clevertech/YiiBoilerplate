@@ -3,6 +3,8 @@
  * Common behavior related to the user logging out of system.
  *
  * It's used in backend currently, but most possibly it'll be needed in frontend, too.
+ *
+ * @package YiiBoilerplate\Actions
  */
 class LogoutAction extends CAction
 {

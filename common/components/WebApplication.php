@@ -3,6 +3,8 @@
  * Base class for our web application.
  *
  * Here will be the tweaks affecting the behavior of all entry points.
+ *
+ * @package YiiBoilerplate
  */
 class WebApplication extends CWebApplication
 {

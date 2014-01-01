@@ -3,6 +3,8 @@
  * Base class for controllers at frontend.
  *
  * Includes all assets required for frontend and also registers Google Analytics widget if there's code specified.
+ *
+ * @package YiiBoilerplate\Frontend
  */
 class FrontendController extends CController
 {

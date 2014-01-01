@@ -1,7 +1,8 @@
 <?php
-
 /**
- * Class m120805_131754_user_table_migration
+ * Installation of users table.
+ *
+ * @package migrations
  */
 class m120805_131754_user_table_migration extends CDbMigration
 {
