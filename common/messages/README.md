@@ -1,0 +1,10 @@
+# Messages Folder
+
+This folder should be the one configured to hold translations of our `messages` component if we make use of
+CPhpMessageSource component to handle translations.
+
+For further information, please visit the following links:
+
+* [How Yii handles translations(Yii guide on translations)](http://www.yiiframework.com/doc/guide/1.1/en/topics.i18n#translation)
+* [CPhpMessageSource basePath detail(Setting messages folder location)](http://www.yiiframework.com/doc/api/1.1/CPhpMessageSource#basePath-detail)
+
