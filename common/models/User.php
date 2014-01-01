@@ -21,6 +21,8 @@
  * @property integer $delete_id
  * @property integer $delete_time
  * @property integer $status
+ *
+ * @method bool verifyPassword
  */
 class User extends CActiveRecord
 {
