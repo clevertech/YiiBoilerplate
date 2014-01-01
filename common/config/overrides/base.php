@@ -33,6 +33,9 @@ return [
                     'autoCreateCacheTable' => true,
                     'cacheTableName' => 'cache',
                 ],
+        'messages' => [
+            'basePath' => 'common.messages'
+        ],
         'log' => [
             'class' => 'CLogRouter',
             'routes' => [
