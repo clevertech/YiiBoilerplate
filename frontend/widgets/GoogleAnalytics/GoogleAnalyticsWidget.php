@@ -12,8 +12,17 @@ class GoogleAnalyticsWidget extends CWidget
     /** @var string Google Analytics ID */
     public $gaid = '';
 
+    /**
+     * What to do when this widget will be called.
+     *
+     * Register the Google Analytics javascript code if ID was specified.
+     * Do not do anything if ID was not specified.
+     */
     public function run()
     {
+        if (!$this->gaid)
+            return;
+
         Yii::app()->clientScript->registerScript(
             $this->makeScriptId(),
             $this->makeScriptBody(),

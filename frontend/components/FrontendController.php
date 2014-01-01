@@ -6,6 +6,14 @@
  */
 class FrontendController extends CController
 {
+    /**
+     * What to do before rendering the view file.
+     *
+     * We include Google Analytics code if ID was specified and register the frontend assets.
+     *
+     * @param string $view
+     * @return bool
+     */
     public function beforeRender($view)
     {
         $result = parent::beforeRender($view);
