@@ -1,15 +1,10 @@
 <?php
 /**
- * error.php
+ * What visitor will see in case of any error.
  *
- * General view file to display error messages
- * Change to suit your needs.
- *
- * @see errHandler at the main.php configuration file
- *
- * @author: antonio ramirez <antonio@clevertech.biz>
- * Date: 7/22/12
- * Time: 8:27 PM
+ * @var FrontendSiteController $this
+ * @var string $message
+ * @var string $code
  */
 $this->pageTitle .= ' - Error';
 ?>
@@ -18,4 +13,4 @@ $this->pageTitle .= ' - Error';
 	<div><?php echo CHtml::encode($message) ?></div>
 
 	<small>(Error <?php echo $code ?>)</small>
-</div><!-- .error_page -->
+</div>

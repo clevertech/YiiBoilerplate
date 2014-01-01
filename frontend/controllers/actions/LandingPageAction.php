@@ -1,6 +1,7 @@
 <?php
-/** hijarian @ 12.11.13 13:50 */
-
+/**
+ * Most basic landing page rendering action possible.
+ */
 class LandingPageAction extends CAction
 {
     public function run()

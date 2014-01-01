@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * Base class for controllers at frontend.
+ *
+ * Includes all assets required for frontend and also registers Google Analytics widget if there's code specified.
+ */
 class FrontendController extends CController
 {
     public function beforeRender($view)

@@ -1,5 +1,10 @@
 <?php
 /**
+ * Main layout for frontend entry point.
+ *
+ * It's just raw HTML5Boilerplate, nothing else.
+ *
+ * @var FrontendController $this
  * @var string $content
  */
 ?>

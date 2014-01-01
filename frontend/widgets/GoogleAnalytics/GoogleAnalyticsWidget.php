@@ -1,6 +1,12 @@
 <?php
-/** hijarian @ 12.11.13 13:00 */
-
+/**
+ * Helper class to generate Google Analytics code snippet inside the rendered page.
+ *
+ * It registers script via the CClientScript.registerScript, so you can do anything with it before it'll be rendered.
+ *
+ * @see https://support.google.com/analytics/answer/1008080?hl=en
+ * @package YiiBoilerplate\frontend\widgets
+ */
 class GoogleAnalyticsWidget extends CWidget
 {
     /** @var string Google Analytics ID */

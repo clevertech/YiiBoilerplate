@@ -1,10 +1,8 @@
 <?php
 /**
- * index.php
+ * Landing page view file
  *
- * @author: antonio ramirez <antonio@clevertech.biz>
- * Date: 7/22/12
- * Time: 8:30 PM
+ * @var FrontendSiteController $this
  */
 ?>
 <h1>Hello <?php echo Yii::app()->user->name;?></h1>

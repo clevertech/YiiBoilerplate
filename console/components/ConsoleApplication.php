@@ -1,6 +1,9 @@
 <?php
-/** hijarian @ 12.11.13 12:10 */
-
+/**
+ * Base class for console application, so we will have control over it.
+ *
+ * Some tweaks for console can end here.
+ */
 class ConsoleApplication extends CConsoleApplication
 {
 

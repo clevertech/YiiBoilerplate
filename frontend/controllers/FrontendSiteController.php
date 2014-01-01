@@ -1,9 +1,13 @@
 <?php
-
+/**
+ * Basic "kitchen sink" controller for frontend.
+ * It was configured to be accessible by `/site` route, not the `/frontendSite` one!
+ */
 class FrontendSiteController extends FrontendController
 {
 	/**
-	 * Declares class-based actions.
+     * Actions attached to this controller
+     *
 	 * @return array
 	 */
 	public function actions()
