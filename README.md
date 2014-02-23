@@ -202,6 +202,12 @@ Two scripts, which are used as provisioning scripts for Vagrant, can be used as 
 
 You are encouraged to read through them yourself, they're not so hard to comprehend.
 
+Note that in default installation after each `vagrant provision` call you will have to wait until all three `apt-get update` calls finish. This is time-consuming.
+To relieve yourself from this burden, you can safely pack the machine created by initial `vagrant up` to the custom Vagrant box and reference this box instead of generic `precise64`.
+This way you'll safely remove `prepare-precise64.sh` from the provisioning scripts list in `Vagrantfile`.
+
+If you did not understand a word from the preceding paragraph, consult the [documentation about `vagrant box repackage`](http://docs.vagrantup.com/v2/cli/box.html) command and the [documentation about provisioning](http://docs.vagrantup.com/v2/provisioning/index.html) on Vagrant site.
+
 ## Composer
 
 All 3rd-party components of YiiBoilerplate, including Yii itself, are managed by the [Composer][composer].
