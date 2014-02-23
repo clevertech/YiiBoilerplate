@@ -4,7 +4,8 @@
 cd /vagrant
 
 # Firing up the Composer to install thirdparty libraries
-php composer.phar install
+php composer.phar self-update
+php composer.phar install --prefer-dist
 
 # Note that all binaries will be installed into `bin/` under ROOT_DIR
 # including phpunit, behat, phing and yiic
