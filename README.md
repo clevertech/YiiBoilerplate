@@ -44,6 +44,9 @@ As a consequence of this, do not bother thinking about "updates" or "future vers
 5.  Inside cloned directory run and wait for complete:
 
         vagrant up
+        
+    Vagrant can complain about versions of VirtualBox Guest Additions and Virtualbox itself being different.
+    This is solved by running `vagrant plugin install vagrant-vbguest`, the only non-obvious step you should encounter so far.
 
 6.  You're done. Open up the [http://localhost:8080/](http://localhost:8080/). It's your future frontend. Open up [http://localhost:8081/](http://localhost:8081/). It's your future backend. You can start working.
     Don't forget to `vagrant halt` the virtual machine before turning off your workstation, virtualbox can fail to shut itself down in time before `kill -9` arrives.

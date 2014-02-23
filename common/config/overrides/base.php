@@ -34,7 +34,7 @@ return [
                     'cacheTableName' => 'cache',
                 ],
         'messages' => [
-            'basePath' => 'common.messages'
+            'basePath' => 'common/messages'
         ],
         'log' => [
             'class' => 'CLogRouter',
