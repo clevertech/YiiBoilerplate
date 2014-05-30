@@ -57,7 +57,7 @@ DESCRIPTION
 	Please note that environment configuration is not your local development settings like the connection settings
 	for DBMS at your workstation. It's the config which will be put into the VCS repo and is intended mainly
 	to differentiate between the production setup where massive micro-optimization and no debug is expected
-	and development setup where the situation is quite the opposite.
+	and development setup where the situation is quite the opposite.\n
 EOD;
 
     }
