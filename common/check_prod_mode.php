@@ -4,7 +4,7 @@
  * where we should compile all configs, combine assets,
  * disable error output, switch logging modes and do all other fun stuff.
  *
- * NOTE that we use ROOT_DIR here so this file has to be required after the `init.php`
+ * NOTE that we use ROOT_DIR here so this file has to be required after the `bootstrap.php`
  * or within it.
  *
  * This script intentionally returns a boolean.
