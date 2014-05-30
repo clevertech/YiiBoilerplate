@@ -31,7 +31,7 @@ Yii::setPathOfAlias('vendor', ROOT_DIR . '/vendor');
 date_default_timezone_set('UTC');
 
 # Set the internal character encoding
-mb_internal_encoding("UTF-8");
+mb_internal_encoding('UTF-8');
 
 # We're in XXI century, so let's use modern locale already
 setlocale(
