@@ -7,7 +7,7 @@
  */
 
 # Loading project default init code for all entry points.
-require __DIR__.'/../../common/bootstrap.php';
+require __DIR__ . '/../../common/bootstrap.php';
 
 # Setting up the frontend-specific aliases
 Yii::setPathOfAlias('backend', ROOT_DIR .'/backend');
@@ -18,11 +18,11 @@ Yii::setPathOfAlias('www', ROOT_DIR . '/backend/www');
 Yii::setPathOfAlias('bootstrap', ROOT_DIR . '/vendor/clevertech/yii-booster/src');
 
 # We use our custom-made WebApplication component as base class for backend app.
-require_once ROOT_DIR.'/backend/components/BackendWebApplication.php';
+require_once ROOT_DIR . '/backend/components/BackendWebApplication.php';
 
 # For obvious reasons, backend entry point is constructed of specialised WebApplication and config
 Yii::createApplication(
     'BackendWebApplication',
-    ROOT_DIR.'/backend/config/main.php'
+    ROOT_DIR . '/backend/config/main.php'
 )->run();
 
