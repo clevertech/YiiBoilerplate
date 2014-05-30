@@ -5,7 +5,7 @@
  * 1. Global config defined in `common/config/main.php`
  * Note that this config itself is assembled the same way from three parts.
  * 2. Base overrides for console entry point.
- * 3. Possible current environment-specific overrides for console entry point
+ * 3. Possible current environment-specific overrides for console entry point.
  * 4. Possible local overrides for console entry point.
  */
 return CMap::mergeArray(
